@@ -1,0 +1,33 @@
+import { auth } from '../core/firebase-config.js';
+import { sendPasswordResetEmail } from 'https://www.gstatic.com/firebasejs/10.8.0/firebase-auth.js';
+import { showToast, showLoading, hideLoading } from '../core/common.js';
+
+document.addEventListener('DOMContentLoaded', () => {
+    const form = document.getElementById('forgot-password-form');
+
+    if (!form) {
+        showToast("Không tìm thấy form khôi phục!", "error");
+        return;
+    }
+
+    form.addEventListener('submit', async (e) => {
+        e.preventDefault();
+        const email = form.email.value.trim();
+
+        if (!email) {
+            showToast("Vui lòng nhập email.", "error");
+            return;
+        }
+
+        showLoading("Đang gửi email khôi phục...");
+
+        try {
+            await sendPasswordResetEmail(auth, email);
+            hideLoading();
+            showToast("Email khôi phục đã được gửi!", "success");
+        } catch (err) {
+            hideLoading();
+            showToast(err.message || "Gửi email thất bại.", "error");
+        }
+    });
+});

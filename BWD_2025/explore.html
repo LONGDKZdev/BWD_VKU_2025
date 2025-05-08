@@ -1,0 +1,405 @@
+<!DOCTYPE html>
+<html lang="vi">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Bảng xếp hạng - VIETNAM Self+Rise</title>
+    <link rel="stylesheet" href="src/css/explore1.css">
+    <link rel="stylesheet" href="src/css/explore2.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+
+<body>
+    <nav class="navbar">
+        <div class="logo">
+            <a href="index.html" class="logo-text">
+                <div class="logo-main">
+                    <span class="logo-viet">VIET</span>
+                    <span class="logo-nam">NAM</span>
+                    <span class="logo-SelfRise">Self+Rise</span>
+                </div>
+                <span class="logo-subtitle">SỨC KHOẺ LÀ CUỘC SỐNG CỦA CHÚNG TA</span>
+            </a>
+        </div>
+        <ul class="nav-links">
+            <li><a href="index.html">Trang chủ</a></li>
+            <li><a href="explore.html" class="active">Khám phá</a></li>
+            <li><a href="community.html">Cộng Đồng</a></li>
+            <li><a href="login.html">Tài Khoản</a></li>
+        </ul>
+    </nav>
+
+    <header class="rank-header">
+        <div class="container">
+            <h1><span class="highlight">VIETNAM Self+Rise</span></h1>
+            <p>Theo dõi thành tích và chia sẻ hành trình phát triển bản thân cùng cộng đồng</p>
+        </div>
+    </header>
+
+    <div class="container main-content">
+        <div class="content-layout">
+            <div class="left-sidebar">
+                <div class="profile-card">
+                    <div class="avatar">
+                        <img src="images/your-avatar.jpg" alt="Avatar của bạn">
+                    </div>
+                    <h3>Phạm Minh D</h3>
+                    <p class="rank-position">Hạng #42</p>
+                    <div class="progress-container">
+                        <div class="progress-bar">
+                            <div class="progress" style="width: 65%"></div>
+                        </div>
+                        <p class="progress-text">650 điểm</p>
+                    </div>
+                    <div class="profile-stats">
+                        <div class="stat">
+                            <span class="stat-value">15</span>
+                            <span class="stat-label">Ngày liên tiếp</span>
+                        </div>
+                        <div class="stat">
+                            <span class="stat-value">24</span>
+                            <span class="stat-label">Bài đăng</span>
+                        </div>
+                        <div class="stat">
+                            <span class="stat-value">156</span>
+                            <span class="stat-label">Người theo dõi</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="category-filter">
+                    <h3>Danh mục</h3>
+                    <ul>
+                        <li class="active"><a href="#" data-category="all">Tất cả</a></li>
+                        <li><a href="#" data-category="fitness">Thể dục</a></li>
+                        <li><a href="#" data-category="nutrition">Dinh dưỡng</a></li>
+                        <li><a href="#" data-category="meditation">Thiền</a></li>
+                        <li><a href="#" data-category="study">Học tập</a></li>
+                        <li><a href="#" data-category="podcast">Podcast</a></li>
+                    </ul>
+                </div>
+
+                <div class="top-performers-sidebar">
+                    <h3>Top người dùng</h3>
+                    <div class="top-user">
+                        <div class="rank-badge">1</div>
+                        <div class="user-avatar">
+                            <img src="images/avatar-1.jpg" alt="Top 1">
+                        </div>
+                        <div class="user-info">
+                            <h4>Trần Thị A</h4>
+                            <p>1250 điểm</p>
+                        </div>
+                    </div>
+                    <div class="top-user">
+                        <div class="rank-badge">2</div>
+                        <div class="user-avatar">
+                            <img src="images/avatar-2.jpg" alt="Top 2">
+                        </div>
+                        <div class="user-info">
+                            <h4>Nguyễn Văn B</h4>
+                            <p>950 điểm</p>
+                        </div>
+                    </div>
+                    <div class="top-user">
+                        <div class="rank-badge">3</div>
+                        <div class="user-avatar">
+                            <img src="images/avatar-3.jpg" alt="Top 3">
+                        </div>
+                        <div class="user-info">
+                            <h4>Lê Văn C</h4>
+                            <p>820 điểm</p>
+                        </div>
+                    </div>
+                    <a href="#leaderboard" class="view-all">Xem tất cả</a>
+                </div>
+            </div>
+
+            <div class="main-feed">
+                <div class="create-post">
+                    <div class="post-form">
+                        <div class="form-header">
+                            <div class="user-avatar">
+                                <img src="images/your-avatar.jpg" alt="Avatar của bạn">
+                            </div>
+                            <input type="text" id="post-text"
+                                placeholder="Chia sẻ thành tựu hoặc kinh nghiệm của bạn...">
+                        </div>
+                        <div class="form-footer">
+                            <div class="post-attachments">
+                                <button class="attachment-btn" id="photo-btn">
+                                    <i class="fas fa-image"></i> Ảnh
+                                </button>
+                                <button class="attachment-btn" id="video-btn">
+                                    <i class="fas fa-video"></i> Video
+                                </button>
+                                <button class="attachment-btn" id="podcast-btn">
+                                    <i class="fas fa-microphone"></i> Podcast
+                                </button>
+                                <button class="attachment-btn" id="activity-btn">
+                                    <i class="fas fa-running"></i> Hoạt động
+                                </button>
+                            </div>
+                            <div class="post-category">
+                                <select id="post-category">
+                                    <option value="">-- Chọn danh mục --</option>
+                                    <option value="fitness">Thể dục</option>
+                                    <option value="nutrition">Dinh dưỡng</option>
+                                    <option value="meditation">Thiền</option>
+                                    <option value="study">Học tập</option>
+                                    <option value="podcast">Podcast</option>
+                                </select>
+                            </div>
+                            <button id="publish-btn" class="btn-primary">Đăng bài</button>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="feed-filter">
+                    <button class="filter-btn active" data-filter="trending">Xu hướng</button>
+                    <button class="filter-btn" data-filter="latest">Mới nhất</button>
+                    <button class="filter-btn" data-filter="following">Đang theo dõi</button>
+                </div>
+
+                <div class="posts-container" id="posts-container">
+                    <!-- Bài đăng sẽ được thêm vào bằng JavaScript -->
+                </div>
+
+                <div class="loading-spinner" id="feed-spinner">
+                    <div class="spinner"></div>
+                    <p>Đang tải bài viết...</p>
+                </div>
+
+                <button id="load-more" class="btn-secondary">Xem thêm</button>
+            </div>
+
+            <div class="right-sidebar">
+                <div class="search-box">
+                    <input type="text" id="search-input" placeholder="Tìm kiếm...">
+                    <button id="search-button"><i class="fas fa-search"></i></button>
+                </div>
+
+                <div class="achievements-card">
+                    <h3>Thành tích của bạn</h3>
+                    <div class="achievement-list">
+                        <div class="achievement-item">
+                            <div class="achievement-icon">
+                                <i class="fas fa-fire"></i>
+                            </div>
+                            <div class="achievement-info">
+                                <h4>15 ngày liên tiếp</h4>
+                                <div class="progress-bar">
+                                    <div class="progress" style="width: 75%"></div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="achievement-item">
+                            <div class="achievement-icon">
+                                <i class="fas fa-dumbbell"></i>
+                            </div>
+                            <div class="achievement-info">
+                                <h4>Vận động viên</h4>
+                                <div class="progress-bar">
+                                    <div class="progress" style="width: 60%"></div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="achievement-item">
+                            <div class="achievement-icon">
+                                <i class="fas fa-brain"></i>
+                            </div>
+                            <div class="achievement-info">
+                                <h4>Thiền định</h4>
+                                <div class="progress-bar">
+                                    <div class="progress" style="width: 40%"></div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <a href="#leaderboard" class="view-all" id="view-detail-btn">Xem chi tiết</a>
+                </div>
+
+                <div class="suggested-users">
+                    <h3>Gợi ý theo dõi</h3>
+                    <div class="user-suggestion">
+                        <div class="user-avatar">
+                            <img src="images/avatar-4.jpg" alt="Người dùng gợi ý">
+                        </div>
+                        <div class="user-info">
+                            <h4>Hoàng Thị D</h4>
+                            <p>Thể dục, Dinh dưỡng</p>
+                        </div>
+                        <button class="follow-btn">Theo dõi</button>
+                    </div>
+                    <div class="user-suggestion">
+                        <div class="user-avatar">
+                            <img src="images/avatar-5.jpg" alt="Người dùng gợi ý">
+                        </div>
+                        <div class="user-info">
+                            <h4>Đỗ Văn E</h4>
+                            <p>Thiền, Podcast</p>
+                        </div>
+                        <button class="follow-btn">Theo dõi</button>
+                    </div>
+                    <div class="user-suggestion">
+                        <div class="user-avatar">
+                            <img src="images/avatar-6.jpg" alt="Người dùng gợi ý">
+                        </div>
+                        <div class="user-info">
+                            <h4>Ngô Thị F</h4>
+                            <p>Học tập, Dinh dưỡng</p>
+                        </div>
+                        <button class="follow-btn">Theo dõi</button>
+                    </div>
+                </div>
+
+                <div class="trending-topics">
+                    <h3>Chủ đề nổi bật</h3>
+                    <div class="topic-list">
+                        <a href="#" class="topic-tag">#ChạyBộMỗiNgày</a>
+                        <a href="#" class="topic-tag">#ĂnSạchSốngKhỏe</a>
+                        <a href="#" class="topic-tag">#ThiềnBuổiSáng</a>
+                        <a href="#" class="topic-tag">#HọcTậpHiệuQuả</a>
+                        <a href="#" class="topic-tag">#PodcastSelfRise</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <section id="leaderboard" class="leaderboard-section">
+        <div class="close-leaderboard"
+            style="position: absolute; top: 20px; right: 30px; cursor: pointer; font-size: 2rem; z-index: 10;">&times;
+        </div>
+        <div class="container">
+            <h2>Bảng xếp hạng chi tiết</h2>
+            <div class="leaderboard-filters">
+                <div class="filter-group">
+                    <label for="time-filter">Thời gian:</label>
+                    <select id="time-filter" class="filter-select">
+                        <option value="week">Tuần này</option>
+                        <option value="month" selected>Tháng này</option>
+                        <option value="year">Năm nay</option>
+                        <option value="all-time">Tất cả thời gian</option>
+                    </select>
+                </div>
+                <div class="filter-group">
+                    <label for="category-leaderboard">Danh mục:</label>
+                    <select id="category-leaderboard" class="filter-select">
+                        <option value="all">Tất cả</option>
+                        <option value="fitness">Thể dục</option>
+                        <option value="nutrition">Dinh dưỡng</option>
+                        <option value="meditation">Thiền</option>
+                        <option value="study">Học tập</option>
+                        <option value="podcast">Podcast</option>
+                    </select>
+                </div>
+            </div>
+
+            <div class="rank-table-container">
+                <div class="loading-spinner" id="table-spinner">
+                    <div class="spinner"></div>
+                    <p>Đang tải dữ liệu...</p>
+                </div>
+                <table class="rank-table">
+                    <thead>
+                        <tr>
+                            <th class="rank-column">Hạng</th>
+                            <th class="user-column">Người dùng</th>
+                            <th class="category-column">Danh mục chính</th>
+                            <th class="posts-column">Bài đăng</th>
+                            <th class="streak-column">Chuỗi ngày</th>
+                            <th class="score-column">Điểm</th>
+                            <th class="trend-column">Xu hướng</th>
+                        </tr>
+                    </thead>
+                    <tbody id="rank-table-body">
+                        <!-- Dữ liệu sẽ được thêm vào bằng JavaScript -->
+                    </tbody>
+                </table>
+                <div class="pagination">
+                    <button class="pagination-btn" id="prev-page" disabled>
+                        <i class="fas fa-chevron-left"></i>
+                    </button>
+                    <div class="page-numbers" id="page-numbers">
+                        <span class="page-number active">1</span>
+                        <span class="page-number">2</span>
+                    </div>
+                    <button class="pagination-btn" id="next-page">
+                        <i class="fas fa-chevron-right"></i>
+                    </button>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="achievements" class="achievements-section">
+        <div class="container">
+            <div class="achievements-grid">
+                <!-- Nội dung thành tích sẽ được thêm vào bằng JavaScript -->
+            </div>
+        </div>
+    </section>
+    <script src="src/js/explore.js"></script>
+
+    <script>
+        import { db } from './firebase.js';
+        import { collection, getDocs } from 'firebase/firestore';
+
+        // Load thêm bài đăng từ Firestore
+        async function loadPostsFromDatabase() {
+            try {
+                const querySnapshot = await getDocs(collection(db, "posts"));
+                querySnapshot.forEach((doc) => {
+                    const data = doc.data();
+                    const newPost = {
+                        id: posts.length + 1,
+                        user: {
+                            id: data.userId || 99,
+                            name: data.userName || "Người dùng ẩn danh",
+                            avatar: data.userAvatar || "images/default-avatar.jpg",
+                            rank: data.userRank || 0
+                        },
+                        category: data.category || "other",
+                        content: data.content || "",
+                        media: data.media || null,
+                        activity: data.activity || null,
+                        likes: data.likes || 0,
+                        comments: data.comments || 0,
+                        saved: false,
+                        liked: false,
+                        time: data.time || "Vừa xong",
+                        commentsList: data.commentsList || []
+                    };
+
+                    // Thêm vào cả danh sách chính và danh sách lọc
+                    posts.unshift(newPost);
+                    filteredPosts.unshift(newPost);
+                });
+
+                renderPosts(); // Hiển thị lại sau khi load
+                showNotification("Đã tải dữ liệu từ Firestore", "success");
+            } catch (error) {
+                console.error("Lỗi khi tải bài đăng từ server", error);
+                showNotification("Không thể tải bài đăng từ server", "error");
+            }
+        }
+
+    </script>
+
+66    <div id="user-info"></div>
+    <script>
+        // Lấy thông tin tài khoản từ localStorage
+        const userInfo = JSON.parse(localStorage.getItem('userInfo'));
+        if (userInfo) {
+            document.getElementById('user-info').innerHTML = `
+                <p>Xin chào, <b>${userInfo.name}</b> (${userInfo.email})</p>
+            `;
+        }
+    </script>
+
+
+</body>
+
+</html>

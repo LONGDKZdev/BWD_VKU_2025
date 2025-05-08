@@ -1,0 +1,203 @@
+<!DOCTYPE html>
+<html lang="vi">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Đăng ký - VIETNAM Self+Rise</title>
+    <link rel="stylesheet" href="src/css/login-styles.css">
+    <link rel="icon" type="image" href="src/images/LogoSelfRise.jpg">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+    <link rel="stylesheet" href="src/css/notification.css">
+</head>
+
+
+
+<body>
+
+
+    <video class="video-background" autoplay muted loop>
+        <source src="src/images/intro.mp4" type="video/mp4">
+    </video>
+    <div class="login-page">
+        <div class="login-container">
+            <div class="login-left">
+                <div class="login-content">
+                    <h1>VIETNAM <span class="highlight">Self+Rise</span></h1>
+                    <p class="tagline">Nâng cao sức khỏe - Nâng tầm cuộc sống</p>
+                    <div class="form-container">
+                        <h2>Đăng ký tài khoản</h2>
+                        <form class="login-form" id="register-form" autocomplete="off">
+                            <div class="input-group">
+                                <i class="fas fa-user"></i>
+                                <input id="name" name="name" type="text" placeholder="Họ và tên" required>
+                                <span class="focus-border"></span>
+                            </div>
+
+                            <div class="input-group">
+                                <i class="fas fa-envelope"></i>
+                                <input id="email" name="email" type="email" placeholder="Email" required>
+                                <span class="focus-border"></span>
+                            </div>
+
+                            <div class="input-group">
+                                <i class="fas fa-lock"></i>
+                                <input id="password" name="password" type="password" placeholder="Mật khẩu" required>
+                                <span class="focus-border"></span>
+                            </div>
+
+                            <div class="input-group">
+                                <i class="fas fa-lock"></i>
+                                <input id="confirm-password" name="confirm-password" type="password"
+                                    placeholder="Xác nhận mật khẩu" required>
+                                <span class="focus-border"></span>
+                            </div>
+
+                            <div class="form-options">
+                                <div class="remember-me">
+                                    <input type="checkbox" id="terms" name="terms">
+                                    <label for="terms">Tôi đồng ý với <a href="#">điều khoản sử dụng</a></label>
+                                </div>
+                            </div>
+
+                            <button id="register-btn" type="submit" class="login-button">
+                                <span>Đăng ký</span>
+                                <i class="fas fa-arrow-right"></i>
+                            </button>
+                        </form>
+
+                        <div class="social-login">
+                            <p>Hoặc đăng ký với</p>
+                            <div class="social-icons">
+                                <!-- <a href="#" class=""><i class="fab fa-facebook-f"></i></a> -->
+                                <button class="social-icon facebook" id="facebook-register" type="button"><i
+                                        class="fab fa-facebook"></i></button>
+                                <button class="social-icon google" id="google-register" type="button"><i
+                                        class="fab fa-google"></i></button>
+                                <button class="social-icon github" id="github-register" type="button"><i
+                                        class="fab fa-github"></i></button>
+
+
+                            </div>
+                        </div>
+
+                        <div class="register-link">
+                            <p>Đã có tài khoản? <a href="login.html">Đăng nhập ngay</a></p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div id="toast-container" class="toast-container"></div>
+
+
+            <div class="login-right">
+                <div class="fitness-quote">
+                    <h2>"Hành trình sức khỏe bắt đầu từ hôm nay"</h2>
+                    <p>Đăng ký để trở thành thành viên của cộng đồng sức khỏe lớn nhất Việt Nam</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- register.html -->
+    <script type="module">
+        import { auth, db } from "./src/core/firebase.js";
+        import { signInWithGoogle, signInWithGithub } from "./src/modules/auth/social-auth.js";
+        import {
+            createUserWithEmailAndPassword,
+            updateProfile,
+        } from "https://www.gstatic.com/firebasejs/11.6.0/firebase-auth.js";
+        import {
+            doc,
+            setDoc,
+            serverTimestamp,
+        } from "https://www.gstatic.com/firebasejs/11.6.0/firebase-firestore.js";
+
+        let notificationTimeout1, notificationTimeout2;
+
+        function showNotification(message, type = 'success', duration = 2500) {
+            const notification = document.getElementById('notification');
+
+            clearTimeout(notificationTimeout1);
+            clearTimeout(notificationTimeout2);
+
+            notification.textContent = message;
+            notification.className = `notification show ${type}`;
+
+            notificationTimeout1 = setTimeout(() => {
+                notification.classList.remove('show');
+                notificationTimeout2 = setTimeout(() => {
+                    notification.textContent = '';
+                    notification.className = 'notification';
+                }, 500);
+            }, duration);
+        }
+
+        document.addEventListener("DOMContentLoaded", () => {
+            const form = document.getElementById("register-form");
+            if (!form) return;
+
+            const googleBtn = document.getElementById("google-register");
+            const githubBtn = document.getElementById("github-register");
+
+            googleBtn?.addEventListener("click", signInWithGoogle);
+            githubBtn?.addEventListener("click", signInWithGithub);
+
+            form.addEventListener("submit", async (e) => {
+                e.preventDefault();
+                const name = form["name"].value;
+                const email = form["email"].value;
+                const password = form["password"].value;
+                const confirm = form["confirm-password"].value;
+                const agreed = form["terms"].checked;
+
+                if (!agreed) {
+                    showNotification("👌 Bạn cần đồng ý với điều khoản.", "error");
+                    return;
+                }
+                if (!name || !email || !password || !confirm) {
+                    showNotification("❗📋✍️ Vui lòng điền đầy đủ thông tin.", "error");
+                    return;
+                }
+                if (password !== confirm) {
+                    showNotification("❌ Mật khẩu không khớp.", "error");
+                    return;
+                }
+                try {
+                    const { user } = await createUserWithEmailAndPassword(auth, email, password);
+                    await updateProfile(user, { displayName: name });
+
+                    await setDoc(doc(db, "users", user.uid), {
+                        name,
+                        email,
+                        avatar: "",
+                        createdAt: serverTimestamp(),
+                        points: 0,
+                        streak: 0,
+                        postCount: 0,
+                        followers: 0,
+                        category: "",
+                        achievements: [""]
+                    });
+
+                    showNotification("✅ Đăng ký thành công!", 'success', 2000);
+                    setTimeout(() => {
+                        showNotification("👍 Đang điều hướng tới trang đăng nhập...", 'info', 2500);
+                        setTimeout(() => {
+                            window.location.href = "login.html";
+                        }, 2500);
+                    }, 2200);
+
+                } catch (err) {
+                    showNotification("❌ " + err.message, "error");
+                }
+            });
+        });
+    </script>
+    <!-- <script type="module" src="./src/core/firebase.js"></script> -->
+    <!-- <script type="module" src="./src/main.js"></script> -->
+
+    <div id="notification" class="notification"></div>
+</body>
+
+</html>
