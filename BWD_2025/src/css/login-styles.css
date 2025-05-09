@@ -640,10 +640,12 @@ h2::after {
     padding: 15px 15px 15px 45px;
     border: none;
     border-bottom: 2px solid #e0e0e0;
-    background-color: rgba(255, 255, 255, 0.3);
+    background-color: rgba(255, 255, 255, 0.5);
+    color: #57534c;
+    border: 1px solid #ddd;
     border-bottom: 2px solid rgba(255, 255, 255, 0.5);
     border-radius: 8px;
-    font-size: 16px;
+    font-size: 18px;
     transition: all 0.3s;
     box-shadow: 0 2px 5px rgba(0, 0, 0, 0.05);
 }
@@ -666,7 +668,7 @@ h2::after {
     left: 0;
     width: 0;
     height: 2px;
-    background-color: #4CAF50;
+    background-color: #002aff;
     transition: width 0.4s;
 }
 
@@ -701,9 +703,9 @@ h2,
 .remember-me input {
     margin-right: 8px;
     appearance: none;
-    width: 18px;
-    height: 18px;
-    border: 2px solid #e0e0e0;
+    width: 20px;
+    height: 20px;
+    border: 2px solid #ddd;
     border-radius: 3px;
     position: relative;
     cursor: pointer;
@@ -716,12 +718,12 @@ h2,
 }
 
 .remember-me label {
-    color: #4CAF50;
-    font-weight: 500;
+    color: #9eed88d9;
+    font-weight: bold;
 }
 
 .remember-me a {
-    color: rgb(31, 31, 30);
+    color: rgb(200, 255, 1);
     text-decoration: underline;
     font-weight: bold;
 }
@@ -737,7 +739,7 @@ h2,
     left: 50%;
     transform: translate(-50%, -50%);
     color: white;
-    font-size: 12px;
+    font-size: 14px;
 }
 
 .remember-me label {
@@ -745,7 +747,7 @@ h2,
 }
 
 .forgot-password {
-    color: #4CAF50;
+    color: white; 
     text-decoration: none;
     transition: all 0.3s;
     position: relative;
@@ -758,12 +760,12 @@ h2,
     left: 0;
     width: 0;
     height: 1px;
-    background-color: #1a472a;
+    background-color: rgb(9, 96, 39);
     transition: width 0.3s;
 }
 
 .forgot-password:hover {
-    color: #1a472a;
+    color: #c0ddca;
 }
 
 .forgot-password:hover::after {
@@ -787,7 +789,7 @@ h2,
 .form-container {
     max-height: 65vh;
     overflow-y: auto;
-    padding-right: 15px;
+    padding-right: 25px;
     margin-bottom: 20px;
 }
 
@@ -1130,7 +1132,7 @@ h2,
 }
 
 .social-login p {
-    color: #4CAF50;
+    color: #9eed88d9;
     margin-bottom: 15px;
     position: relative;
     font-size: 14px;
@@ -1192,7 +1194,7 @@ h2,
 }
 
 .register-link a {
-    color: #4CAF50;
+    color: #9eed88d9;
     text-decoration: none;
     font-weight: bold;
     transition: all 0.3s;
@@ -1211,7 +1213,7 @@ h2,
 }
 
 .register-link a:hover {
-    color: #1a472a;
+    color: #c0ddca;
 }
 
 .register-link a:hover::after {
@@ -1303,7 +1305,7 @@ h2,
     top: 50%;
     transform: translateY(-50%);
     font-size: 16px;
-    color: #999;
+    color: #98ff54;
     pointer-events: none;
     transition: all 0.3s;
 }
@@ -1312,7 +1314,7 @@ h2,
 .input-group.floating input:not(:placeholder-shown)~label {
     top: 25%;
     font-size: 12px;
-    color: #4CAF50;
+    color: rgb(2, 145, 255);
 }
 
 /* Responsive design */
