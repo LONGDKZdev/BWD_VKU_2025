@@ -35,14 +35,30 @@ function showNotification(message, type = 'success', duration = 2500) {
     }, duration);
 }
 
-// Sử dụng hàm showNotification với các thông báo đơn giản hơn
-async function handleSocialLogin(user, provider) {
+async function checkAccountExists(user) {
     try {
         const userRef = doc(db, "users", user.uid);
         const userDoc = await getDoc(userRef);
+        return userDoc.exists();
+    } catch (error) {
+        console.error("Error checking account existence:", error);
+        return false;
+    }
+}
 
-        if (!userDoc.exists()) {
-            await setDoc(userRef, {
+async function handleSocialLogin(user, provider) {
+    try {
+        const accountExists = await checkAccountExists(user);
+        if (accountExists) {
+            showNotification("✅ Đăng nhập thành công!", 'success', 2000);
+                    setTimeout(() => {
+                        showNotification("👍 Đang điều hướng tới trang khám phá...", 'info', 2500);
+                        setTimeout(() => {
+                            window.location.href = "explore.html";
+                        }, 2500);
+                    }, 2200);
+        } else {
+            await setDoc(doc(db, "users", user.uid), {
                 name: user.displayName,
                 email: user.email,
                 avatar: user.photoURL || "",
@@ -55,16 +71,11 @@ async function handleSocialLogin(user, provider) {
                 achievements: [""],
                 provider: provider
             });
+            showNotification("✅ Đăng ký thành công!", 'success', 2000);
+            setTimeout(() => {
+                window.location.href = "explore.html";
+            }, 2500);
         }
-
-        showNotification("✅ Đăng ký thành công!", 'success', 2000);
-                    setTimeout(() => {
-                        showNotification("👍 Đang điều hướng tới trang khám phá...", 'info', 2500);
-                        setTimeout(() => {
-                            window.location.href = "explore.html";
-                        }, 2500);
-                    }, 2200);
-
     } catch (error) {
         showNotification("Lỗi: " + error.message, "error");
     }

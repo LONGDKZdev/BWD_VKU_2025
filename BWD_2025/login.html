@@ -54,7 +54,7 @@
                         <div class="social-login">
                             <p>Hoặc đăng nhập với</p>
                             <div class="social-icons">
-                                <a href="#" class="social-icon facebook"><i class="fab fa-facebook-f"></i></a>
+                                <!-- <a href="#" class="social-icon facebook"><i class="fab fa-facebook-f"></i></a> -->
                                 <button class="social-icon google" id="google-register" type="button"><i
                                         class="fab fa-google"></i></button>
                                 <button class="social-icon github" id="github-register" type="button"><i
@@ -106,17 +106,12 @@
             }, duration);
         }
 
-
-
-
         document.addEventListener("DOMContentLoaded", () => {
-            // Xử lý form đăng nhập
             const form = document.getElementById("login-form");
             if (!form) return;
-            
-            // Thêm xử lý sự kiện cho các nút đăng nhập xã hội
-            const googleBtn = document.getElementById("google-login");
-            const githubBtn = document.getElementById("github-login");
+
+            const googleBtn = document.getElementById("google-register");
+            const githubBtn = document.getElementById("github-register");
 
             googleBtn?.addEventListener("click", signInWithGoogle);
             githubBtn?.addEventListener("click", signInWithGithub);
@@ -141,7 +136,6 @@
                             window.location.href = "explore.html";
                         }, 2500);
                     }, 2200);
-
 
                 } catch (err) {
                     showNotification("❌ Lỗi: " + err.message, "error");
