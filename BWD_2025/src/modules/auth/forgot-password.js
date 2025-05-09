@@ -1,5 +1,5 @@
 import { auth } from '../core/firebase-config.js';
-import { sendPasswordResetEmail } from 'https://www.gstatic.com/firebasejs/10.8.0/firebase-auth.js';
+import { sendPasswordResetEmail } from 'https://www.gstatic.com/firebasejs/11.6.0/firebase-auth.js';
 import { showToast, showLoading, hideLoading } from '../core/common.js';
 
 document.addEventListener('DOMContentLoaded', () => {
@@ -25,6 +25,8 @@ document.addEventListener('DOMContentLoaded', () => {
             await sendPasswordResetEmail(auth, email);
             hideLoading();
             showToast("Email khôi phục đã được gửi!", "success");
+            // Chuyển hướng đến trang đặt lại mật khẩu
+            window.location.href = 'reset-password.html';
         } catch (err) {
             hideLoading();
             showToast(err.message || "Gửi email thất bại.", "error");
