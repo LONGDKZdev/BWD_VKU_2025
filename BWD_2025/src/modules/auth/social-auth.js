@@ -103,7 +103,9 @@ export async function signInWithGithub() {
         await handleSocialLogin(result.user, "github");
     } catch (error) {
         console.error("GitHub sign-in error:", error);
-        if (error.code === 'auth/popup-closed-by-user') {
+        if (error.code === '❌tài khoản tồn tại với thông tin xác thực khác') {
+            showNotification("❌ Tài khoản đã tồn tại với phương thức đăng nhập khác. Vui lòng sử dụng phương thức đăng nhập ban đầu.", "error");
+        } else if (error.code === 'auth/popup-closed-by-user') {
             showNotification("❌ Đăng nhập bị hủy bởi người dùng", "error");
         } else if (error.code === 'auth/unauthorized-domain') {
             showNotification("❌ Domain chưa được cấu hình trong Firebase", "error");

@@ -1,6 +1,7 @@
 import { auth, db } from "../../core/firebase.js";
 import {
   createUserWithEmailAndPassword,
+  fetchSignInMethodsForEmail
 } from "https://www.gstatic.com/firebasejs/11.6.0/firebase-auth.js";
 import {
   doc,
@@ -10,6 +11,13 @@ import {
 export async function register({ email, password, name }) {
   try {
     console.log("🔐 Đang tạo tài khoản Firebase...");
+
+    // Kiểm tra xem email đã tồn tại chưa
+    const signInMethods = await fetchSignInMethodsForEmail(auth, email);
+    if (signInMethods.length > 0) {
+      console.error("❌ Email đã tồn tại trong hệ thống.");
+      throw new Error("Email đã tồn tại trong hệ thống.");
+    }
 
     const userCredential = await createUserWithEmailAndPassword(auth, email, password);
     const user = userCredential.user;

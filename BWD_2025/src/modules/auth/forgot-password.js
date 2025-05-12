@@ -1,4 +1,4 @@
-import { auth } from '../core/firebase-config.js';
+import { auth } from '../core/firebase.js';
 import { sendPasswordResetEmail } from 'https://www.gstatic.com/firebasejs/11.6.0/firebase-auth.js';
 import { showToast, showLoading, hideLoading } from '../core/common.js';
 
@@ -12,7 +12,8 @@ document.addEventListener('DOMContentLoaded', () => {
 
     form.addEventListener('submit', async (e) => {
         e.preventDefault();
-        const email = form.email.value.trim();
+        const email = document.getElementById("forgot-email").value.trim();
+
 
         if (!email) {
             showToast("Vui lòng nhập email.", "error");
