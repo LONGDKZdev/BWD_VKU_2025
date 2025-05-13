@@ -12,7 +12,14 @@ import {
 } from "https://www.gstatic.com/firebasejs/11.6.0/firebase-firestore.js";
 
 const googleProvider = new GoogleAuthProvider();
+googleProvider.setCustomParameters({
+    prompt: 'select_account'
+});
+
 const githubProvider = new GithubAuthProvider();
+githubProvider.setCustomParameters({
+    allow_signup: 'false' // hoặc bạn có thể sử dụng prompt nếu GitHub hỗ trợ
+});
 
 let notificationTimeout1, notificationTimeout2;
 
@@ -51,12 +58,12 @@ async function handleSocialLogin(user, provider) {
         const accountExists = await checkAccountExists(user);
         if (accountExists) {
             showNotification("✅ Đăng nhập thành công!", 'success', 2000);
-                    setTimeout(() => {
-                        showNotification("👍 Đang điều hướng tới trang khám phá...", 'info', 2500);
-                        setTimeout(() => {
-                            window.location.href = "explore.html";
-                        }, 2500);
-                    }, 2200);
+            setTimeout(() => {
+                showNotification("👍 Đang điều hướng tới trang khám phá...", 'info', 2500);
+                setTimeout(() => {
+                    window.location.href = "explore.html";
+                }, 2500);
+            }, 2200);
         } else {
             await setDoc(doc(db, "users", user.uid), {
                 name: user.displayName,
@@ -112,5 +119,55 @@ export async function signInWithGithub() {
         } else {
             showNotification("❌ Lỗi đăng nhập: " + error.message, "error");
         }
+    }
+}
+
+export async function registerWithGoogle() {
+    try {
+        const result = await signInWithPopup(auth, googleProvider);
+        await handleSocialRegister(result.user, "google");
+    } catch (error) {
+        console.error("Google registration error:", error);
+        showNotification("❌ Lỗi đăng ký: " + error.message, "error");
+    }
+}
+
+export async function registerWithGithub() {
+    try {
+        const result = await signInWithPopup(auth, githubProvider);
+        await handleSocialRegister(result.user, "github");
+    } catch (error) {
+        console.error("GitHub registration error:", error);
+        showNotification("❌ Lỗi đăng ký: " + error.message, "error");
+    }
+}
+
+// Hàm xử lý đăng ký xã hội
+async function handleSocialRegister(user, provider) {
+    try {
+        const accountExists = await checkAccountExists(user);
+        if (accountExists) {
+            showNotification("❌ Tài khoản đã tồn tại. Vui lòng đăng nhập.", "error");
+        } else {
+            await setDoc(doc(db, "users", user.uid), {
+                name: user.displayName,
+                email: user.email,
+                avatar: user.photoURL || "",
+                createdAt: serverTimestamp(),
+                points: 0,
+                streak: 0,
+                postCount: 0,
+                followers: 0,
+                category: "",
+                achievements: [""],
+                provider: provider
+            });
+            showNotification("✅ Đăng ký thành công!", 'success', 2000);
+            setTimeout(() => {
+                window.location.href = "explore.html";
+            }, 2500);
+        }
+    } catch (error) {
+        showNotification("Lỗi: " + error.message, "error");
     }
 }
