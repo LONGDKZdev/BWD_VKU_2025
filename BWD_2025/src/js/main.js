@@ -1,5 +1,5 @@
 document.querySelector('.join-button').addEventListener('click', function() {
-    const sections = ['about', 'status', 'mission','cta'];
+    const sections = ['about', 'status', 'mission'];
     let delay = 0;
     
     sections.forEach(section => {

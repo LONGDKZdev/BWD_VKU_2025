@@ -1,0 +1,78 @@
+.follow-btn {
+    padding: 8px 16px;
+    border: 2px solid #4CAF50;
+    border-radius: 20px;
+    background-color: #4CAF50;
+    color: white;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    min-width: 100px;
+    font-size: 14px;
+    position: relative;
+    overflow: hidden;
+}
+
+.follow-btn::before {
+    display: inline-block;
+    transition: all 0.3s ease;
+}
+
+.follow-btn:hover {
+    background-color: #45a049;
+}
+
+.follow-btn.following {
+    background-color: white;
+    color: #4CAF50;
+}
+
+
+.follow-btn.following:hover {
+    background-color: #ffebee;
+    border-color: #f44336;
+    color: #f44336;
+}
+
+
+/* Trạng thái loading */
+.follow-btn.loading {
+    pointer-events: none;
+    opacity: 0.7;
+    animation: buttonLoading 0.8s infinite;
+}
+
+/* Animation cho loading */
+@keyframes buttonLoading {
+    0% {
+        transform: translateY(0);
+        opacity: 1;
+    }
+    50% {
+        transform: translateY(-2px);
+        opacity: 0.7;
+    }
+    100% {
+        transform: translateY(0);
+        opacity: 1;
+    }
+}
+
+/* Container cho nút theo dõi */
+.follow-btn-container {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.follow-btn:not(.loading):active {
+    transform: scale(0.95);
+}
+
+/* Responsive */
+@media screen and (max-width: 768px) {
+    .follow-btn {
+        min-width: 80px;
+        padding: 6px 12px;
+        font-size: 12px;
+    }
+}

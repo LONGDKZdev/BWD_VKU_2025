@@ -1,0 +1,182 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>VIETNAM Self+Rise - Chiến dịch</title>
+    <link rel="stylesheet" href="src/css/styles.css">
+    <link rel="stylesheet" href="src/css/campaign-styles.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body>
+    <nav class="navbar">
+        <div class="logo">
+            <a href="index.html" class="logo-text">
+                <div class="logo-main">
+                    <span class="logo-viet">VIET</span>
+                    <span class="logo-nam">NAM</span>
+                    <span class="logo-SelfRise">Self+Rise</span>
+                </div>
+                <span class="logo-subtitle">SỨC KHOẺ LÀ CUỘC SỐNG CỦA CHÚNG TA</span>
+            </a>
+        </div>
+        <ul class="nav-links">
+            <li><a href="campaign.html" class="active">Chiến Dịch</a></li>
+            <li><a href="explore.html">Khám phá</a></li>
+            <li><a href="community.html">Cộng Đồng</a></li>
+            <li><a href="account.html">Tài Khoản</a></li>
+            <!-- <li><a href="login.html">Đăng Xuất</a></li> -->
+        </ul>
+    </nav>
+
+    <main class="campaign-container">
+        <div class="campaign-filters">
+            <div class="search-box">
+                <input type="text" id="campaignSearch" placeholder="Tìm kiếm chiến dịch...">
+                <i class="fas fa-search"></i>
+            </div>
+            <div class="filter-options">
+                <select id="statusFilter">
+                    <option value="all">Tất cả trạng thái</option>
+                    <option value="active">Đang diễn ra</option>
+                    <option value="upcoming">Sắp diễn ra</option>
+                    <option value="completed">Đã kết thúc</option>
+                </select>
+                <select id="categoryFilter">
+                    <option value="all">Tất cả danh mục</option>
+                    <option value="running">Chạy bộ</option>
+                    <option value="yoga">Yoga</option>
+                    <option value="fitness">Thể hình</option>
+                    <option value="nutrition">Dinh dưỡng</option>
+                </select>
+            </div>
+        </div>
+
+        <section class="featured-campaign">
+            <div class="campaign-header">
+                <h1>Chiến dịch nổi bật</h1>
+                <p>Tham gia cùng chúng tôi trong các hoạt động vì sức khỏe cộng đồng</p>
+            </div>
+            <div class="campaign-grid">
+                <div class="campaign-card" data-category="running">
+                    <div class="campaign-image">
+                        <img src="src/images/chạy_bộ_chiến_dịch.webp" alt="Chiến dịch chạy bộ">
+                        <div class="campaign-status active">Đang diễn ra</div>
+                    </div>
+                    <div class="campaign-content">
+                        <h3>Chạy bộ vì sức khỏe cộng đồng</h3>
+                        <p>Tham gia cùng chúng tôi trong chiến dịch chạy bộ 30 ngày</p>
+                        <div class="campaign-stats">
+                            <span><i class="fas fa-users"></i> 1,234 người tham gia</span>
+                            <span><i class="fas fa-calendar"></i> 20 ngày còn lại</span>
+                        </div>
+                        <button class="join-campaign-btn">Tham gia ngay</button>
+                    </div>
+                </div>
+
+                <div class="campaign-card" data-category="yoga">
+                    <div class="campaign-image">
+                        <img src="src/images/yoga_chiến_dịch.jpg" alt="Yoga cùng nhau">
+                        <div class="campaign-status upcoming">Sắp diễn ra</div>
+                    </div>
+                    <div class="campaign-content">
+                        <h3>Yoga vì sức khỏe tinh thần</h3>
+                        <p>Khám phá sức mạnh của yoga trong 21 ngày</p>
+                        <div class="campaign-stats">
+                            <span><i class="fas fa-users"></i> 856 người đăng ký</span>
+                            <span><i class="fas fa-calendar"></i> Bắt đầu sau 5 ngày</span>
+                        </div>
+                        <button class="join-campaign-btn">Đăng ký trước</button>
+                    </div>
+                </div>
+
+                <div class="campaign-card" data-category="fitness">
+                    <div class="campaign-image">
+                        <img src="src/images/thể_hình_chiến_dịch.jpg" alt="Thử thách thể hình">
+                        <div class="campaign-status active">Đang diễn ra</div>
+                    </div>
+                    <div class="campaign-content">
+                        <h3>30 Ngày Thử Thách Thể Hình</h3>
+                        <p>Xây dựng cơ bắp và sức mạnh với chương trình tập luyện chuyên nghiệp</p>
+                        <div class="campaign-stats">
+                            <span><i class="fas fa-users"></i> 2,156 người tham gia</span>
+                            <span><i class="fas fa-calendar"></i> 15 ngày còn lại</span>
+                        </div>
+                        <button class="join-campaign-btn">Tham gia ngay</button>
+                    </div>
+                </div>
+
+                <div class="campaign-card" data-category="nutrition">
+                    <div class="campaign-image">
+                        <img src="src/images/cdau_chiến_dịch.jpg" alt="Dinh dưỡng lành mạnh">
+                        <div class="campaign-status upcoming">Sắp diễn ra</div>
+                    </div>
+                    <div class="campaign-content">
+                        <h3>Thay Đổi Chế Độ Ăn Uống</h3>
+                        <p>Học cách chuẩn bị các bữa ăn lành mạnh và cân bằng dinh dưỡng</p>
+                        <div class="campaign-stats">
+                            <span><i class="fas fa-users"></i> 567 người đăng ký</span>
+                            <span><i class="fas fa-calendar"></i> Bắt đầu sau 10 ngày</span>
+                        </div>
+                        <button class="join-campaign-btn">Đăng ký trước</button>
+                    </div>
+                </div>
+
+                <div class="campaign-card" data-category="running">
+                    <div class="campaign-image">
+                        <img src="src/images/marathon_chiến_dịch.jpg" alt="Marathon vì cộng đồng">
+                        <div class="campaign-status upcoming">Sắp diễn ra</div>
+                    </div>
+                    <div class="campaign-content">
+                        <h3>Marathon Vì Cộng Đồng 2024</h3>
+                        <p>Chạy vì một mục đích ý nghĩa, quyên góp cho trẻ em khó khăn</p>
+                        <div class="campaign-stats">
+                            <span><i class="fas fa-users"></i> 3,421 người đăng ký</span>
+                            <span><i class="fas fa-calendar"></i> Bắt đầu sau 15 ngày</span>
+                        </div>
+                        <button class="join-campaign-btn">Đăng ký trước</button>
+                    </div>
+                </div>
+
+                <div class="campaign-card" data-category="fitness">
+                    <div class="campaign-image">
+                        <img src="src/images/plank_chiến_dịch.jpg" alt="Thử thách plank">
+                        <div class="campaign-status active">Đang diễn ra</div>
+                    </div>
+                    <div class="campaign-content">
+                        <h3>Thử Thách Plank 30 Ngày</h3>
+                        <p>Tăng cường sức mạnh cơ bụng và cải thiện sức khỏe toàn diện</p>
+                        <div class="campaign-stats">
+                            <span><i class="fas fa-users"></i> 1,789 người tham gia</span>
+                            <span><i class="fas fa-calendar"></i> 25 ngày còn lại</span>
+                        </div>
+                        <button class="join-campaign-btn">Tham gia ngay</button>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section class="campaign-achievements">
+            <h2>Thành tựu cộng đồng</h2>
+            <div class="achievement-stats">
+                <div class="stat-card">
+                    <i class="fas fa-running"></i>
+                    <h3>50,000+</h3>
+                    <p>Km đã chạy</p>
+                </div>
+                <div class="stat-card">
+                    <i class="fas fa-heart"></i>
+                    <h3>10,000+</h3>
+                    <p>Người tham gia</p>
+                </div>
+                <div class="stat-card">
+                    <i class="fas fa-hand-holding-heart"></i>
+                    <h3>100+</h3>
+                    <p>Chiến dịch thành công</p>
+                </div>
+            </div>
+        </section>
+    </main>
+    <script src="src/js/campaign.js"></script>
+</body>
+</html>

@@ -5,7 +5,6 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>VIETNAM Self+Rise - Cộng đồng</title>
-    <link rel="icon" type="image" href="src/images/LogoSelfRise.png">
 
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700&display=swap" rel="stylesheet">
@@ -15,22 +14,23 @@
 
 <body>
     <div class="app-container">
-        <nav class="navbar">
+        <nav class="navbar" style = "padding: 0.2rem 1.5rem">
             <div class="logo">
                 <a href="index.html" class="logo-text">
                     <div class="logo-main">
                         <span class="logo-viet">VIET</span>
                         <span class="logo-nam">NAM</span>
-                        <span class="logo-SelfRise">Self+Rise</span>
+                        <span class="logo-SelfRise" style = "border-left: 2px solid #4CAF50;">Self+Rise</span>
                     </div>
-                    <span class="logo-subtitle">SỨC KHOẺ LÀ CUỘC SỐNG CỦA CHÚNG TA</span>
+                    <span class="logo-subtitle" style = "font-weight: normal;">SỨC KHOẺ LÀ CUỘC SỐNG CỦA CHÚNG TA</span>
                 </a>
             </div>
             <ul class="nav-links">
-                <li><a href="index.html">Trang chủ</a></li>
-                <li><a href="Explore.html">Khám phá</a></li>
+                <li><a href="campaign.html">Chiến Dịch</a></li>
+                <li><a href="explore.html">Khám phá</a></li>
                 <li><a href="community.html" class="active">Cộng Đồng</a></li>
-                <li><a href="login.html">Tài Khoản</a></li>
+                <li><a href="account.html">Tài Khoản</a></li>
+                <!-- <li><a href="login.html">Đăng Xuất</a></li> -->
             </ul>
         </nav>
 
@@ -44,12 +44,12 @@
                         <span class="status-dot online"></span>
                     </div>
                     <div class="user-info">
-                        <h3 id="display-name">Đang tải...</h3>
-                        <span class="status-text">Online</span>
-                        <button id="logout-btn" class="btn btn-sm btn-outline">Đăng xuất</button>
+                        <div class="user-details">
+                            <h3 id="display-name">Quoc Anh</h3>
+                            <span class="status-text">Online</span>
+                        </div>
+                        <button id="logout-btn" class="btn btn-sm btn-outline" onclick="window.location.href='login.html'">Đăng xuất</button>
                     </div>
-
-                    <button class="icon-btn settings-btn"><i class="fas fa-cog"></i></button>
                 </div>
 
                 <div class="search-container">
@@ -64,23 +64,23 @@
                     <ul class="group-list">
                         <li class="group-item active" data-chat-id="web-dev">
                             <div class="group-avatar">
-                                <img src="src/images/ltweb.jpg" alt="Group">
+                                <img src="src/images/Taptheduc.webp" alt="Group">
                             </div>
                             <div class="group-info">
-                                <h5>Lập Trình Web</h5>
+                                <h5>Sức khỏe là nền tảng của cuộc sống </h5>
                                 <p>Huyền: Các bạn xem qua bài này nhé...</p>
                             </div>
-                            <div class="group-badge">1</div>
+                            <div class="group-badge">4</div>
                         </li>
                         <li class="group-item" data-chat-id="ml-community">
                             <div class="group-avatar">
-                                <img src="src/images/MLC.png" alt="Group">
+                                <img src="src/images/Healthy.jpg" alt="Group">
                             </div>
                             <div class="group-info">
-                                <h5>Machine Learning Community</h5>
-                                <p>Alice: Mình có tài liệu hay về...</p>
+                                <h5>Ăn mạnh sống khỏe </h5>
+                                <p>Huyền: Các bạn xem qua bài này nhé. Rất hay về thể dục mỗi ngày</p>
                             </div>
-                            <div class="group-badge">1</div>
+                            <div class="group-badge">3</div>
                         </li>
                     </ul>
                 </div>
@@ -90,21 +90,33 @@
                     <ul class="group-list">
                         <li class="group-item">
                             <div class="group-avatar">
-                                <img src="src/images/Junkfood.jpg" alt="Group">
+                                <img src="src/images/foodhealthy.jpg" alt="Group">
                             </div>
                             <div class="group-info">
-                                <h5>Python Developers</h5>
+                                <h5>Thực đơn mỗi ngày </h5>
                                 <p>1.2k thành viên</p>
                             </div>
                             <button class="btn btn-sm btn-join">Tham gia</button>
                         </li>
+                        
                         <li class="group-item">
                             <div class="group-avatar">
-                                <img src="src/images/LogoSelfRise.png" alt="Group">
+                                <img src="src/images/Training.png" alt="Group">
                             </div>
                             <div class="group-info">
                                 <h5>Healthy Lifestyle</h5>
                                 <p>3.5k thành viên</p>
+                            </div>
+                            <button class="btn btn-sm btn-join">Tham gia</button>
+                        </li>
+
+                        <li class="group-item">
+                            <div class="group-avatar">
+                                <img src="src/images/Chaybo.jpg" alt="Group">
+                            </div>
+                            <div class="group-info">
+                                <h5>Tour chạy bộ xuyên Đà Nẵng </h5>
+                                <p>3k thành viên</p>
                             </div>
                             <button class="btn btn-sm btn-join">Tham gia</button>
                         </li>
@@ -117,11 +129,11 @@
                 <div class="chat-header">
                     <div class="chat-title">
                         <div class="group-avatar">
-                            <img src="src/images/Beophi.jpg" alt="Group">
+                            <img src="src/images/Taptheduc.webp" alt="Group">
                         </div>
                         <div class="group-info">
-                            <h3>Lập Trình Web</h3>
-                            <p>123 thành viên</p>
+                            <h3 style="margin: 3px 0;">Sức khỏe là nền tảng của cuộc sống </h3>
+                            <p>1.2k thành viên</p>
                         </div>
                     </div>
                     <div class="chat-actions">
@@ -162,18 +174,18 @@
                                 <h4>Huyền</h4>
                                 <span class="message-time">12:30</span>
                             </div>
-                            <div class="message-body">
-                                <p>Các bạn xem qua bài này nhé. Rất hay về responsive design</p>
-                                <div class="message-attachment file">
-                                    <i class="fas fa-file-pdf"></i>
-                                    <div class="file-info">
-                                        <span class="file-name">responsive-design-guide.pdf</span>
+                                    <div class="message-body">
+                                    <p>Các bạn xem qua bài này nhé. Rất hay về thể dục mỗi ngày </p>
+                                    <div class="message-attachment file">
+                                        <i class="fas fa-file-pdf"></i>
+                                        <div class="file-info">
+                                            <a href="src/images/tduc.pdf" target="_blank" class="file-name">Bai-tap-san-chac-co-the.pdf</a>
+                                        </div>
                                     </div>
                                 </div>
-                            </div>
                             <div class="message-actions">
-                                <button class="reaction-btn"><i class="far fa-thumbs-up"></i> 2</button>
-                                <button class="reaction-btn"><i class="far fa-heart"></i></button>
+                                <button class="reaction-btn"><i class="far fa-thumbs-up"></i> 289</button>
+                                <button class="reaction-btn"><i class="far fa-heart"></i>323</button>
                                 <button class="reaction-btn"><i class="far fa-share-square"></i></button>
                             </div>
                         </div>
@@ -188,8 +200,28 @@
                                 <p>Cảm ơn bạn! Tài liệu rất hữu ích</p>
                             </div>
                             <div class="message-actions">
-                                <button class="reaction-btn"><i class="far fa-thumbs-up"></i></button>
-                                <button class="reaction-btn"><i class="far fa-heart"></i></button>
+                                <button class="reaction-btn"><i class="far fa-thumbs-up">943</i></button>
+                                <button class="reaction-btn"><i class="far fa-heart"></i>200</button>
+                                <button class="reaction-btn"><i class="far fa-share-square"></i></button>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="message-container">
+                        <div class="message-avatar">
+                            <img src="src/images/NgocHuyen.jpg" alt="Huyen">
+                        </div>
+                        <div class="message-content">
+                            <div class="message-header">
+                                <h4>Huyền</h4>
+                                <span class="message-time">14:15</span>
+                            </div>
+                            <div class="message-body">
+                                <p>Mọi người có thể chia sẻ thêm kinh nghiệm tập luyện không ạ?</p>
+                            </div>
+                            <div class="message-actions">
+                                <button class="reaction-btn"><i class="far fa-thumbs-up"></i>554</button>
+                                <button class="reaction-btn"><i class="far fa-heart"></i>214</button>
                                 <button class="reaction-btn"><i class="far fa-share-square"></i></button>
                             </div>
                         </div>
@@ -202,10 +234,56 @@
                         <div class="message-content">
                             <div class="message-header">
                                 <h4>Thanh Hải</h4>
+                                <span class="message-time">14:20</span>
+                            </div>
+                            <div class="message-body">
+                                <p>Theo kinh nghiệm của mình, nên tập thể dục vào buổi sáng sớm hoặc chiều tối. Tránh tập vào buổi trưa vì thời tiết nóng bức có thể ảnh hưởng đến sức khỏe.</p>
+                            </div>
+                            <div class="message-actions">
+                                <button class="reaction-btn"><i class="far fa-thumbs-up"></i> 213</button>
+                                <button class="reaction-btn"><i class="far fa-heart"></i> 104</button>
+                                <button class="reaction-btn"><i class="far fa-share-square"></i></button>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="message-container">
+                        <div class="message-avatar">
+                            <img src="src/images/TuanAnh.jpg" alt="TuanAnh">
+                        </div>
+                        <div class="message-content">
+                            <div class="message-header">
+                                <h4>Tuấn Anh</h4>
+                                <span class="message-time">14:25</span>
+                            </div>
+                            <div class="message-body">
+                                <p>Đúng vậy, và nên uống đủ nước trước, trong và sau khi tập để cơ thể không bị mất nước. Mọi người có thể tham khảo thêm lịch tập của mình:</p>
+                                <div class="message-attachment file">
+                                    <i class="fas fa-file-pdf"></i>
+                                    <div class="file-info">
+                                        <a href="src/images/lich-tap.pdf" target="_blank" class="file-name">lich-tap-hang-tuan.pdf</a>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="message-actions">
+                                <button class="reaction-btn"><i class="far fa-thumbs-up"></i>52</button>
+                                <button class="reaction-btn"><i class="far fa-heart"></i>344</button>
+                                <button class="reaction-btn"><i class="far fa-share-square"></i></button>
+                            </div>
+                        </div>
+                    </div>
+                   
+                    <div class="message-container">
+                        <div class="message-avatar">
+                            <img src="src/images/ThanhHai.jpg" alt="ThanhHai">
+                        </div>
+                        <div class="message-content">
+                            <div class="message-header">
+                                <h4>Thanh Hải</h4>
                                 <span class="message-time">12:32</span>
                             </div>
                             <div class="message-body">
-                                <p>Mình có một số ví dụ thực tế về responsive design</p>
+                                <p>Mình có một số ví dụ thực tế về tình trạng béo phì </p>
                                 <div class="message-attachments">
                                     <div class="message-attachment image">
                                         <img src="src/images/Junkfood.jpg" alt="Attachment">
@@ -215,8 +293,8 @@
                                     </div>
                                 </div>
                                 <div class="message-actions">
-                                    <button class="reaction-btn"><i class="far fa-thumbs-up"></i></button>
-                                    <button class="reaction-btn"><i class="far fa-heart"></i></button>
+                                    <button class="reaction-btn"><i class="far fa-thumbs-up">101</i></button>
+                                    <button class="reaction-btn"><i class="far fa-heart"></i>232</button>
                                     <button class="reaction-btn"><i class="far fa-share-square"></i></button>
                                 </div>
                             </div>
@@ -320,7 +398,10 @@
     <script type="module" src="src/modules/chat/groups.js"></script>
 
     <!-- UI Script -->
-    <script type="module" src="src/js/community.js"></script>
-
+    <script src="src/js/community.js"></script>
+    <div id="imageViewer" class="image-viewer">
+        <span class="close-viewer">&times;</span>
+        <img id="expandedImg" class="viewer-content">
+    </div>
 </body>
 </html>
