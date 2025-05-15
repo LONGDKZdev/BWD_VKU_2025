@@ -12,7 +12,7 @@ export const utils = {
     }
 };
 
-// 🧠 Hiển thị Toast notification
+//  Hiển thị Toast notification
 export function showToast(message, type = "success") {
     Swal.fire({
         toast: true,
@@ -25,7 +25,7 @@ export function showToast(message, type = "success") {
     });
 }
 
-// 🧠 Hiển thị Loading overlay
+//  Hiển thị Loading overlay
 export function showLoading(message = "Đang xử lý...", timeout = 10000) {
     Swal.fire({
         title: message,
@@ -37,12 +37,12 @@ export function showLoading(message = "Đang xử lý...", timeout = 10000) {
     });
 }
 
-// 🧠 Ẩn Loading overlay
+//  Ẩn Loading overlay
 export function hideLoading() {
     Swal.close();
 }
 
-// 🧠 Hiển thị Confirm Dialog
+//  Hiển thị Confirm Dialog
 export async function showConfirm(message = "Bạn chắc chắn chưa?") {
     const result = await Swal.fire({
         title: message,
@@ -57,7 +57,7 @@ export async function showConfirm(message = "Bạn chắc chắn chưa?") {
     return result.isConfirmed;
 }
 
-// 🧠 Hiển thị Alert đơn giản
+//  Hiển thị Alert đơn giản
 export async function showAlert(message, type = "info") {
     await Swal.fire({
         icon: type,

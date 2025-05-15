@@ -17,7 +17,7 @@ import {
 
 import Swal from "https://cdn.jsdelivr.net/npm/sweetalert2@11/dist/sweetalert2.all.min.js";
 
-// 🧠 Toast helper
+// Toast helper
 function showToast(message, type = "success") {
     Swal.fire({
         toast: true,
@@ -30,7 +30,7 @@ function showToast(message, type = "success") {
     });
 }
 
-// 🔥 Gửi tin nhắn (text hoặc file)
+// Gửi tin nhắn (text hoặc file)
 export async function sendMessage(groupId, text = "", file = null) {
     try {
         const user = auth.currentUser;
