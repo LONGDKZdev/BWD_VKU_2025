@@ -7,11 +7,11 @@ document.addEventListener('DOMContentLoaded', function() {
 
     // Xử lý sự kiện khi nhấn nút "Tiếp theo"
     nextButton.addEventListener('click', function() {
-        window.location.href = 'index3.html';
+        window.location.href = 'index1.html';
     });
 
     // Tự động chuyển trang khi video kết thúc
     video.addEventListener('ended', function() {
-        window.location.href = 'index3.html';
+        window.location.href = 'index1.html';
     });
 });

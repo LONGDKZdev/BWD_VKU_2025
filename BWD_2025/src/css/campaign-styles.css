@@ -37,6 +37,10 @@
     overflow: hidden;
     box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
     transition: transform 0.3s ease;
+    position: relative; /* Thêm position relative */
+    display: flex; /* Thêm display flex */
+    flex-direction: column; /* Sắp xếp các phần tử theo chiều dọc */
+    height: 100%; /* Đảm bảo card có chiều cao 100% */
 }
 
 .campaign-card:hover {
@@ -76,6 +80,9 @@
 
 .campaign-content {
     padding: 1.5rem;
+    flex-grow: 1; /* Cho phép content mở rộng để lấp đầy không gian */
+    display: flex;
+    flex-direction: column;
 }
 
 .campaign-content h3 {
@@ -121,6 +128,11 @@
     cursor: pointer;
     transition: all 0.3s ease;
     overflow: hidden;
+    height: 48px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-top: auto; /* Đẩy nút xuống dưới cùng */
 }
 
 .join-campaign-btn:hover {
