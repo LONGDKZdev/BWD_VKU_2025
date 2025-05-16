@@ -62,12 +62,12 @@ document.addEventListener('DOMContentLoaded', function () {
         const confirmPassword = document.getElementById('confirmPassword').value;
 
         if (newPassword !== confirmPassword) {
-            showNotification('Mật khẩu mới không khớp!', 'error');
+            showNotification('❌ Mật khẩu mới không khớp!', 'error');
             return;
         }
 
         // Hiển thị thông báo thành công
-        showNotification('Đã lưu cài đặt thành công!');
+        showNotification('✅ Đã lưu cài đặt thành công!');
         // Ở đây bạn có thể thêm code để cập nhật cài đặt lên server
     });
 
@@ -102,15 +102,15 @@ document.addEventListener('DOMContentLoaded', function () {
         const errors = [];
 
         if (!formData.fullName.trim()) {
-            errors.push('Vui lòng nhập họ tên');
+            errors.push('❌Vui lòng nhập họ tên');
         }
 
         if (!formData.email.match(/^[^\s@]+@[^\s@]+\.[^\s@]+$/)) {
-            errors.push('Email không hợp lệ');
+            errors.push('❌Email không hợp lệ');
         }
 
         if (!formData.phone.match(/^[0-9]{10}$/)) {
-            errors.push('Số điện thoại không hợp lệ');
+            errors.push('❌Số điện thoại không hợp lệ');
         }
 
         return errors;
@@ -206,7 +206,7 @@ document.addEventListener('DOMContentLoaded', function () {
                 setTimeout(() => {
                     window.location.href = 'login.html';
                 }, 2000);
-            });
+            }, 1000);
 
             // Xử lý sự kiện nút hủy
             cancelBtn.addEventListener('click', function () {
