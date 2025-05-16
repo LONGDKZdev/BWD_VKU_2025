@@ -59,7 +59,7 @@ async function handleSocialLogin(user, provider) {
         if (accountExists) {
             showNotification("✅ Đăng nhập thành công!", 'success', 2000);
             setTimeout(() => {
-                showNotification("👍 Đang điều hướng, chờ giây lát...", 'info', 2500);
+                showNotification("👍 Đang điều hướng tới trang khám phá...", 'info', 2500);
                 setTimeout(() => {
                     window.location.href = "explore.html";
                 }, 2500);
@@ -80,11 +80,8 @@ async function handleSocialLogin(user, provider) {
             });
             showNotification("✅ Đăng ký thành công!", 'success', 2000);
             setTimeout(() => {
-                showNotification("👍 Đang điều hướng, chờ giây lát...", 'info', 2500);
-                setTimeout(() => {
-                    window.location.href = "explore.html";
-                }, 2500);
-            }, 2200);
+                window.location.href = "explore.html";
+            }, 2500);
         }
     } catch (error) {
         showNotification("Lỗi: " + error.message, "error");

@@ -363,3 +363,22 @@
         margin: 0 auto;
     }
 }
+.menu-item {
+    padding: 15px;
+    display: flex;
+    align-items: center;
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+
+.menu-item:hover {
+    background-color: #f0f0f0;
+}
+
+.menu-item i {
+    margin-right: 10px;
+}
+
+#logoutButton {
+    color: rgb(78, 12, 12);
+}

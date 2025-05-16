@@ -18,7 +18,7 @@ const firebaseConfig = {
 //  Khởi tạo Firebase
 const app = initializeApp(firebaseConfig);
 
-//  Export services để dùng lại
+// Export services để dùng lại
 export const auth = getAuth(app);
 export const db = getFirestore(app);
 export const storage = getStorage(app);

@@ -53,6 +53,7 @@ body {
 
 .logo-subtitle {
     color: #4CAF50;
+    font-family: 'Playwrite DK Loopet', cursive;
     font-size: 0.7rem;
     margin-left: 4px;
 }
@@ -186,8 +187,9 @@ main h2 {
 .subtitle {
     font-size: 1.8rem;  /* Increased from 1.5rem */
     color: #4CAF50;
+    font-family: 'Montserrat', sans-serif;
     margin-top: 1.5rem;  /* Increased margin */
-    font-weight: 700;  /* Adjusted weight */
+    font-weight: 600;  /* Adjusted weight */
     letter-spacing: 0.5px;
     text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.3); 
 }
@@ -213,7 +215,8 @@ main h2 {
     margin-top: 2rem;
     padding: 1rem 2.5rem;
     font-size: 1.2rem;
-    font-weight: 700;
+    font-weight: 600;
+    font-family: 'Montserrat', sans-serif;
     background-color: #3c883f;
     color: rgb(228, 216, 216);
     border: none;
