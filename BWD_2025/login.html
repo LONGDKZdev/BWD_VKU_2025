@@ -27,13 +27,13 @@
                         <form id="login-form" class="login-form">
                             <div class="input-group">
                                 <i class="fas fa-user"></i>
-                                <input type="text" id="email" placeholder="Email">
+                                <input type="text" id="email" placeholder="Tên đăng nhập" >
                                 <span class="focus-border"></span>
                             </div>
 
                             <div class="input-group">
                                 <i class="fas fa-lock"></i>
-                                <input type="password" id="password" placeholder="Mật khẩu">
+                                <input type="password" id="password" placeholder="Mật khẩu" >
                                 <span class="focus-border"></span>
                             </div>
 
@@ -55,10 +55,8 @@
                             <p>Hoặc đăng nhập với</p>
                             <div class="social-icons">
                                 <!-- <a href="#" class="social-icon facebook"><i class="fab fa-facebook-f"></i></a> -->
-                                <button class="social-icon google" id="google-login" type="button"><i
-                                        class="fab fa-google"></i></button>
-                                <button class="social-icon github" id="github-login" type="button"><i
-                                        class="fab fa-github"></i></button>
+                                <button class="social-icon google" id="google-login" type="button"><i class="fab fa-google"></i></button>
+                                <button class="social-icon github" id="github-login" type="button"><i class="fab fa-github"></i></button>
 
                             </div>
                         </div>
@@ -126,7 +124,6 @@
                     showNotification("❗📋✍️​ Vui lòng điền đầy đủ thông tin.", "error");
                     return;
                 }
-
 
                 try {
                     const result = await signInWithEmailAndPassword(auth, email, password);
