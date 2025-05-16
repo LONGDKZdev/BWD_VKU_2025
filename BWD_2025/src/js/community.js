@@ -69,7 +69,7 @@ const chatRooms = {
                                 <div class="message-attachment file">
                                     <i class="fas fa-file-pdf"></i>
                                     <div class="file-info">
-                                        <a href="src/images/lich-tap.pdf" target="_blank" class="file-name">lich-tap-hang-tuan.pdf</a>
+                                        <a href="src/images/Lich_tap-moi-ngay.pdf" target="_blank" class="file-name">Lich_tap-moi-ngay.pdf</a>
                                     </div>
                                 </div>
                             </div>
@@ -83,11 +83,11 @@ const chatRooms = {
               
             <div class="message-container">
                 <div class="message-avatar">
-                    <img src="src/images/NgocHuyen.jpg" alt="Alice">
+                    <img src="src/images/HuyLong.jpg" alt="Alice">
                 </div>
                 <div class="message-content">
                     <div class="message-header">
-                        <h4>Ngọc Huyền</h4>
+                        <h4>Huy Long</h4>
                         <span class="message-time">10:15</span>
                     </div>
                                  <div class="message-body">
@@ -95,7 +95,7 @@ const chatRooms = {
                                     <div class="message-attachment file">
                                         <i class="fas fa-file-pdf"></i>
                                         <div class="file-info">
-                                            <a href="src/images/an.pdf" target="_blank" class="file-name">Thuc don moi ngay.pdf</a>
+                                            <a href="src/images/Thuc-don-moi-ngay.pdf" target="_blank" class="file-name">Thuc-don-moi-ngay.pdf</a>
                                         </div>
                                     </div>
                                 </div>
@@ -226,6 +226,61 @@ function setupMessageSending() {
             }
         }
     });
+
+    // Thêm xử lý cho nút video call
+const videoCallBtn = document.getElementById('video-call-btn');
+videoCallBtn.addEventListener('click', () => {
+    // Tạo iframe cho cuộc gọi video
+    const videoFrame = document.createElement('iframe');
+    videoFrame.src = 'https://meet.jit.si/your-room-name'; // Sử dụng Jitsi Meet
+    videoFrame.allow = "camera; microphone; fullscreen; display-capture";
+    videoFrame.style = "position: fixed; top: 0; left: 0; width: 100vw; height: 100vh; border: 0; z-index: 9999;";
+    
+    // Thêm iframe vào body
+    document.body.appendChild(videoFrame);
+    
+    // Thêm nút thoát
+        // Thêm nút thoát
+  // ... existing code ...
+  const exitBtn = document.createElement('button');
+  exitBtn.innerHTML = '×';  // Sử dụng dấu × thay vì chữ X
+  exitBtn.style = `
+      position: fixed;
+      top: 15px;
+      right: 15px;
+      z-index: 10000;
+      background: rgba(0, 0, 0, 0.3);
+      color: white;
+      border: none;
+      font-size: 20px;
+      line-height: 1;
+      cursor: pointer;
+      width: 25px;
+      height: 25px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-family: Arial, sans-serif;
+      border-radius: 50%;
+      transition: all 0.2s ease;
+      padding: 0;
+  `;
+
+  exitBtn.onmouseover = () => {
+      exitBtn.style.background = 'rgba(0, 0, 0, 0.5)';
+      exitBtn.style.transform = 'scale(1.1)';
+  };
+
+  exitBtn.onmouseout = () => {
+      exitBtn.style.background = 'rgba(0, 0, 0, 0.3)';
+      exitBtn.style.transform = 'scale(1)';
+  };
+    exitBtn.onclick = () => {
+        videoFrame.remove();
+        exitBtn.remove();
+    };
+    document.body.appendChild(exitBtn);
+});
 }
 
 // Gửi tin nhắn
@@ -1350,7 +1405,7 @@ document.addEventListener('DOMContentLoaded', function() {
         }
     });
 });
-// ... existing code ...
+
 
 // Thiết lập image viewer
 function setupImageViewer() {
@@ -1381,7 +1436,7 @@ function setupImageViewer() {
 
 // Thêm vào phần khởi tạo
 document.addEventListener('DOMContentLoaded', function() {
-    // ... existing code ...
+    
     
     // Thiết lập image viewer
     setupImageViewer();

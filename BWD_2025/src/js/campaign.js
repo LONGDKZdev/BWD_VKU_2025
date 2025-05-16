@@ -1,98 +1,95 @@
 document.addEventListener('DOMContentLoaded', function() {
+    // Lấy các phần tử lọc
     const searchInput = document.getElementById('campaignSearch');
     const statusFilter = document.getElementById('statusFilter');
     const categoryFilter = document.getElementById('categoryFilter');
+    
+    // Lấy tất cả các thẻ chiến dịch
     const campaignCards = document.querySelectorAll('.campaign-card');
-
-    // Hàm tìm kiếm và lọc
+    
+    // Hàm lọc chiến dịch
     function filterCampaigns() {
-        const searchTerm = searchInput.value.toLowerCase().trim();
+        const searchTerm = searchInput.value.toLowerCase();
         const statusValue = statusFilter.value;
         const categoryValue = categoryFilter.value;
-
+        
+        // Đếm số lượng thẻ hiển thị để duy trì bố cục grid
+        let visibleCount = 0;
+        
         campaignCards.forEach(card => {
+            // Lấy thông tin từ thẻ
             const title = card.querySelector('h3').textContent.toLowerCase();
             const description = card.querySelector('p').textContent.toLowerCase();
-            const status = card.querySelector('.campaign-status').textContent.toLowerCase();
-            const category = card.getAttribute('data-category') || 'all';
-
-            // Kiểm tra điều kiện tìm kiếm
-            const matchesSearch = searchTerm === '' || 
-                                title.includes(searchTerm) || 
-                                description.includes(searchTerm);
-            const matchesStatus = statusValue === 'all' || 
-                                (statusValue === 'active' && status.includes('đang diễn ra')) ||
-                                (statusValue === 'upcoming' && status.includes('sắp diễn ra')) ||
-                                (statusValue === 'completed' && status.includes('đã kết thúc'));
+            const status = card.querySelector('.campaign-status').classList.contains('active') ? 'active' : 
+                          card.querySelector('.campaign-status').classList.contains('upcoming') ? 'upcoming' : 'completed';
+            const category = card.getAttribute('data-category');
+            
+            // Kiểm tra điều kiện lọc
+            const matchesSearch = title.includes(searchTerm) || description.includes(searchTerm);
+            const matchesStatus = statusValue === 'all' || status === statusValue;
             const matchesCategory = categoryValue === 'all' || category === categoryValue;
-
-            // Hiển thị hoặc ẩn card dựa trên kết quả tìm kiếm
+            
+            // Hiển thị hoặc ẩn thẻ dựa trên kết quả lọc
             if (matchesSearch && matchesStatus && matchesCategory) {
                 card.style.display = '';
-                if (searchTerm) {
-                    highlightText(card, searchTerm);
-                } else {
-                    removeHighlight(card);
-                }
+                visibleCount++;
             } else {
                 card.style.display = 'none';
             }
         });
-
-        // Hiển thị thông báo khi không có kết quả
-        const visibleCards = document.querySelectorAll('.campaign-card[style=""]').length;
-        showNoResultsMessage(visibleCards === 0);
-    }
-
-    // Hàm highlight text tìm kiếm
-    function highlightText(card, searchTerm) {
-        const title = card.querySelector('h3');
-        const description = card.querySelector('p');
         
-        title.innerHTML = highlightMatch(title.textContent, searchTerm);
-        description.innerHTML = highlightMatch(description.textContent, searchTerm);
-    }
-
-    function highlightMatch(text, searchTerm) {
-        if (!searchTerm) return text;
-        const regex = new RegExp(`(${searchTerm})`, 'gi');
-        return text.replace(regex, '<mark>$1</mark>');
-    }
-
-    function removeHighlight(card) {
-        const title = card.querySelector('h3');
-        const description = card.querySelector('p');
+        // Thêm các thẻ giả để duy trì bố cục grid
+        const campaignGrid = document.querySelector('.campaign-grid');
         
-        title.innerHTML = title.textContent;
-        description.innerHTML = description.textContent;
-    }
-
-    // Hàm hiển thị thông báo không có kết quả
-    function showNoResultsMessage(show) {
-        let messageEl = document.querySelector('.no-results-message');
-        if (show) {
-            if (!messageEl) {
-                messageEl = document.createElement('div');
-                messageEl.className = 'no-results-message';
-                messageEl.textContent = 'Không tìm thấy chiến dịch phù hợp';
-                document.querySelector('.campaign-grid').appendChild(messageEl);
+        // Xóa các thẻ giả cũ nếu có
+        const existingPlaceholders = document.querySelectorAll('.campaign-placeholder');
+        existingPlaceholders.forEach(placeholder => placeholder.remove());
+        
+        // Thêm các thẻ giả mới để duy trì bố cục
+        // Số lượng thẻ giả = số lượng cột - (số lượng thẻ hiển thị % số lượng cột)
+        // Chỉ thêm khi số lượng thẻ hiển thị không chia hết cho số lượng cột
+        if (visibleCount > 0 && visibleCount % 3 !== 0) {
+            const placeholdersNeeded = 3 - (visibleCount % 3);
+            for (let i = 0; i < placeholdersNeeded; i++) {
+                const placeholder = document.createElement('div');
+                placeholder.className = 'campaign-placeholder';
+                placeholder.style.visibility = 'hidden';
+                campaignGrid.appendChild(placeholder);
             }
-            messageEl.style.display = 'block';
-        } else if (messageEl) {
-            messageEl.style.display = 'none';
         }
     }
-
-    // Thêm event listeners
+    
+    // Thêm sự kiện lắng nghe cho các bộ lọc
     searchInput.addEventListener('input', filterCampaigns);
     statusFilter.addEventListener('change', filterCampaigns);
     categoryFilter.addEventListener('change', filterCampaigns);
+    
+    // Thêm CSS cho các thẻ giả
+    const style = document.createElement('style');
+    style.textContent = `
+        .campaign-placeholder {
+            width: 100%;
+            height: 0;
+            margin: 0;
+            padding: 0;
+            border: none;
+        }
+        
+        .campaign-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 20px;
+        }
+    `;
+    document.head.appendChild(style);
+    
+    // Xử lý nút tham gia chiến dịch
+    const joinButtons = document.querySelectorAll('.join-campaign-btn');
+    joinButtons.forEach(button => {
+        button.addEventListener('click', function() {
+            const campaignTitle = this.closest('.campaign-content').querySelector('h3').textContent;
 
-    // Thêm debounce để tối ưu hiệu suất tìm kiếm
-    let searchTimeout;
-    searchInput.addEventListener('input', () => {
-        clearTimeout(searchTimeout);
-        searchTimeout = setTimeout(filterCampaigns, 300);
+        });
     });
 });
 

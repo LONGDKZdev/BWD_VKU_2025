@@ -455,79 +455,68 @@ function initializePage() {
 }
 
 // Thiết lập sự kiện
+// Hàm initLeaderboardFilters
+function initLeaderboardFilters() {
+    const timeFilter = document.getElementById('time-filter');
+    const categoryFilter = document.getElementById('category-leaderboard');
+
+    if (timeFilter) {
+        timeFilter.addEventListener('change', renderRankTable);
+    }
+
+    if (categoryFilter) {
+        categoryFilter.addEventListener('change', renderRankTable);
+    }
+
+    renderRankTable();
+}
+
+// Hàm setupEventListeners
 function setupEventListeners() {
-    // Sự kiện cho bộ lọc danh mục
     document.querySelectorAll('.category-filter a').forEach(link => {
         link.addEventListener('click', function(e) {
             e.preventDefault();
-            
-            // Cập nhật trạng thái active
             document.querySelectorAll('.category-filter li').forEach(item => {
                 item.classList.remove('active');
             });
             this.parentElement.classList.add('active');
-            
-            // Lọc bài đăng theo danh mục
             currentCategory = this.getAttribute('data-category');
             filterPosts();
         });
     });
 
-    // Thêm sự kiện cho các hashtag
     document.querySelectorAll('.topic-tag').forEach(tag => {
         tag.addEventListener('click', function(e) {
             e.preventDefault();
-            const hashtag = this.textContent.trim(); // Lấy nội dung hashtag
-            
-            // Lọc bài viết theo hashtag
+            const hashtag = this.textContent.trim();
             filteredPosts = posts.filter(post => {
                 return post.content.includes(hashtag);
             });
-            
-            // Cập nhật hiển thị
             renderPosts();
-            
-            // Cập nhật trạng thái active cho hashtag
             document.querySelectorAll('.topic-tag').forEach(t => {
                 t.classList.remove('active');
             });
             this.classList.add('active');
         });
     });
-    
-    // Sự kiện cho bộ lọc feed
+
     document.querySelectorAll('.filter-btn').forEach(btn => {
         btn.addEventListener('click', function() {
-            // Cập nhật trạng thái active
             document.querySelectorAll('.filter-btn').forEach(item => {
                 item.classList.remove('active');
             });
             this.classList.add('active');
-            
-            // Lọc bài đăng theo loại
             currentFilter = this.getAttribute('data-filter');
             filterPosts();
         });
     });
-    
-    // Sự kiện cho nút đăng bài
+
     document.getElementById('publish-btn').addEventListener('click', publishPost);
-    
-    // Sự kiện cho các nút đính kèm
     document.getElementById('photo-btn').addEventListener('click', () => showAttachmentDialog('photo'));
     document.getElementById('video-btn').addEventListener('click', () => showAttachmentDialog('video'));
     document.getElementById('podcast-btn').addEventListener('click', () => showAttachmentDialog('podcast'));
     document.getElementById('activity-btn').addEventListener('click', () => showAttachmentDialog('activity'));
-          
-  // Sự kiện cho bộ lọc bảng xếp hạng
-    document.getElementById('time-filter').addEventListener('change', renderRankTable);
-    document.getElementById('category-leaderboard').addEventListener('change', renderRankTable);
-    
-    
-    // Sự kiện cho nút xem thêm
     document.getElementById('load-more').addEventListener('click', loadMorePosts);
-    
-    // Sự kiện đóng modal
     document.querySelector('.close-modal').addEventListener('click', closeModal);
     window.addEventListener('click', function(e) {
         const modal = document.getElementById('post-modal');
@@ -535,6 +524,15 @@ function setupEventListeners() {
             closeModal();
         }
     });
+}
+
+// Hàm initializePage
+function initializePage() {
+    renderPosts();
+    renderAchievements();
+    document.getElementById('feed-spinner').style.display = 'none';
+    document.getElementById('table-spinner').style.display = 'none';
+    initLeaderboardFilters();
 }
 
 // Hiệu ứng animation
@@ -1329,10 +1327,13 @@ likeButtons.forEach(button => {
         post.commentsList.push(newComment);
         post.comments++;
         
-        // Cập nhật UI
-        const commentCount = document.querySelector(`.post-card[data-post-id="${postId}"] .action-btn[data-action="comment"] .action-count`);
-        if (commentCount) {
-            commentCount.textContent = post.comments;
+        // Cập nhật UI - Sửa lỗi ở đây
+        const commentBtn = document.querySelector(`.post-card[data-post-id="${postId}"] .action-btn:nth-child(2)`);
+        if (commentBtn) {
+            const countSpan = commentBtn.querySelector('.action-count');
+            if (countSpan) {
+                countSpan.textContent = post.comments;
+            }
         }
         
         // Reset input và hiển thị lại bình luận
@@ -1363,8 +1364,74 @@ likeButtons.forEach(button => {
 }
 
 function sharePost(postId) {
-// Trong thực tế, bạn sẽ hiển thị dialog chia sẻ
-showNotification('Đã sao chép liên kết bài đăng vào clipboard', 'success');
+    // Tạo modal chia sẻ
+    const shareModal = document.createElement('div');
+    shareModal.className = 'share-modal';
+    shareModal.innerHTML = `
+        <div class="share-modal-content">
+            <span class="close-share-modal">&times;</span>
+            <h3>Chia sẻ bài viết</h3>
+            <div class="share-options">
+                <button class="share-btn facebook"><i class="fab fa-facebook"></i> Facebook</button>
+                <button class="share-btn twitter"><i class="fab fa-twitter"></i> Twitter</button>
+                <button class="share-btn linkedin"><i class="fab fa-linkedin"></i> LinkedIn</button>
+                <button class="share-btn email"><i class="fas fa-envelope"></i> Email</button>
+                <button class="share-btn copy-link"><i class="fas fa-link"></i> Sao chép liên kết</button>
+            </div>
+        </div>
+    `;
+    
+    document.body.appendChild(shareModal);
+    
+    // Hiển thị modal
+    setTimeout(() => {
+        shareModal.style.display = 'flex';
+    }, 10);
+    
+    // Xử lý đóng modal
+    const closeBtn = shareModal.querySelector('.close-share-modal');
+    closeBtn.addEventListener('click', () => {
+        shareModal.style.display = 'none';
+        setTimeout(() => {
+            shareModal.remove();
+        }, 300);
+    });
+    
+    // Xử lý các nút chia sẻ
+    const facebookBtn = shareModal.querySelector('.facebook');
+    const twitterBtn = shareModal.querySelector('.twitter');
+    const linkedinBtn = shareModal.querySelector('.linkedin');
+    const emailBtn = shareModal.querySelector('.email');
+    const copyLinkBtn = shareModal.querySelector('.copy-link');
+    
+    // Tạo URL chia sẻ (trong thực tế, bạn sẽ sử dụng URL thực của bài đăng)
+    const shareUrl = `${window.location.origin}/post/${postId}`;
+    const shareTitle = "Bài viết từ Vietnam Self+Rise";
+    
+    // Xử lý sự kiện cho các nút
+    facebookBtn.addEventListener('click', () => {
+        window.open(`https://www.facebook.com/sharer/sharer.php?u=${encodeURIComponent(shareUrl)}`, '_blank');
+    });
+    
+    twitterBtn.addEventListener('click', () => {
+        window.open(`https://twitter.com/intent/tweet?url=${encodeURIComponent(shareUrl)}&text=${encodeURIComponent(shareTitle)}`, '_blank');
+    });
+    
+    linkedinBtn.addEventListener('click', () => {
+        window.open(`https://www.linkedin.com/sharing/share-offsite/?url=${encodeURIComponent(shareUrl)}`, '_blank');
+    });
+    
+    emailBtn.addEventListener('click', () => {
+        window.location.href = `mailto:?subject=${encodeURIComponent(shareTitle)}&body=${encodeURIComponent('Xem bài viết này: ' + shareUrl)}`;
+    });
+    
+    copyLinkBtn.addEventListener('click', () => {
+        navigator.clipboard.writeText(shareUrl).then(() => {
+            showNotification('Đã sao chép liên kết bài đăng vào clipboard', 'success');
+        }).catch(err => {
+            showNotification('Không thể sao chép liên kết', 'error');
+        });
+    });
 }
 
 // Hiển thị bảng xếp hạng
@@ -1474,8 +1541,7 @@ function filterRankData() {
     
     // Sắp xếp theo điểm số
     filteredRankData.sort((a, b) => b.score - a.score);
-    
-    // Không cần reset currentPage vì đã bỏ phân trang
+
 }
 // Hiển thị thành tích
 function renderAchievements() {
@@ -1512,10 +1578,21 @@ function updatePagination() {
     const prevBtn = document.getElementById('prev-page');
     const nextBtn = document.getElementById('next-page');
     const pageNumbers = document.getElementById('page-numbers');
-    
+
+    if (!prevBtn || !nextBtn || !pageNumbers) return;
+
+    // Tính tổng số trang dựa trên dữ liệu đã lọc
+    totalPages = Math.ceil(filteredRankData.length / itemsPerPage);
+
+    // Nếu ít hơn 10 người, đặt currentPage về 1 và giới hạn chỉ hiển thị trang 1
+    if (filteredRankData.length <= itemsPerPage) {
+        currentPage = 1; // Chuyển về trang 1
+        totalPages = 1;  // Đặt tổng số trang là 1
+    }
+
     prevBtn.disabled = currentPage === 1;
     nextBtn.disabled = currentPage === totalPages;
-    
+
     prevBtn.onclick = () => {
         if (currentPage > 1) {
             currentPage--;
@@ -1523,7 +1600,7 @@ function updatePagination() {
             animatePaginationButtons();
         }
     };
-    
+
     nextBtn.onclick = () => {
         if (currentPage < totalPages) {
             currentPage++;
@@ -1531,7 +1608,7 @@ function updatePagination() {
             animatePaginationButtons();
         }
     };
-    
+
     pageNumbers.innerHTML = '';
     for (let i = 1; i <= totalPages; i++) {
         const pageSpan = document.createElement('span');
@@ -1691,3 +1768,4 @@ document.getElementById('view-detail-btn').addEventListener('click', function(e)
 
 let currentAttachment = null;
 let currentActivity = null;
+

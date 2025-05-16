@@ -59,9 +59,9 @@ async function handleSocialLogin(user, provider) {
         if (accountExists) {
             showNotification("✅ Đăng nhập thành công!", 'success', 2000);
             setTimeout(() => {
-                showNotification("👍 Đang điều hướng tới trang khám phá...", 'info', 2500);
+                showNotification("👍 Đang điều hướng tới trang chủ...", 'info', 2500);
                 setTimeout(() => {
-                    window.location.href = "explore.html";
+                    window.location.href = "campaign.html";
                 }, 2500);
             }, 2200);
         } else {
@@ -80,7 +80,7 @@ async function handleSocialLogin(user, provider) {
             });
             showNotification("✅ Đăng ký thành công!", 'success', 2000);
             setTimeout(() => {
-                window.location.href = "explore.html";
+                window.location.href = "campaign.html";
             }, 2500);
         }
     } catch (error) {
@@ -164,7 +164,7 @@ async function handleSocialRegister(user, provider) {
             });
             showNotification("✅ Đăng ký thành công!", 'success', 2000);
             setTimeout(() => {
-                window.location.href = "explore.html";
+                window.location.href = "campaign.html";
             }, 2500);
         }
     } catch (error) {

@@ -1,6 +1,5 @@
 <!DOCTYPE html>
 <html lang="vi">
-
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -11,12 +10,11 @@
     <link rel="stylesheet" href="src/css/follow-button.css">
     <link rel="icon" type="image" href="src/images/LogoSelfRise.png">
 </head>
-
 <body>
     <nav class="navbar">
         <div class="logo">
             <a href="index.html" class="logo-text">
-                <div class="logo-main" style="margin-left: 20px;">
+                <div class="logo-main" style = "margin-left: 20px;">
                     <span class="logo-viet">VIET</span>
                     <span class="logo-nam">NAM</span>
                     <span class="logo-SelfRise">Self+Rise</span>
@@ -29,7 +27,6 @@
             <li><a href="explore.html" class="active">Khám phá</a></li>
             <li><a href="community.html">Cộng Đồng</a></li>
             <li><a href="account.html">Tài Khoản</a></li>
-            <!-- <li><a href="login.html">Đăng Xuất</a></li> -->
         </ul>
     </nav>
 
@@ -126,8 +123,7 @@
                             <div class="user-avatar">
                                 <img src="src/images/QuocAnh.jpg" alt="Avatar của bạn">
                             </div>
-                            <input type="text" id="post-text"
-                                placeholder="Chia sẻ thành tựu hoặc kinh nghiệm của bạn..." onclick="openPostModal()">
+                            <input type="text" id="post-text" placeholder="Chia sẻ thành tựu hoặc kinh nghiệm của bạn..." onclick="openPostModal()">
                         </div>
                     </div>
                 </div>
@@ -141,8 +137,7 @@
                                 <div class="user-avatar">
                                     <img src="src/images/QuocAnh.jpg" alt="Avatar của bạn">
                                 </div>
-                                <textarea id="post-text-modal"
-                                    placeholder="Chia sẻ thành tựu hoặc kinh nghiệm của bạn..."></textarea>
+                                <textarea id="post-text-modal" placeholder="Chia sẻ thành tựu hoặc kinh nghiệm của bạn..."></textarea>
                             </div>
                             <div class="preview-container" id="preview-container">
                                 <!-- Preview content sẽ được thêm vào đây bằng JavaScript -->
@@ -181,15 +176,15 @@
                     </div>
                 </div>
                 <!-- Modal cho comments -->
-                <div id="comments-modal" class="modal">
-                    <div class="modal-content">
-                        <span class="close">&times;</span>
-                        <h3 class="modal-title"></h3>
-                        <div class="modal-content-inner">
-                            <!-- Nội dung comments sẽ được thêm vào đây bằng JavaScript -->
-                        </div>
-                    </div>
-                </div>
+<div id="comments-modal" class="modal">
+    <div class="modal-content">
+        <span class="close">&times;</span>
+        <h3 class="modal-title"></h3>
+        <div class="modal-content-inner">
+            <!-- Nội dung comments sẽ được thêm vào đây bằng JavaScript -->
+        </div>
+    </div>
+</div>
                 <div class="feed-filter">
                     <button class="filter-btn active" data-filter="trending">Xu hướng</button>
                     <button class="filter-btn" data-filter="latest">Mới nhất</button>
@@ -288,24 +283,22 @@
                     </div>
                 </div>
 
-                <div class="trending-topics">
-                    <h3>Chủ đề nổi bật</h3>
-                    <div class="topic-list">
-                        <a href="#" class="topic-tag">#ChayBoMoiNgay</a>
-                        <a href="#" class="topic-tag">#AnSachSongKhoe</a>
-                        <a href="#" class="topic-tag">#ThienBuoiSang</a>
-                        <a href="#" class="topic-tag">#HocTapHieuQua</a>
-                        <a href="#" class="topic-tag">#PodcastSelfRise</a>
-                    </div>
-                </div>
+               <div class="trending-topics">
+    <h3>Chủ đề nổi bật</h3>
+    <div class="topic-list">
+        <a href="#" class="topic-tag">#ChayBoMoiNgay</a>
+        <a href="#" class="topic-tag">#AnSachSongKhoe</a>
+        <a href="#" class="topic-tag">#ThienBuoiSang</a>
+        <a href="#" class="topic-tag">#HocTapHieuQua</a>
+        <a href="#" class="topic-tag">#PodcastSelfRise</a>
+    </div>
+</div>
             </div>
         </div>
     </div>
 
     <section id="leaderboard" class="leaderboard-section">
-        <div class="close-leaderboard"
-            style="position: absolute; top: 20px; right: 30px; cursor: pointer; font-size: 2rem; z-index: 10;">&times;
-        </div>
+        <div class="close-leaderboard" style="position: absolute; top: 20px; right: 30px; cursor: pointer; font-size: 2rem; z-index: 10;">&times;</div>
         <div class="container">
             <h2>Bảng xếp hạng chi tiết</h2>
             <div class="leaderboard-filters">
@@ -379,5 +372,4 @@
     <script src="src/js/search.js"></script>
     <script src="src/js/follow-button.js"></script>
 </body>
-
 </html>
