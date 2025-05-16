@@ -1,37 +1,105 @@
 // Lưu trữ dữ liệu chat cho mỗi phòng
 const chatRooms = {
     'web-dev': {
-        name: 'Lập Trình Web',
-        avatar: 'src/images/ltweb.jpg',
-        memberCount: '123 thành viên',
+        name: 'Sức khỏe là nền tảng của cuộc sống',
+        avatar: 'src/images/Taptheduc.webp',
+        memberCount: '1,2k thành viên',
         messages: '' // Sẽ được cập nhật khi trang tải
     },
     'ml-community': {
-        name: 'Machine Learning Community',
-        avatar: 'src/images/MLC.png',
-        memberCount: '89 thành viên',
+        name: 'Ăn mạnh sống khỏe',
+        avatar: 'src/images/Healthy.jpg',
+        memberCount: '2.4k thành viên',
         messages: `
             <div class="date-divider">
                 <span>Hôm nay</span>
             </div>
-            <div class="message-container">
-                <div class="message-avatar">
-                    <img src="src/images/alice-avatar.jpg" alt="Alice">
-                </div>
-                <div class="message-content">
-                    <div class="message-header">
-                        <h4>Alice</h4>
-                        <span class="message-time">10:15</span>
-                    </div>
-                    <div class="message-body">
-                        <p>Mình có tài liệu hay về Machine Learning, các bạn tham khảo nhé!</p>
-                        <div class="message-attachment file">
-                            <i class="fas fa-file-pdf"></i>
-                            <div class="file-info">
-                                <span class="file-name">ml-basics.pdf</span>
+                                
+                    <div class="message-container">
+                        <div class="message-avatar">
+                            <img src="src/images/NgocHuyen.jpg" alt="Huyen">
+                        </div>
+                        <div class="message-content">
+                            <div class="message-header">
+                                <h4>Huyền</h4>
+                                <span class="message-time">14:15</span>
+                            </div>
+                            <div class="message-body">
+                                <p>Mọi người có thể chia sẻ thêm kinh nghiệm tập luyện không ạ?</p>
+                            </div>
+                            <div class="message-actions">
+                                <button class="reaction-btn"><i class="far fa-thumbs-up"></i></button>
+                                <button class="reaction-btn"><i class="far fa-heart"></i></button>
+                                <button class="reaction-btn"><i class="far fa-share-square"></i></button>
                             </div>
                         </div>
                     </div>
+
+                    <div class="message-container">
+                        <div class="message-avatar">
+                            <img src="src/images/ThanhHai.jpg" alt="ThanhHai">
+                        </div>
+                        <div class="message-content">
+                            <div class="message-header">
+                                <h4>Thanh Hải</h4>
+                                <span class="message-time">14:20</span>
+                            </div>
+                            <div class="message-body">
+                                <p>Theo kinh nghiệm của mình, nên tập thể dục vào buổi sáng sớm hoặc chiều tối. Tránh tập vào buổi trưa vì thời tiết nóng bức có thể ảnh hưởng đến sức khỏe.</p>
+                            </div>
+                            <div class="message-actions">
+                                <button class="reaction-btn"><i class="far fa-thumbs-up"></i> 3</button>
+                                <button class="reaction-btn"><i class="far fa-heart"></i> 1</button>
+                                <button class="reaction-btn"><i class="far fa-share-square"></i></button>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="message-container">
+                        <div class="message-avatar">
+                            <img src="src/images/TuanAnh.jpg" alt="TuanAnh">
+                        </div>
+                        <div class="message-content">
+                            <div class="message-header">
+                                <h4>Tuấn Anh</h4>
+                                <span class="message-time">14:25</span>
+                            </div>
+                            <div class="message-body">
+                                <p>Đúng vậy, và nên uống đủ nước trước, trong và sau khi tập để cơ thể không bị mất nước. Mọi người có thể tham khảo thêm lịch tập của mình:</p>
+                                <div class="message-attachment file">
+                                    <i class="fas fa-file-pdf"></i>
+                                    <div class="file-info">
+                                        <a href="src/images/lich-tap.pdf" target="_blank" class="file-name">lich-tap-hang-tuan.pdf</a>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="message-actions">
+                                <button class="reaction-btn"><i class="far fa-thumbs-up"></i> 5</button>
+                                <button class="reaction-btn"><i class="far fa-heart"></i> 2</button>
+                                <button class="reaction-btn"><i class="far fa-share-square"></i></button>
+                            </div>
+                        </div>
+                    </div>
+              
+            <div class="message-container">
+                <div class="message-avatar">
+                    <img src="src/images/NgocHuyen.jpg" alt="Alice">
+                </div>
+                <div class="message-content">
+                    <div class="message-header">
+                        <h4>Ngọc Huyền</h4>
+                        <span class="message-time">10:15</span>
+                    </div>
+                                 <div class="message-body">
+                                    <p>Các bạn xem qua bài này nhé. Rất hay về thể dục mỗi ngày </p>
+                                    <div class="message-attachment file">
+                                        <i class="fas fa-file-pdf"></i>
+                                        <div class="file-info">
+                                            <a href="src/images/an.pdf" target="_blank" class="file-name">Thuc don moi ngay.pdf</a>
+                                        </div>
+                                    </div>
+                                </div>
+                                
                     <div class="message-actions">
                         <button class="reaction-btn"><i class="far fa-thumbs-up"></i> 3</button>
                         <button class="reaction-btn"><i class="far fa-heart"></i> 1</button>
@@ -39,6 +107,7 @@ const chatRooms = {
                     </div>
                 </div>
             </div>`
+            
     }
 };
 
@@ -284,7 +353,7 @@ function setupEmojiPanel() {
     
     // Tạo emoji grid
     const emojiGrid = document.querySelector('.emoji-grid');
-    const emojis = ['😀', '😃', '😄', '😁', '😆', '😅', '😂', '🤣', '😊', '😇', 
+    const emojis = ['😀', '😃', '😄', '😁', '😆', '😚', '😂', '🤣', '😊', '😇', 
                     '🙂', '🙃', '😉', '😌', '😍', '🥰', '😘', '😗', '😙', '😚',
                     '👍', '👎', '❤️', '🔥', '🎉', '🤔', '👏', '🙏', '👋', '🤝'];
     
@@ -1244,4 +1313,76 @@ document.addEventListener('DOMContentLoaded', function() {
     setupChatSearch();
     
     // Other initialization code
+});// Image Viewer Functions
+function openImageViewer(imgElement) {
+    const viewer = document.getElementById('imageViewer');
+    const expandedImg = document.getElementById('expandedImg');
+    viewer.style.display = 'block';
+    expandedImg.src = imgElement.src;
+}
+
+function closeImageViewer() {
+    document.getElementById('imageViewer').style.display = 'none';
+}
+
+// Add click events to all chat images
+document.addEventListener('DOMContentLoaded', function() {
+    // Add click event to all message images
+    const chatImages = document.querySelectorAll('.message-attachment.image img');
+    chatImages.forEach(img => {
+        img.onclick = function() {
+            openImageViewer(this);
+        };
+    });
+
+    // Close viewer when clicking outside the image
+    const imageViewer = document.getElementById('imageViewer');
+    imageViewer.onclick = function(e) {
+        if (e.target === this || e.target.className === 'close-viewer') {
+            closeImageViewer();
+        }
+    };
+
+    // Close viewer with Escape key
+    document.addEventListener('keydown', function(e) {
+        if (e.key === 'Escape') {
+            closeImageViewer();
+        }
+    });
+});
+// ... existing code ...
+
+// Thiết lập image viewer
+function setupImageViewer() {
+    const imageViewer = document.getElementById('imageViewer');
+    const expandedImg = document.getElementById('expandedImg');
+    const closeViewer = document.querySelector('.close-viewer');
+
+    // Xử lý click vào ảnh
+    document.addEventListener('click', function(e) {
+        if (e.target.matches('.message-attachment.image img')) {
+            imageViewer.style.display = 'block';
+            expandedImg.src = e.target.src;
+        }
+    });
+
+    // Xử lý đóng viewer
+    closeViewer.addEventListener('click', function() {
+        imageViewer.style.display = 'none';
+    });
+
+    // Đóng viewer khi click ngoài ảnh
+    imageViewer.addEventListener('click', function(e) {
+        if (e.target === imageViewer) {
+            imageViewer.style.display = 'none';
+        }
+    });
+}
+
+// Thêm vào phần khởi tạo
+document.addEventListener('DOMContentLoaded', function() {
+    // ... existing code ...
+    
+    // Thiết lập image viewer
+    setupImageViewer();
 });

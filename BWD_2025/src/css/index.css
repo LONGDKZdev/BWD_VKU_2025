@@ -1,0 +1,130 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+body {
+    overflow: hidden;
+    background-color: #000;
+    min-height: 100vh;
+}
+
+/* Navbar Styles */
+.navbar {
+    background-color: #1a472a;
+    padding: 1rem 2rem;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    position: fixed;
+    width: 100%;
+    z-index: 1000;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+}
+
+.logo-text {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    text-decoration: none;
+}
+
+.logo-main {
+    display: flex;
+    align-items: baseline;
+    gap: 4px;
+}
+
+.logo-viet,
+.logo-nam {
+    font-size: 1.4rem;
+    font-weight: 700;
+    color: #ffffff;
+}
+
+.logo-nam {
+    color: #4CAF50;
+}
+
+.logo-SelfRise {
+    color: #ffffff;
+    font-size: 1.4rem;
+    font-weight: 500;
+    margin-left: 8px;
+    padding-left: 8px;
+    border-left: 2px solid #4CAF50;
+}
+
+.logo-subtitle {
+    color: #4CAF50;
+    font-size: 0.8rem;
+    margin-left: 4px;
+}
+
+/* Video Container Styles */
+.video-container {
+    position: relative;
+    width: 100vw;
+    height: 100vh;
+}
+
+video {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    position: absolute;
+    top: 0;
+    left: 0;
+}
+
+.next-button {
+    position: fixed;
+    right: 30px;
+    top: 50%;
+    transform: translateY(-50%);
+    background-color: rgba(76, 175, 80, 0.3);
+    color: rgba(255, 255, 255, 0.9);
+    padding: 3px 6px;
+    border: 1px solid rgba(255, 255, 255, 0.3);
+    border-radius: 30px;
+    cursor: pointer;
+    font-size: 16px;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    transition: all 0.3s ease;
+    backdrop-filter: blur(8px);
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.05);
+}
+
+.next-button:hover {
+    background-color: rgba(76, 175, 80, 0.5);
+    border-color: rgba(255, 255, 255, 0.5);
+    color: rgba(255, 255, 255, 1);
+    transform: translateY(-50%) scale(1.05);
+    box-shadow: 0 6px 20px rgba(0, 0, 0, 0.1);
+}
+
+.next-button span {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    font-weight: 500;
+    text-shadow: 0 1px 2px rgba(0, 0, 0, 0.1);
+}
+
+.next-button i {
+    font-size: 18px;
+    transition: transform 0.3s ease;
+}
+
+.next-button:hover i {
+    transform: translateX(5px);
+}
+
+.next-button:hover {
+    background-color: rgba(76, 175, 80, 1);
+    transform: translateY(-50%) scale(1.05);
+}
+
+

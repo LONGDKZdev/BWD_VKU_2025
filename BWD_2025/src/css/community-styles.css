@@ -3,7 +3,6 @@
     margin: 0;
     padding: 0;
     box-sizing: border-box;
-    font-family: 'Roboto', sans-serif;
 }
 
 html, body {
@@ -14,6 +13,7 @@ html, body {
     overflow-x: hidden;
     background-color: var(--background-white);
 }
+
 
 /* App Container */
 .app-container {
@@ -146,6 +146,7 @@ body {
     justify-content: center;
     background: transparent;
     border: none;
+    font-size: 1.2em;
     color: var(--text-secondary);
     cursor: pointer;
     transition: background-color var(--transition-speed);
@@ -271,6 +272,7 @@ body {
 .user-info h3 {
     font-size: 15px;
     margin-bottom: 2px;
+    margin: 5px 0;
 }
 
 .status-text {
@@ -279,7 +281,7 @@ body {
 }
 
 .search-container {
-    padding: 15px;
+    padding: 0px;
 }
 
 .search-box {
@@ -287,7 +289,7 @@ body {
     align-items: center;
     background-color: var(--background-light);
     border-radius: 20px;
-    padding: 8px 15px;
+    padding: 4px 10px;
 }
 
 .search-box i {
@@ -398,6 +400,8 @@ body {
 
 .avatar img {
     transition: all 0.3s ease;
+    width: 45px;  /* Tăng từ kích thước mặc định */
+    height: 45px; /* Giữ tỷ lệ 1:1 */
 }
 
 .avatar:hover img {
@@ -426,8 +430,8 @@ body {
 }
 
 .group-avatar img {
-    width: 30px;
-    height: 30px;
+    width: 45px;
+    height: 45px;
     border-radius: 50%;
     object-fit: cover;
 }
@@ -567,7 +571,23 @@ body {
 .message-container.outgoing .message-avatar {
     display: none;
 }
+.message-avatar {
+    margin-right: 12px;
+}
 
+.message-avatar img {
+    width: 70px;  /* Tăng từ kích thước mặc định */
+    height: 70px; /* Giữ tỷ lệ 1:1 */
+    border-radius: 50%;
+    object-fit: cover;
+    border: 2px solid #fff;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+    transition: transform 0.3s ease;
+}
+
+.message-avatar img:hover {
+    transform: scale(1.1);
+}
 .message-avatar img {
     width: 40px;
     height: 40px;
@@ -714,7 +734,131 @@ body {
     background-color: var(--background-white);
     border-top: 1px solid var(--divider-color);
 }
+/* Cải thiện thanh chat */
+.chat-input-area {
+    background: linear-gradient(145deg, #ffffff, #f8f9fa);
+    border-top: 1px solid rgba(0, 0, 0, 0.05);
+    padding: 15px;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    box-shadow: 0 -2px 10px rgba(0, 0, 0, 0.03);
+}
 
+.input-actions {
+    display: flex;
+    gap: 8px;
+}
+
+.icon-btn {
+    width: 36px;
+    height: 36px;
+    border-radius: 50%;
+    border: none;
+    background: linear-gradient(145deg, #ffffff, #f0f0f0);
+    color: #666;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    box-shadow: 3px 3px 6px #d9d9d9, -3px -3px 6px #ffffff;
+}
+
+.icon-btn:hover {
+    color: #4CAF50;
+    transform: translateY(-2px);
+    box-shadow: 4px 4px 8px #d9d9d9, -4px -4px 8px #ffffff;
+}
+
+.input-field {
+    flex: 1;
+    background: #ffffff;
+    border-radius: 20px;
+    padding: 0 15px;
+    box-shadow: inset 2px 2px 5px #d9d9d9, inset -2px -2px 5px #ffffff;
+}
+
+.input-field input {
+    width: 100%;
+    height: 40px;
+    border: none;
+    background: transparent;
+    color: #333;
+    font-size: 14px;
+}
+
+.input-field input:focus {
+    outline: none;
+}
+
+.send-btn {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    border: none;
+    background: linear-gradient(145deg, #4CAF50, #45a049);
+    color: white;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    box-shadow: 3px 3px 6px rgba(0, 0, 0, 0.1);
+}
+/* Điều chỉnh kích thước thanh chat */
+.chat-input-area {
+    padding: 6px;
+    display: flex;
+    align-items: center;
+    gap: 6px;
+}
+
+.input-actions {
+    display: flex;
+    gap: 6px;
+}
+
+.icon-btn {
+    width: 32px;
+    height: 32px;
+    border-radius: 50%;
+}
+
+.input-field {
+    flex: 1;
+    border-radius: 16px;
+    padding: 0 12px;
+}
+
+.input-field input {
+    height: 32px;
+    font-size: 13px;
+}
+
+.send-btn {
+    width: 32px;
+    height: 32px;
+    border-radius: 50%;
+}
+
+/* Điều chỉnh kích thước icon */
+.icon-btn i {
+    font-size: 14px;
+}
+
+.send-btn i {
+    font-size: 14px;
+}
+.send-btn:hover {
+    transform: scale(1.05);
+    box-shadow: 4px 4px 8px rgba(0, 0, 0, 0.15);
+}
+
+.send-btn:active {
+    transform: scale(0.95);
+    box-shadow: 2px 2px 4px rgba(0, 0, 0, 0.1);
+}
 .input-actions {
     display: flex;
     margin-right: 10px;
@@ -743,7 +887,7 @@ body {
     color: white;
     border: none;
     display: flex;
-    align-items: center;
+    align-items: center; 
     justify-content: center;
     margin-left: 10px;
     cursor: pointer;
@@ -1934,4 +2078,279 @@ body {
 @keyframes slide-down {
     from { transform: translateY(-100%); opacity: 0; }
     to { transform: translateY(0); opacity: 1; }
+}.message-attachment.file:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+}
+
+.file-name:hover {
+    color: #3498db !important;
+    text-decoration: underline !important;
+}
+.message-attachment.file {
+    display: flex;
+    align-items: center;
+    padding: 8px 12px;
+    background-color: #f8f9fa;
+    border-radius: 8px;
+    margin-top: 8px;
+    transition: all 0.3s ease;
+}
+
+.message-attachment.file:hover {
+    background-color: #e9ecef;
+    transform: translateY(-2px);
+    box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+}
+
+.message-attachment.file i {
+    color: #e74c3c;
+    font-size: 1.2em;
+    margin-right: 8px;
+}
+
+.file-info {
+    flex: 1;
+}
+
+.file-name {
+    color: #2980b9;
+    text-decoration: none;
+    font-size: 0.95em;
+    transition: all 0.3s ease;
+}
+
+.file-name:hover {
+    color: #3498db;
+    text-decoration: underline;
+}/* Image Viewer Styles */
+.image-viewer {
+    display: none;
+    position: fixed;
+    z-index: 9999;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.9);
+    cursor: pointer;
+}
+
+.viewer-content {
+    margin: auto;
+    display: block;
+    max-width: 90%;
+    max-height: 90vh;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    animation: zoom 0.3s ease;
+}
+
+.close-viewer {
+    position: absolute;
+    right: 35px;
+    top: 15px;
+    color: #f1f1f1;
+    font-size: 40px;
+    font-weight: bold;
+    cursor: pointer;
+    transition: color 0.3s ease;
+}
+
+.close-viewer:hover {
+    color: #bbb;
+}
+
+@keyframes zoom {
+    from {transform: translate(-50%, -50%) scale(0)}
+    to {transform: translate(-50%, -50%) scale(1)}
+}
+
+.message-attachment.image img {
+    cursor: pointer;
+    transition: opacity 0.3s ease;
+}
+
+.message-attachment.image img:hover {
+    opacity: 0.9;
+}.user-profile {
+    display: flex;
+    align-items: center;
+    padding: 15px;
+    background-color: var(--background-light);
+    border-bottom: 1px solid var(--divider-color);
+}
+/* User Profile Animation */
+.user-profile {
+    padding: 7.5px;
+    border-bottom: 1px solid var(--divider-color);
+    transition: all 0.3s ease;
+    background: #ffffff;
+}
+
+.user-profile:hover {
+    background: #ffffff;
+}
+
+
+.avatar {
+    position: relative;
+    margin-right: 15px;
+}
+
+.avatar img {
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    object-fit: cover;
+    border: 2px solid #fff;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+}
+
+.status-dot {
+    position: absolute;
+    bottom: 2px;
+    right: 2px;
+    width: 12px;
+    height: 12px;
+    border-radius: 50%;
+    border: 2px solid white;
+}
+
+.status-dot.online {
+    background-color: #4CAF50;
+}
+
+.user-info {
+    flex: 1;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.user-details {
+    display: flex;
+    flex-direction: column;
+}
+
+.user-details h3 {
+    margin: 0;
+    font-size: 1.1em;
+    font-weight: 600;
+    color: var(--text-primary);
+}
+
+.status-text {
+    font-size: 0.9em;
+    color: var(--text-secondary);
+}
+
+#logout-btn {
+    padding: 6px 12px;
+    font-size: 0.9em;
+    color: var(--text-primary);
+    border: 1px solid var(--divider-color);
+    border-radius: 4px;
+    background: transparent;
+    transition: all 0.3s ease;
+}
+
+#logout-btn:hover {
+    background-color: #f5f5f5;
+    border-color: #ddd;
+}.image-viewer {
+    display: none;
+    position: fixed;
+    z-index: 1000;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.9);
+}
+
+.viewer-content {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    animation: zoom 0.3s ease;
+}/* Nút tham gia nhóm */
+.btn-join {
+    background: linear-gradient(145deg, #4CAF50, #45a049);
+    color: white;
+    border: none;
+    padding: 8px 16px;
+    border-radius: 20px;
+    font-weight: 500;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+}
+
+.btn-join:hover {
+    background: linear-gradient(145deg, #45a049, #4CAF50);
+    transform: translateY(-2px);
+    box-shadow: 0 4px 8px rgba(0,0,0,0.15);
+}
+
+.btn-join:active {
+    transform: translateY(1px);
+    box-shadow: 0 1px 2px rgba(0,0,0,0.1);
+}
+
+.btn-join.joined {
+    background: linear-gradient(145deg, #e0e0e0, #d5d5d5);
+    color: #666;
+}
+
+.btn-join.joined:hover {
+    background: linear-gradient(145deg, #d5d5d5, #e0e0e0);
+}/* Thêm style cho system message */
+.system-message {
+    text-align: center;
+    background-color: rgba(0, 0, 0, 0.03);
+    border-radius: 10px;
+    margin: 20px 0;
+    padding: 15px;
+}
+
+.system-message p {
+    color: #666;
+    margin: 5px 0;
+}
+
+/* Style cho nút tham gia */
+.btn-join {
+    background: linear-gradient(145deg, #4CAF50, #45a049);
+    color: white;
+    border: none;
+    padding: 8px 16px;
+    border-radius: 20px;
+    font-weight: 500;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+}
+
+.btn-join:hover {
+    background: linear-gradient(145deg, #45a049, #4CAF50);
+    transform: translateY(-2px);
+    box-shadow: 0 4px 8px rgba(0,0,0,0.15);
+}
+
+.btn-join:active {
+    transform: translateY(1px);
+    box-shadow: 0 1px 2px rgba(0,0,0,0.1);
+}
+
+.btn-join.joined {
+    background: linear-gradient(145deg, #e0e0e0, #d5d5d5);
+    color: #666;
+}
+
+.btn-join.joined:hover {
+    background: linear-gradient(145deg, #d5d5d5, #e0e0e0);
 }

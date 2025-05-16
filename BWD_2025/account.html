@@ -1,0 +1,156 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>VIETNAM Self+Rise - Tài Khoản</title>
+    <link rel="icon" type="image" href="src/images/LogoSelfRise.png">
+    <link rel="stylesheet" href="src/css/styles.css">
+    <link rel="stylesheet" href="src/css/account-styles.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body>
+    <nav class="navbar">
+        <div class="logo">
+            <a href="index.html" class="logo-text">
+                <div class="logo-main">
+                    <span class="logo-viet">VIET</span>
+                    <span class="logo-nam">NAM</span>
+                    <span class="logo-SelfRise">Self+Rise</span>
+                </div>
+                <span class="logo-subtitle">SỨC KHOẺ LÀ CUỘC SỐNG CỦA CHÚNG TA</span>
+            </a>
+        </div>
+        <ul class="nav-links">
+            <li><a href="campaign.html">Chiến Dịch</a></li>
+            <li><a href="explore.html">Khám phá</a></li>
+            <li><a href="community.html">Cộng Đồng</a></li>
+            <li><a href="account.html" class="active">Tài Khoản</a></li>
+        </ul>
+    </nav>
+
+    <main class="account-container">
+        <div class="account-header">
+            <div class="profile-image">
+                <img src="src/images/QuocAnh.jpg" alt="Ảnh đại diện" id="profileImage">
+                <div class="image-upload">
+                    <label for="uploadImage">
+                        <i class="fas fa-camera"></i>
+                    </label>
+                    <input type="file" id="uploadImage" accept="image/*">
+                </div>
+            </div>
+            <div class="profile-info">
+                <h1 id="userName">Lê Văn Quốc Anh</h1>
+                <p class="member-since">Thành viên từ: <span id="memberSince">01/01/2024</span></p>
+            </div>
+        </div>
+
+        <div class="account-content">
+            <div class="account-nav">
+                <button class="nav-btn active" data-tab="profile">
+                    <i class="fas fa-user"></i> Thông tin cá nhân
+                </button>
+                <button class="nav-btn" data-tab="activities">
+                    <i class="fas fa-running"></i> Hoạt động
+                </button>
+                <button class="nav-btn" data-tab="achievements">
+                    <i class="fas fa-medal"></i> Thành tích
+                </button>
+                <button class="nav-btn" data-tab="settings">
+                    <i class="fas fa-cog"></i> Cài đặt
+                </button>
+            </div>
+
+            <div class="tab-content">
+                <div class="tab-pane active" id="profile">
+                    <form id="profileForm">
+                        <div class="form-group">
+                            <label>Họ và tên</label>
+                            <input type="text" id="fullName" value="Lê Văn Quốc Anh">
+                        </div>
+                        <div class="form-group">
+                            <label>Email</label>
+                            <input type="email" id="email" value="example@email.com">
+                        </div>
+                        <div class="form-group">
+                            <label>Số điện thoại</label>
+                            <input type="tel" id="phone" value="0123456789">
+                        </div>
+                        <div class="form-group">
+                            <label>Ngày sinh</label>
+                            <input type="date" id="birthdate" value="1990-01-01">
+                        </div>
+                        <div class="form-group">
+                            <label>Giới tính</label>
+                            <select id="gender">
+                                <option value="male">Nam</option>
+                                <option value="female">Nữ</option>
+                                <option value="other">Khác</option>
+                            </select>
+                        </div>
+                        <button type="submit" class="save-btn">Lưu thay đổi</button>
+                    </form>
+                </div>
+
+                <div class="tab-pane" id="activities">
+                    <div class="activities-list">
+                        <div class="activity-card">
+                            <div class="activity-icon"><i class="fas fa-running"></i></div>
+                            <div class="activity-info">
+                                <h3>Chạy bộ vì sức khỏe cộng đồng</h3>
+                                <p>Đã hoàn thành 15/30 ngày</p>
+                                <div class="progress-bar">
+                                    <div class="progress" style="width: 50%"></div>
+                                </div>
+                            </div>
+                        </div>
+                        <!-- Thêm các hoạt động khác -->
+                    </div>
+                </div>
+
+                <div class="tab-pane" id="achievements">
+                    <div class="achievements-grid">
+                        <div class="achievement-card">
+                            <div class="achievement-icon">
+                                <i class="fas fa-medal"></i>
+                            </div>
+                            <h3>Người chạy bộ tích cực</h3>
+                            <p>Hoàn thành 100km chạy bộ</p>
+                        </div>
+                        <!-- Thêm các thành tích khác -->
+                    </div>
+                </div>
+
+                <div class="tab-pane" id="settings">
+                    <form id="settingsForm">
+                        <div class="form-group notification-group">
+                            <label>Thông báo</label>
+                            <div class="toggle-switch">
+                                <input type="checkbox" id="notifications" checked>
+                                <label for="notifications"></label>
+                            </div>
+                        </div>
+                        <div class="form-group password-group">
+                            <label>Đổi mật khẩu</label>
+                            <div class="password-inputs">
+                                <div class="password-field">
+                                    <input type="password" id="currentPassword" placeholder="Mật khẩu hiện tại">
+                                </div>
+                                <div class="password-field">
+                                    <input type="password" id="newPassword" placeholder="Mật khẩu mới">
+                                </div>
+                                <div class="password-field">
+                                    <input type="password" id="confirmPassword" placeholder="Xác nhận mật khẩu mới">
+                                </div>
+                            </div>
+                        </div>
+                        <button type="submit" class="save-btn">Lưu cài đặt</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </main>
+    <script src="src/js/account.js"></script>
+</body>
+</html>

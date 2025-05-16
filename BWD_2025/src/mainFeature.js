@@ -3,10 +3,10 @@ import { auth, db } from "./core/firebase.js";
 import { showToast, showLoading, hideLoading } from "./core/common.js";
 
 // Auth modules
-import { 
+import {
     checkAuthState,
     initSessionPersistence,
-    logoutUser 
+    logoutUser
 } from "./modules/auth/auth.js";
 import { signInWithGoogle, signInWithGithub } from "./modules/auth/social-auth.js";
 import { resetPassword } from "./modules/auth/forgot-password.js";
@@ -35,9 +35,9 @@ import {
     fetchMessages,
     createChatGroup
 } from "./modules/chat/chat.js";
-import { 
+import {
     fetchCommunityPosts,
-    createCommunityPost 
+    createCommunityPost
 } from "./modules/chat/community.js";
 
 // Export tất cả các functions cần thiết
@@ -135,12 +135,12 @@ function setupAccountEvents() {
     // Gắn các sự kiện cho trang Account
     const tabBtns = document.querySelectorAll('.tab-btn');
     const tabContents = document.querySelectorAll('.tab-content');
-    
+
     tabBtns.forEach(btn => {
         btn.addEventListener('click', () => {
             tabBtns.forEach(b => b.classList.remove('active'));
             btn.classList.add('active');
-            
+
             const tabId = btn.dataset.tab;
             tabContents.forEach(content => {
                 content.classList.remove('active');
