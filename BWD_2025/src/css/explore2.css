@@ -55,6 +55,7 @@ body {
 }
 
 .logo-subtitle {
+    font-family: 'Playwrite DK Loopet', cursive;
     color: #4CAF50;
     font-size: 0.7rem;
     margin-left: 4px;

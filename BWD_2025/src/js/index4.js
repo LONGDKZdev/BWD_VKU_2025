@@ -12,6 +12,6 @@ document.addEventListener('DOMContentLoaded', function() {
 
     // Tự động chuyển trang khi video kết thúc
     video.addEventListener('ended', function() {
-        window.location.href = 'index3.html';
+        window.location.href = 'index1.html';
     });
 });
