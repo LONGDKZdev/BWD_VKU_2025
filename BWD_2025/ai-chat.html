@@ -1,0 +1,287 @@
+<!DOCTYPE html>
+<html lang="vi">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>AI Tư vấn sức khỏe - VIETNAM Self+Rise</title>
+    <link rel="icon" type="image" href="src/images/LogoSelfRise.png" />
+    <link rel="stylesheet" href="src/css/styles.css" />
+    <link rel="stylesheet" href="src/css/community-styles.css" />
+    <link rel="stylesheet" href="src/css/ai-chat.css" />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Playwrite+DK+Loopet&display=swap"
+      rel="stylesheet"
+    />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
+    />
+    <link rel="stylesheet" href="src/css/notification.css" />
+  </head>
+
+  <body>
+    <nav class="navbar">
+      <div class="logo">
+        <a href="index.html" class="logo-text">
+          <div class="logo-main">
+            <span class="logo-viet">VIET</span>
+            <span class="logo-nam">NAM</span>
+            <span class="logo-SelfRise">Self+Rise</span>
+          </div>
+          <span class="logo-subtitle">SỨC KHOẺ LÀ CUỘC SỐNG CỦA CHÚNG TA</span>
+        </a>
+      </div>
+      <ul class="nav-links">
+        <li><a href="campaign.html">Chiến Dịch</a></li>
+        <li><a href="explore.html">Khám phá</a></li>
+        <li><a href="community.html">Cộng Đồng</a></li>
+        <li><a href="ai-chat.html">Hỗ trợ</a></li>
+        <li><a href="account.html">Tài Khoản</a></li>
+      </ul>
+    </nav>
+
+    <div class="ai-chat-container">
+      <div class="ai-sidebar">
+        <h3>Câu hỏi gợi ý</h3>
+        <button class="suggestion-btn">
+          Làm thế nào để duy trì sức khỏe tốt?
+        </button>
+        <button class="suggestion-btn">
+          Chế độ ăn nào tốt cho sức khỏe tim mạch?
+        </button>
+        <button class="suggestion-btn">Làm thế nào để giảm stress?</button>
+        <button class="suggestion-btn">
+          Tôi nên tập thể dục bao nhiêu lần một tuần?
+        </button>
+        <button class="suggestion-btn">Làm thế nào để giảm cân an toàn?</button>
+
+        <div class="survey-section">
+          <button id="healthSurveyBtn" class="survey-btn">
+            Đánh giá tình trạng sức khỏe
+          </button>
+        </div>
+      </div>
+
+      <div class="ai-main">
+        <div class="chat-header">
+          <div class="ai-avatar">
+            <i class="fas fa-robot"></i>
+          </div>
+          <div class="chat-title">
+            <h2>AI Tư vấn sức khỏe</h2>
+            <p>Trợ lý thông minh của VIETNAM Self+Rise</p>
+          </div>
+        </div>
+
+        <div class="chat-messages" id="chatMessages">
+          <div class="message ai">
+            <div class="message-content">
+              Xin chào! Tôi là trợ lý AI của VIETNAM Self+Rise. Tôi có thể giúp
+              bạn trả lời các câu hỏi về sức khỏe, dinh dưỡng và luyện tập. Bạn
+              có thể hỏi tôi bất cứ điều gì hoặc sử dụng các câu hỏi gợi ý ở bên
+              trái.
+            </div>
+          </div>
+        </div>
+
+        <div class="typing-indicator" id="typingIndicator">
+          <span></span>
+          <span></span>
+          <span></span>
+        </div>
+
+        <div class="chat-input">
+          <input
+            type="text"
+            id="messageInput"
+            placeholder="Nhập câu hỏi của bạn..."
+            autocomplete="off"
+          />
+          <button id="sendMessageBtn">
+            <i class="fas fa-paper-plane"></i>
+          </button>
+        </div>
+      </div>
+    </div>
+
+    <!-- Modal Khảo sát sức khỏe -->
+    <div class="modal" id="healthSurveyModal">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h3>Đánh giá tình trạng sức khỏe</h3>
+          <button class="close-modal">&times;</button>
+        </div>
+        <form id="healthSurveyForm">
+          <!-- I. Thông tin thể chất -->
+          <h4>I. Thông tin thể chất</h4>
+          <div class="form-group">
+            <label>Chiều cao (cm):</label>
+            <input type="number" name="height" min="50" max="250" required />
+          </div>
+
+          <div class="form-group">
+            <label>Cân nặng (kg):</label>
+            <input type="number" name="weight" min="10" max="200" required />
+          </div>
+
+          <div class="form-group">
+            <label>Tuổi:</label>
+            <input type="number" name="age" min="10" max="120" />
+          </div>
+
+          <div class="form-group">
+            <label>Giới tính:</label>
+            <select name="gender">
+              <option value="">-- Chọn giới tính --</option>
+              <option value="Nam">Nam</option>
+              <option value="Nữ">Nữ</option>
+              <option value="Khác">Khác</option>
+            </select>
+          </div>
+
+          <!-- II. Mục tiêu sức khỏe -->
+          <h4>II. Mục tiêu sức khỏe</h4>
+          <div class="form-group">
+            <label>Mục tiêu chính:</label>
+            <select name="goal" required>
+              <option value="">-- Chọn mục tiêu --</option>
+              <option value="Giảm cân">Giảm cân</option>
+              <option value="Tăng cơ">Tăng cơ</option>
+              <option value="Duy trì cân nặng">Duy trì cân nặng</option>
+              <option value="Giảm stress">Giảm stress</option>
+              <option value="Cải thiện giấc ngủ">Cải thiện giấc ngủ</option>
+              <option value="Khác">Khác</option>
+            </select>
+          </div>
+
+          <div class="form-group">
+            <label>Mục tiêu cụ thể (nếu có):</label>
+            <input
+              type="text"
+              name="specific-goal"
+              placeholder="Ví dụ: Giảm 3kg trong 2 tháng..."
+            />
+          </div>
+
+          <!-- III. Lối sống & vận động -->
+          <h4>III. Lối sống & vận động</h4>
+          <div class="form-group">
+            <label>Tần suất tập thể dục mỗi tuần:</label>
+            <select name="exercise-frequency">
+              <option value="">-- Chọn --</option>
+              <option value="Không tập">Không tập</option>
+              <option value="1–2 buổi">1–2 buổi</option>
+              <option value="3–5 buổi">3–5 buổi</option>
+              <option value="6 buổi trở lên">6 buổi trở lên</option>
+            </select>
+          </div>
+
+          <div class="form-group">
+            <label>Loại hình vận động chính:</label>
+            <input
+              type="text"
+              name="exercise-type"
+              placeholder="Ví dụ: đi bộ, gym, yoga..."
+            />
+          </div>
+
+          <div class="form-group">
+            <label>Thời lượng trung bình mỗi buổi (phút):</label>
+            <input type="number" name="exercise-duration" min="0" max="300" />
+          </div>
+
+          <!-- IV. Giấc ngủ & stress -->
+          <h4>IV. Giấc ngủ & mức độ stress</h4>
+          <div class="form-group">
+            <label>Trung bình số giờ ngủ mỗi đêm:</label>
+            <input type="number" name="sleep" min="0" max="24" />
+          </div>
+
+          <div class="form-group">
+            <label>Chất lượng giấc ngủ:</label>
+            <select name="sleep-quality">
+              <option value="">-- Chọn --</option>
+              <option value="Ngủ sâu">Ngủ sâu</option>
+              <option value="Khó ngủ">Khó ngủ</option>
+              <option value="Thức dậy nhiều lần">Thức dậy nhiều lần</option>
+              <option value="Ngủ không đủ giấc">Ngủ không đủ giấc</option>
+            </select>
+          </div>
+
+          <!-- <div class="form-group">
+            <label>Mức độ stress hiện tại (1-10):</label>
+            <input type="range" name="stress" min="1" max="10" step="1" />
+          </div> -->
+
+          <div class="form-group">
+            <label for="stress">Mức độ stress hiện tại (1-10):</label>
+            <input
+              type="range"
+              name="stress"
+              id="stress"
+              min="1"
+              max="10"
+              step="1"
+              list="stress-ticks"
+            />
+            <datalist id="stress-ticks">
+              <option value="1" label="1"></option>
+              <option value="2" label="2"></option>
+              <option value="3" label="3"></option>
+              <option value="4" label="4"></option>
+              <option value="5" label=" 5"></option>
+              <option value="6" label=" 6"></option>
+              <option value="7" label=" 7"></option>
+              <option value="8" label=" 8"></option>
+              <option value="9" label=" 9"></option>
+              <option value="10" label=" 10"></option>
+            </datalist>
+          </div>
+
+          <!-- V. Thói quen & tiền sử bệnh -->
+          <h4>V. Thói quen & tiền sử bệnh</h4>
+          <div class="form-group">
+            <label>Thói quen không lành mạnh (nếu có):</label>
+            <input
+              type="text"
+              name="habits"
+              placeholder="Ví dụ: hút thuốc, uống bia, ăn khuya..."
+            />
+          </div>
+
+          <div class="form-group">
+            <label>Nhật ký ăn uống gần đây (tóm tắt):</label>
+            <textarea
+              name="diet-log"
+              rows="4"
+              placeholder="Bạn đã ăn gì hôm qua? Ăn vặt? Nhiều rau? Đồ ngọt?..."
+            ></textarea>
+          </div>
+
+          <div class="form-group">
+            <label>Tiền sử bệnh cá nhân:</label>
+            <textarea
+              name="health-issues"
+              rows="3"
+              placeholder="Ví dụ: cao huyết áp, dạ dày, tiểu đường..."
+            ></textarea>
+          </div>
+
+          <div class="form-group">
+            <label>Tiền sử bệnh trong gia đình:</label>
+            <textarea
+              name="family-issues"
+              rows="3"
+              placeholder="Ví dụ: tim mạch, ung thư, tiểu đường..."
+            ></textarea>
+          </div>
+
+          <!-- Submit -->
+          <button type="submit" class="submit-btn">Gửi khảo sát</button>
+        </form>
+      </div>
+    </div>
+
+    <script src="src/js/ai-chat.js"></script>
+  </body>
+</html>
