@@ -69,11 +69,12 @@
           </div>
           <div class="chat-title">
             <h2>AI Tư vấn sức khỏe</h2>
-            <p>Trợ lý thông minh của VIETNAM Self+Rise</p>
+            <p><pre>   Trợ lý thông minh của VIETNAM Self+Rise   </pre></p>
           </div>
         </div>
 
         <div class="chat-messages" id="chatMessages">
+          
           <div class="message ai">
             <div class="message-content">
               Xin chào! Tôi là trợ lý AI của VIETNAM Self+Rise. Tôi có thể giúp
@@ -90,6 +91,12 @@
           <span></span>
         </div>
 
+        <div style="background-color: rgba(6, 176, 65, 0.508);">
+          <div><pre>  Chỉ hỗ trợ các loại ảnh, tệp pdf, docx, doc👍</pre></div>
+          <div class="file-preview-container scrollbar" id="filePreviewContainer"></div>
+        </div>
+        
+        
         <div class="chat-input">
           <input
             type="text"
@@ -97,6 +104,18 @@
             placeholder="Nhập câu hỏi của bạn..."
             autocomplete="off"
           />
+          <label for="fileInput" class="file-upload-btn">
+            <i class="fas fa-paperclip"></i>
+          </label>
+          <input type="file" id="fileInput" style="display: none" multiple />
+          <input type="file" id="imageInput" accept="image/*" style="display:none;">
+          <label for="imageInput" class="file-upload-btn">
+            <i class="fas fa-image"></i>
+            
+        </label>
+
+        
+
           <button id="sendMessageBtn">
             <i class="fas fa-paper-plane"></i>
           </button>
@@ -281,7 +300,29 @@
         </form>
       </div>
     </div>
-
+    <script src="https://cdn.jsdelivr.net/npm/tesseract.js@2.1.5/dist/tesseract.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/pdf.js/2.14.305/pdf.min.js"></script>
+    
     <script src="src/js/ai-chat.js"></script>
+
+    <div id="notification" class="notification"></div>
+
+    <script>
+      function showNotification(message, type = 'warning', duration = 3000) {
+    const noti = document.getElementById('notification');
+    noti.textContent = message;
+    noti.className = `notification show ${type}`;
+
+    setTimeout(() => {
+        noti.classList.remove('show');
+        setTimeout(() => {
+            noti.textContent = '';
+            noti.className = 'notification';
+        }, 400);
+    }, duration);
+}
+
+    </script>
+
   </body>
 </html>

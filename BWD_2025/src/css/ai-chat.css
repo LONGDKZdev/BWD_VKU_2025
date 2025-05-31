@@ -7,7 +7,7 @@
 .ai-sidebar {
     width: 300px;
     background-color: #f5f5f5;
-    border-right: 1px solid #e0e0e0;
+    border-right: 3px solid #e0e0e0;
     padding: 20px;
     overflow-y: auto;
 }
@@ -20,16 +20,16 @@
 
 .chat-header {
     padding: 15px 20px;
-    background-color: #1a472a;
-    color: white;
+    background-color: #f5f5f5;
+    color: rgb(32, 175, 0);
     display: flex;
     align-items: center;
-    border-bottom: 1px solid #e0e0e0;
+    border-bottom: 5px solid #e0e0e0;
 }
 
 .ai-avatar {
-    width: 40px;
-    height: 40px;
+    width: 50px;
+    height: 50px;
     border-radius: 50%;
     margin-right: 15px;
     background-color: #4CAF50;
@@ -67,6 +67,8 @@ body, html {
     background-color: white;
 }
 
+/* Sửa lỗi hiển thị tin nhắn user bị cắt */
+
 .message {
     display: flex;
     margin-bottom: 15px;
@@ -81,12 +83,31 @@ body, html {
     justify-content: flex-start;
 }
 
+/* Sửa lại message-container */
+.message-container {
+    display: flex;
+    flex-direction: column;
+    max-width: 70%;
+    min-width: 100px; /* Thêm min-width để tránh quá nhỏ */
+}
+
+.message.user .message-container {
+    align-items: flex-end;
+}
+
+.message.ai .message-container {
+    align-items: flex-start;
+}
+
+/* Sửa lại message-content */
 .message-content {
     padding: 12px 15px;
     border-radius: 18px;
     box-shadow: 0 1px 2px rgba(0, 0, 0, 0.1);
     word-wrap: break-word;
-    max-width: 70%;
+    word-break: break-word; /* Thêm để ngắt từ dài */
+    width: 100%; /* Đảm bảo chiếm toàn bộ container */
+    box-sizing: border-box; /* Bao gồm padding trong tính toán width */
 }
 
 .message.ai .message-content {
@@ -101,19 +122,74 @@ body, html {
     border-top-right-radius: 5px;
 }
 
+/* Sửa message-time */
 .message-time {
     font-size: 12px;
     margin-top: 5px;
     color: #666;
+    white-space: nowrap; /* Không cho time xuống dòng */
 }
 
 .message.ai .message-time {
-    margin-left: 15px;
+    margin-left: 0; /* Bỏ margin-left */
+    text-align: left;
 }
 
 .message.user .message-time {
     text-align: right;
-    margin-right: 15px;
+    margin-right: 0; /* Bỏ margin-right */
+    color: #999; /* Màu nhạt hơn cho user message */
+}
+
+/* Định dạng nội dung markdown trong message-content */
+.message-content p {
+    margin: 0 0 12px;
+    line-height: 1.6;
+    font-size: 15px;
+}
+
+.message-content p:last-child {
+    margin-bottom: 0; /* Bỏ margin của đoạn cuối */
+}
+
+.message-content strong {
+    font-weight: 600;
+    color: #333;
+}
+
+.message.user .message-content strong {
+    color: white; /* Đảm bảo màu trên nền xanh */
+}
+
+.message-content em {
+    font-style: italic;
+    color: #555;
+}
+
+.message.user .message-content em {
+    color: #f0f0f0; /* Màu nhạt trên nền xanh */
+}
+
+.message-content ul,
+.message-content ol {
+    margin: 8px 0 12px 20px;
+    padding-left: 20px;
+}
+
+.message-content li {
+    margin-bottom: 6px;
+}
+
+/* Responsive cho mobile */
+@media (max-width: 768px) {
+    .message-container {
+        max-width: 85%; /* Tăng width trên mobile */
+    }
+    
+    .message-content {
+        font-size: 14px;
+        padding: 10px 12px;
+    }
 }
 
 .chat-input {
@@ -345,6 +421,7 @@ body, html {
     display: flex;
     flex-direction: column;
     max-width: 70%;
+    align-items: flex-end;
 }
 
 .message.user .message-container {
@@ -355,6 +432,20 @@ body, html {
     align-items: flex-start;
 }
 
+.message-time {
+    font-size: 12px;
+    margin-top: 5px;
+    color: #666;
+    width: 100%;
+}
+
+.message.user .message-time {
+    text-align: right;
+}
+
+.message.ai .message-time {
+    text-align: left;
+}
 .message-content p {
     margin: 0 0 12px;
     line-height: 1.6;
@@ -397,4 +488,177 @@ input[type=range] {
     display: inline;
     writing-mode: horizontal-tb;
   }
+.file-upload-btn {
+    cursor: pointer;
+    margin: 0 10px;
+    color: #666;
+    transition: color 0.3s;
+}
+
+.file-upload-btn:hover {
+    color: #4CAF50;
+}
+
+.chat-messages.drag-over {
+    border: 3px dashed #4CAF50;
+    background-color: rgb(0, 255, 13);
+}
+
+.file-message {
+    display: flex;
+    align-items: center;
+    padding: 5px 10px;
+    background-color: #f0f0f0;
+    border-radius: 5px;
+    margin: 5px 0;
+}
+
+.file-message i {
+    margin-right: 8px;
+}
+
+.file-message .file-name {
+    flex-grow: 1;
+    margin-right: 10px;
+}
+
+.file-message .remove-file {
+    cursor: pointer;
+    color: #666;
+}
+
+.file-message .remove-file:hover {
+    color: #ff0000;
+}
+.file-preview {
+    transition: transform 0.2s ease-in-out;
+}
+.file-preview:hover {
+    transform: scale(1.05);
+    box-shadow: 0 3px 10px rgba(0,0,0,0.15);
+}
+.file-remove-btn:hover {
+    background: #d32f2f;
+}
+
+
+
+.file-preview {
+    border: 1px solid #ccc;
+    border-radius: 10px;
+    margin: 4px;
+    padding: 4px;
+    position: relative;
+    background-color: #fff;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    max-width: 100px;
+    min-width: 80px;
+  }
   
+  .file-preview img {
+    max-width: 100%;
+    max-height: 80px;
+    object-fit: cover;
+    border-radius: 6px;
+  }
+  .file-name-label {
+    font-size: 12px;
+    margin-top: 4px;
+    text-align: center;
+    word-break: break-word;
+    max-width: 90px;
+  }
+  
+  .file-remove-btn {
+    position: absolute;
+    top: 2px;
+    right: 4px;
+    background: red;
+    color: white;
+    border: none;
+    border-radius: 50%;
+    cursor: pointer;
+  }
+  
+
+/* Preview cố định dưới chat input */
+.file-preview-container {
+    display: flex;
+    overflow-x: auto;
+    flex-wrap: nowrap;
+    max-height: 120px;
+    gap: 10px;
+    padding: 10px;
+    max-width: 100%;
+    background: #f9f9f9;
+    border-top: 1px solid #ddd;
+    position: relative;
+}
+
+/* Giới hạn số lượng hiển thị ảnh theo chiều rộng */
+@media (max-width: 768px) {
+    .file-preview-container {
+        max-width: calc(100vw - 20px);
+    }
+}
+.file-preview {
+    flex: 0 0 auto;
+    margin-right: 10px;
+    min-width: 100px;
+    height: 100px;
+    position: relative;
+    background-color: #fff;
+    border: 1px solid #ccc;
+    border-radius: 8px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    overflow: hidden;
+    flex-shrink: 0;
+}
+
+.file-preview img {
+    max-width: 80%;
+    max-height: 80%;
+    object-fit: contain;
+}
+
+.file-remove-btn {
+    position: absolute;
+    top: 4px;
+    right: 4px;
+    background: rgba(255, 0, 0, 0.8);
+    color: white;
+    border: none;
+    border-radius: 50%;
+    width: 20px;
+    height: 20px;
+    font-size: 12px;
+    cursor: pointer;
+    z-index: 10;
+}
+
+/* Tên file cho file tài liệu */
+.file-name-label {
+    font-size: 12px;
+    text-align: center;
+    margin-top: 4px;
+    color: #333;
+    max-width: 100px;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+
+.file-preview-container::-webkit-scrollbar {
+    height: 6px;
+}
+.file-preview-container::-webkit-scrollbar-thumb {
+    background-color: #888;
+    border-radius: 6px;
+}
+
+
+
