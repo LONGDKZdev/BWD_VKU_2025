@@ -420,9 +420,25 @@ body, html {
 .message-container {
     display: flex;
     flex-direction: column;
-    max-width: 70%;
+    max-width: 100%;
     align-items: flex-end;
 }
+
+.message {
+    word-break: break-word;
+    max-width: 100%;
+  }
+  
+
+.message-content img {
+    max-width: 100%; 
+    max-height: auto;  
+    border-radius: 8px;
+    object-fit: contain;
+    display: block;
+    margin-top: 4px;
+  }
+  
 
 .message.user .message-container {
     align-items: flex-end;

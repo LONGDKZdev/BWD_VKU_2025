@@ -1,3 +1,6 @@
+let imageFiles = [];
+let documentFiles = [];
+
 document.addEventListener('DOMContentLoaded', function () {
 
     const messageInput = document.getElementById('messageInput');
@@ -11,68 +14,23 @@ document.addEventListener('DOMContentLoaded', function () {
     const surveyForm = document.getElementById('healthSurveyForm');
     const fileInput = document.getElementById('fileInput');
     const imageInput = document.getElementById('imageInput');
-    let imageFiles = [];
-    let documentFiles = [];
-
-    imageInput.addEventListener('change', async function (e) {
-        const file = e.target.files[0];
-        if (!file) return;
-
-        // Hiển thị preview ảnh
-        const previewContainer = document.getElementById('filePreviewContainer');
-        const preview = document.createElement('div');
-        preview.className = 'file-preview';
-
-        if (file.type.startsWith('image/')) {
-            const img = document.createElement('img');
-            img.src = URL.createObjectURL(file);
-            preview.appendChild(img);
-        } else {
-            const fileIcon = document.createElement('span');
-            fileIcon.textContent = file.name;
-            preview.appendChild(fileIcon);
-        }
-
-        // ✅ nút xoá
-        const removeBtn = document.createElement('button');
-        removeBtn.textContent = '×';
-        removeBtn.className = 'file-remove-btn';
-        removeBtn.onclick = () => {
-            preview.remove();
-            files = files.filter(f => f !== file);
-        };
-        preview.appendChild(removeBtn);
-
-        previewContainer.appendChild(preview);
 
 
-        // Gửi thông báo đang xử lý
-        addMessage("🖼 Đang đọc nội dung trong ảnh...", 'ai');
-
-        // OCR và gửi Gemini
-        try {
-            addMessage("📄 Văn bản trong ảnh: " + text.trim(), 'user');
-            typingIndicator.style.display = 'block';
-
-            const aiResponse = await callAIAPI(`Đây là nội dung trích xuất từ ảnh:\n${text}\n\nHãy phân tích hoặc đưa ra phản hồi phù hợp.`);
-            typingIndicator.style.display = 'none';
-
-            addMessage(aiResponse, 'ai');
-        } catch (err) {
-            console.error("Lỗi OCR:", err);
-            addMessage("❌ Không thể đọc nội dung từ ảnh.", 'ai');
-        }
-
+    imageInput.addEventListener('change', function (e) {
+        if (!e.target.files.length) return;
+        handleFiles(e.target.files);
     });
     document.addEventListener('paste', function (e) {
         const items = e.clipboardData.items;
         for (const item of items) {
             if (item.type.startsWith('image/')) {
                 const blob = item.getAsFile();
+                if (!blob.name) blob.name = `image-${Date.now()}.png`;
                 handleFiles([blob]);
             }
         }
     });
+
 
     // Hàm để gọi API AI
     async function callAIAPI(message) {
@@ -124,7 +82,6 @@ document.addEventListener('DOMContentLoaded', function () {
     }
 
 
-
     // Xử lý sự kiện gửi tin nhắn
     //1
     async function sendMessage() {
@@ -134,18 +91,36 @@ document.addEventListener('DOMContentLoaded', function () {
             return;
         }
 
-        // Hiển thị user input
         if (message) {
             addMessage(message, 'user');
             messageInput.value = '';
         }
 
-        // Hiển thị preview đã gửi
-        if (imageFiles.length > 0) {
-            imageFiles.forEach(file => {
-                addMessage(`📷 Đã gửi ảnh: ${file.name}`, "user");
-            });
+        // Hiển thị ảnh thực tế lên chat
+        for (const file of imageFiles) {
+            const img = document.createElement('img');
+            img.src = URL.createObjectURL(file);
+            img.style.maxWidth = '200px';
+            img.alt = file.name;
+
+            const wrapper = document.createElement('div');
+            wrapper.className = 'message user';
+            wrapper.innerHTML = `<div class="message-container"><div class="message-content"></div></div>`;
+            wrapper.querySelector('.message-content').appendChild(img);
+            chatMessages.appendChild(wrapper);
+            chatMessages.scrollTop = chatMessages.scrollHeight;
         }
+
+        // Hiển thị tài liệu
+        for (const file of documentFiles) {
+            addMessage(`📎 Đã gửi tệp: ${file.name}`, 'user');
+        }
+
+        // if (imageFiles.length > 0) {
+        //     imageFiles.forEach(file => {
+        //         addMessage(`📷 Đã gửi ảnh: ${file.name}`, "user");
+        //     });
+        // }
 
         if (documentFiles.length > 0) {
             documentFiles.forEach(file => {
@@ -155,44 +130,42 @@ document.addEventListener('DOMContentLoaded', function () {
 
         typingIndicator.style.display = 'block';
 
-        // Xử lý OCR ảnh và đọc file PDF
         const fileProcesses = [];
 
-        // Ảnh
         for (const file of imageFiles) {
-            fileProcesses.push(extractTextFromImageViaOCRSpace(file).then(text => {
-                return `📷 ${file.name}\n${text}`;
-            }));
+            fileProcesses.push(
+                extractTextFromImageViaOCRSpace(file).then(text => {
+                    if (!text || text.trim() === "" || text.startsWith("❌")) return "";
+                    return `🖼 ${file.name}\n${text}`;
+                })
+            );
         }
 
-        // Tài liệu
+
         for (const file of documentFiles) {
             if (file.type === "application/pdf") {
-                // xử lý PDF như đã làm
+                fileProcesses.push(readPDFFile(file));
+            } else {
+                fileProcesses.push(Promise.resolve(`📎 ${file.name}`));
             }
         }
 
-
-        // Ghép nội dung text + file
         try {
             const results = await Promise.all(fileProcesses);
             const fullPrompt = [message, ...results.filter(Boolean)].join('\n\n');
-
             const aiResponse = await callAIAPI(fullPrompt);
             addMessage(aiResponse, 'ai');
         } catch (err) {
-            console.error("Chi tiết lỗi:", err);
-            showNotification("❌ Có lỗi xảy ra khi gửi nội dung. Vui lòng thử lại sau.", "error");
-
+            showNotification("❌ Lỗi xử lý file hoặc AI", "error");
         } finally {
             typingIndicator.style.display = 'none';
             imageFiles = [];
             documentFiles = [];
+            const previews = document.querySelectorAll('.file-preview');
+            previews.forEach(p => p.remove());
             document.getElementById('filePreviewContainer').innerHTML = '';
         }
     }
-
-
 
     function addMessage(text, sender) {
         const messageDiv = document.createElement('div');
@@ -210,7 +183,6 @@ document.addEventListener('DOMContentLoaded', function () {
         const minutes = now.getMinutes().toString().padStart(2, '0');
         timeDiv.textContent = `${hours}:${minutes}`;
 
-        // Tạo một div container để bọc nội dung và thời gian
         const containerDiv = document.createElement('div');
         containerDiv.className = 'message-container';
         containerDiv.appendChild(contentDiv);
@@ -219,7 +191,6 @@ document.addEventListener('DOMContentLoaded', function () {
         messageDiv.appendChild(containerDiv);
         chatMessages.appendChild(messageDiv);
 
-        // Cuộn xuống cuối khung chat
         chatMessages.scrollTop = chatMessages.scrollHeight;
     }
 
@@ -337,19 +308,15 @@ function handleFiles(fileList) {
         const isImage = ['png', 'jpg', 'jpeg', 'webp', 'ico'].includes(ext);
         const isDoc = ['pdf', 'doc', 'docx'].includes(ext);
 
-        if (!isImage && isDoc) {
-            documentFiles.push(file);
-            const icon = document.createElement("img");
-            icon.src = "https://cdn-icons-png.flaticon.com/512/337/337946.png";
-            icon.className = "doc-icon";
-            const label = document.createElement("div");
-            label.className = "file-name-label";
-            label.textContent = file.name;
-
-            preview.appendChild(icon);
-            preview.appendChild(label);
+        if (!isImage && !isDoc) {
+            showNotification(`❌ Tệp "${file.name}" không được hỗ trợ!`, "warning");
+            return;
         }
 
+        if (previewContainer.childNodes.length >= 5) {
+            showNotification("Chỉ gửi tối đa 5 tệp!", "warning");
+            return;
+        }
 
         const preview = document.createElement('div');
         preview.className = 'file-preview';
@@ -363,45 +330,32 @@ function handleFiles(fileList) {
             else documentFiles = documentFiles.filter(f => f !== file);
         };
 
-        const img = document.createElement("img");
-        img.src = URL.createObjectURL(file);
-        img.onload = () => URL.revokeObjectURL(img.src); // tránh rò rỉ bộ nhớ
-        preview.appendChild(img);
-
-        const icon = document.createElement("img");
-        icon.src = "https://cdn-icons-png.flaticon.com/512/337/337946.png"; // icon file
-        icon.style.width = "48px";
-        icon.style.marginBottom = "6px";
-
-
         if (isImage) {
-            imageFiles.push(file);
             const img = document.createElement("img");
             img.src = URL.createObjectURL(file);
+            img.onload = () => URL.revokeObjectURL(img.src);
             preview.appendChild(img);
+            imageFiles.push(file);
         } else {
-            documentFiles.push(file);
             const icon = document.createElement("img");
-            icon.src = "https://cdn-icons-png.flaticon.com/512/337/337946.png"; // icon PDF
-            icon.style.width = "50px";
-            icon.style.marginBottom = "6px";
+            icon.src = "https://cdn-icons-png.flaticon.com/512/337/337946.png";
+            icon.style.width = "40px";
             const label = document.createElement("div");
             label.className = "file-name-label";
             label.textContent = file.name;
             preview.appendChild(icon);
             preview.appendChild(label);
+            documentFiles.push(file);
         }
-
-        if (!isImage && !isDoc) {
-            showNotification(`❌ Tệp "${file.name}" không được hỗ trợ!`, "warning");
-            return;
-        }
-
 
         preview.appendChild(removeBtn);
         previewContainer.appendChild(preview);
+
+        addFileMessage(file, isImage ? 'image' : 'doc');
     });
 }
+
+
 
 
 
@@ -448,6 +402,28 @@ async function extractTextFromImageViaOCRSpace(file) {
 }
 
 
+function readPDFFile(file) {
+    return new Promise((resolve, reject) => {
+        const reader = new FileReader();
+        reader.onload = async () => {
+            try {
+                const typedarray = new Uint8Array(reader.result);
+                const pdf = await pdfjsLib.getDocument({ data: typedarray }).promise;
+                let text = '';
+                for (let i = 1; i <= pdf.numPages; i++) {
+                    const page = await pdf.getPage(i);
+                    const content = await page.getTextContent();
+                    const pageText = content.items.map(item => item.str).join(' ');
+                    text += pageText + '\n';
+                }
+                resolve(`📄 Nội dung từ ${file.name}:\n${text.trim().slice(0, 1000)}`);
+            } catch (err) {
+                resolve(`❌ Lỗi đọc PDF: ${file.name}`);
+            }
+        };
+        reader.readAsArrayBuffer(file);
+    });
+}
 
 
 
