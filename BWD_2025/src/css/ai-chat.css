@@ -101,16 +101,21 @@ body, html {
     align-items: flex-start;
 }
 
-/* Sửa lại message-content */
+
 .message-content {
-    padding: 12px 15px;
+    padding: 12px 12px;
     border-radius: 18px;
     box-shadow: 0 10px 4px rgba(16, 16, 16, 0.1);
     word-wrap: break-word;
-    word-break: break-word; /* Thêm để ngắt từ dài */
-    width: 100%; /* Đảm bảo chiếm toàn bộ container */
-    box-sizing: border-box; /* Bao gồm padding trong tính toán width */
-}
+    word-break: normal;
+    white-space: pre-wrap;
+    width: fit-content;
+    max-width: 70%;
+    min-width: 80px; 
+    box-sizing: border-box;
+  }
+  
+
 
 .message.ai .message-content {
     background-color: #f9f9f9;
@@ -123,7 +128,7 @@ body, html {
 .message.user .message-content {
     background-color: #4CAF50;
     color: white;
-    border-top-right-radius: 5px;
+    /* border-top-right-radius: 5px; */
 }
 
 /* Sửa message-time */
@@ -192,7 +197,7 @@ body, html {
     
     .message-content {
         font-size: 14px;
-        padding: 10px 12px;
+        padding: 10px 25px;
     }
 }
 

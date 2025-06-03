@@ -2,10 +2,42 @@ let imageFiles = [];
 let documentFiles = [];
 let promptMemory = [];
 
-const GEMINI_API_KEY = "AIzaSyDJ8iFbiFaeYB6Vbtpy-Q1Yr3GXo48dXME";
+const GEMINI_API_KEY = "AIzaSyCXk9sym8iRIVzV1xxwaW2gAyVeW7-lrEM";
 //const GEMINI_API_KEY = "AIzaSyCtdzDUbgf_vGD2JFThn564-cDcq6I0Rf4";
+
+// other KEY
+// 1. AIzaSyCtdzDUbgf_vGD2JFThn564-cDcq6I0Rf4
+// 2. AIzaSyCXk9sym8iRIVzV1xxwaW2gAyVeW7-lrEM
+// 3. AIzaSyBeN_GlsdffyPmfFMfDsrDdGBxus4zVFUE
 const GEMINI_MODEL = "gemini-2.0-flash";
 const MAX_MEMORY = 10;
+
+
+const instruction = `
+Bạn là trợ lý sức khỏe AI thân thiện.
+
+### Mục tiêu trình bày:
+- **Tiêu đề** dùng **in đậm**
+- *Chú thích* dùng *in nghiêng*
+- Các dòng danh sách dùng "- " đầu dòng
+- Phân chia phần bằng dòng trống giữa các khối nội dung
+- Không dùng bảng hoặc code block
+
+### Ví dụ trình bày lý tưởng:
+**I. Chế độ ăn uống**
+- *Ăn nhiều rau xanh, trái cây*
+- *Hạn chế đường, muối, dầu mỡ*
+
+**II. Thể dục**
+- *30 phút mỗi ngày*
+- *Tập yoga, đi bộ, hoặc aerobic*
+
+**III. Giấc ngủ**
+- *Ngủ đủ 7–8 tiếng mỗi đêm*
+- *Tránh dùng điện thoại trước khi ngủ*
+
+Hãy luôn tuân thủ định dạng trên trong mọi phản hồi.
+`;
 
 document.addEventListener('DOMContentLoaded', function () {
 
@@ -38,42 +70,68 @@ document.addEventListener('DOMContentLoaded', function () {
     });
 
 
+    function generatePromptContents(message) {
+        const contents = [];
+    
+        if (promptMemory.length === 0) {
+            contents.push({ 
+                role: "user", 
+                parts: [{ text: instruction }] 
+            });
+        }
+    
+        const memory = promptMemory.slice(-MAX_MEMORY);
+        memory.forEach(entry => {
+            contents.push({ 
+                role: entry.role, 
+                parts: [{ text: entry.content }] 
+            });
+        });
+    
+        contents.push({
+            role: "user",
+            parts: [{ text: message }]
+        });
+    
+        return contents;
+    }
+    
+
     async function callAIAPI(message) {
         // Ghi nhớ người dùng
+
+
+
+
+
         promptMemory.push({ role: 'user', content: message });
     
         const memory = promptMemory.slice(-MAX_MEMORY);
     
         // Tạo contents
-        const contents = [];
+        const contents = generatePromptContents(message);;
     
-        // ✅ Prompt hướng dẫn được nhúng vào phần mở đầu của user
-        contents.push({
-            role: "user",
-            parts: [{
-                text: `Bạn là trợ lý sức khỏe AI thân thiện. Trả lời ngắn gọn, chính xác, rõ ràng.\n
-    Hãy trình bày kết quả với:
-    - **in đậm** cho tiêu đề
-    - *in nghiêng* cho chú thích
-    - Dùng xuống dòng hợp lý để dễ đọc.
+        // // ✅ Prompt hướng dẫn được nhúng vào phần mở đầu của user
+        // contents.push({
+        //     role: "user",
+        //     parts: [{
+        //         text: instruction
+        //     }]
+        // });
     
-    Dữ liệu dưới đây là cuộc trò chuyện trước đó giữa tôi và bạn:`
-            }]
-        });
+        // // ✅ Ghi nhớ các đoạn hội thoại trước
+        // memory.forEach(entry => {
+        //     contents.push({
+        //         role: entry.role, // 'user' hoặc 'model'
+        //         parts: [{ text: entry.content }]
+        //     });
+        // });
     
-        // ✅ Ghi nhớ các đoạn hội thoại trước
-        memory.forEach(entry => {
-            contents.push({
-                role: entry.role, // 'user' hoặc 'model'
-                parts: [{ text: entry.content }]
-            });
-        });
-    
-        // ✅ Câu hỏi hiện tại
-        contents.push({
-            role: "user",
-            parts: [{ text: message }]
-        });
+        // // ✅ Câu hỏi hiện tại
+        // contents.push({
+        //     role: "user",
+        //     parts: [{ text: message }]
+        // });
     
         try {
             const response = await fetch(

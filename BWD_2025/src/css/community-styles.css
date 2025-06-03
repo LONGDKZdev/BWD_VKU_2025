@@ -34,6 +34,7 @@ html, body {
 .main-content {
     display: flex;
     flex: 1;
+    max-height: calc(100vh - 35px);
     width: 100%;
     overflow: hidden;
     margin: 0;
@@ -1168,7 +1169,7 @@ body {
 
 /* User Profile Animation */
 .user-profile {
-    padding: 10px;
+    padding: 5px;
     border-bottom: 1px solid var(--divider-color);
     transition: all 0.3s ease;
     background: linear-gradient(to right, rgba(76, 175, 80, 0.05), transparent);
@@ -2176,10 +2177,11 @@ body {
 
 .message-attachment.image img:hover {
     opacity: 0.9;
-}.user-profile {
+}
+.user-profile {
     display: flex;
     align-items: center;
-    padding: 15px;
+    padding: 5px;
     background-color: var(--background-light);
     border-bottom: 1px solid var(--divider-color);
 }
@@ -2595,9 +2597,22 @@ body {
     }
 
     .chat-input-area {
-        flex-direction: column;
-        padding: 1rem;
-    }
+    position: sticky;
+    bottom: 20px;
+    background: linear-gradient(145deg, #ffffff, #f8f9fa);
+    border-top: 1px solid rgba(0, 0, 0, 0.05);
+    padding: 15px;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    box-shadow: 0 -2px 10px rgba(0, 0, 0, 0.03);
+    border-radius: 12px;
+    z-index: 100;
+}
+
+.chat-messages {
+    padding-bottom: 80px;
+}
 
     .input-actions {
         margin-bottom: 0.5rem;
