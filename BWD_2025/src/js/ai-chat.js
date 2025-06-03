@@ -1,5 +1,11 @@
 let imageFiles = [];
 let documentFiles = [];
+let promptMemory = [];
+
+const GEMINI_API_KEY = "AIzaSyDJ8iFbiFaeYB6Vbtpy-Q1Yr3GXo48dXME";
+//const GEMINI_API_KEY = "AIzaSyCtdzDUbgf_vGD2JFThn564-cDcq6I0Rf4";
+const GEMINI_MODEL = "gemini-2.0-flash";
+const MAX_MEMORY = 10;
 
 document.addEventListener('DOMContentLoaded', function () {
 
@@ -32,40 +38,74 @@ document.addEventListener('DOMContentLoaded', function () {
     });
 
 
-    // Hàm để gọi API AI
     async function callAIAPI(message) {
+        // Ghi nhớ người dùng
+        promptMemory.push({ role: 'user', content: message });
+    
+        const memory = promptMemory.slice(-MAX_MEMORY);
+    
+        // Tạo contents
+        const contents = [];
+    
+        // ✅ Prompt hướng dẫn được nhúng vào phần mở đầu của user
+        contents.push({
+            role: "user",
+            parts: [{
+                text: `Bạn là trợ lý sức khỏe AI thân thiện. Trả lời ngắn gọn, chính xác, rõ ràng.\n
+    Hãy trình bày kết quả với:
+    - **in đậm** cho tiêu đề
+    - *in nghiêng* cho chú thích
+    - Dùng xuống dòng hợp lý để dễ đọc.
+    
+    Dữ liệu dưới đây là cuộc trò chuyện trước đó giữa tôi và bạn:`
+            }]
+        });
+    
+        // ✅ Ghi nhớ các đoạn hội thoại trước
+        memory.forEach(entry => {
+            contents.push({
+                role: entry.role, // 'user' hoặc 'model'
+                parts: [{ text: entry.content }]
+            });
+        });
+    
+        // ✅ Câu hỏi hiện tại
+        contents.push({
+            role: "user",
+            parts: [{ text: message }]
+        });
+    
         try {
             const response = await fetch(
-                "https://generativelanguage.googleapis.com/v1beta/models/gemini-2.0-flash:generateContent?key=AIzaSyDJ8iFbiFaeYB6Vbtpy-Q1Yr3GXo48dXME",
+                `https://generativelanguage.googleapis.com/v1beta/models/${GEMINI_MODEL}:generateContent?key=${GEMINI_API_KEY}`,
                 {
                     method: "POST",
                     headers: {
                         "Content-Type": "application/json"
                     },
-                    body: JSON.stringify({
-                        contents: [
-                            {
-                                parts: [
-                                    {
-                                        text: `Hãy chia câu trả lời thành các đoạn rõ ràng, dùng markdown như **in đậm**, *in nghiêng*, và xuống dòng nếu cần. Câu hỏi: ${message}`
-                                    }
-                                ]
-                            }
-                        ]
-                    })
+                    body: JSON.stringify({ contents })
                 }
             );
-
-            if (!response.ok) throw new Error("Lỗi khi gọi API Gemini");
-
+    
+            if (!response.ok) {
+                throw new Error(`Gemini API lỗi: ${response.status} ${response.statusText}`);
+            }
+    
             const data = await response.json();
-            return data.candidates?.[0]?.content?.parts?.[0]?.text || "Xin lỗi, tôi chưa có câu trả lời phù hợp.";
+            const aiReply = data.candidates?.[0]?.content?.parts?.[0]?.text?.trim() || "⚠️ Không có phản hồi phù hợp.";
+    
+            // Ghi nhớ phản hồi của AI
+            promptMemory.push({ role: 'model', content: aiReply });
+            return aiReply;
+    
         } catch (error) {
-            console.error("Lỗi khi gọi Gemini API:", error);
-            showNotification("❌ Mô hình quá tải. Vui lòng thử lại sau.",error);
-            return "Xin lỗi, có lỗi xảy ra khi kết nối đến AI.";
+            console.error("Lỗi gọi Gemini:", error);
+            showNotification("❌ Mô hình quá tải hoặc lỗi mạng", "error");
+            return "⚠️ Có lỗi xảy ra khi kết nối với trợ lý AI.";
         }
     }
+    
+    
 
     function formatText(text) {
         // Bôi đậm **text**
@@ -114,7 +154,7 @@ document.addEventListener('DOMContentLoaded', function () {
 
         // Hiển thị tài liệu
         for (const file of documentFiles) {
-            addMessage(`📎 Đã gửi tệp: ${file.name}`, 'user');
+            addMessage(`Đã gửi tệp: ${file.name}`, 'user');
         }
 
         // if (imageFiles.length > 0) {
@@ -245,19 +285,42 @@ document.addEventListener('DOMContentLoaded', function () {
 
         // Tạo prompt cho Gemini
         const surveyPrompt = `
-    Tôi là trợ lý sức khỏe AI. Đây là thông tin của một người dùng:
-    
-    - Tập thể dục thường xuyên: ${surveyData.exercise}
-    - Ngủ mỗi ngày: ${surveyData.sleep} giờ
-    - Mức độ stress: ${surveyData.stress}
-    - Vấn đề sức khỏe: ${surveyData["health-issues"] || "Không rõ"}
-    - Chiều cao: ${surveyData.height} cm
-    - Cân nặng: ${surveyData.weight} kg
-    - Mục tiêu: ${surveyData.goal}
-    - Thói quen: ${surveyData.habits || "Không ghi rõ"}
-    
-    Hãy đánh giá tình trạng hiện tại và đưa ra lời khuyên cá nhân hóa phù hợp. Trình bày rõ ràng bằng markdown có **bôi đậm**, *in nghiêng*, gạch đầu dòng nếu cần.
-    `;
+        Tôi là trợ lý sức khỏe AI. Dưới đây là thông tin chi tiết từ một người dùng đã khảo sát:
+        
+        **I. Thông tin cá nhân**
+        - Họ tên: ${surveyData["full-name"] || "Không rõ"}
+        - Tuổi: ${surveyData.age || "Không rõ"}
+        - Giới tính: ${surveyData.gender || "Không rõ"}
+        - Chiều cao: ${surveyData.height} cm
+        - Cân nặng: ${surveyData.weight} kg
+        
+        **II. Mục tiêu sức khỏe**
+        - Mục tiêu chính: ${surveyData.goal || "Không rõ"}
+        - Mục tiêu cụ thể: ${surveyData["specific-goal"] || "Không ghi"}
+        
+        **III. Vận động & thể dục**
+        - Tần suất tập mỗi tuần: ${surveyData["exercise-frequency"] || "Không rõ"}
+        - Loại hình vận động: ${surveyData["exercise-type"] || "Không rõ"}
+        - Thời lượng mỗi buổi: ${surveyData["exercise-duration"] || "Không rõ"} phút
+        
+        **IV. Giấc ngủ & Stress**
+        - Ngủ trung bình: ${surveyData.sleep || "Không rõ"} giờ/đêm
+        - Chất lượng giấc ngủ: ${surveyData["sleep-quality"] || "Không rõ"}
+        - Mức độ stress (1–10): ${surveyData.stress || "Không rõ"}
+        
+        **V. Dinh dưỡng & sức khỏe**
+        - Nhật ký ăn uống: ${surveyData["diet-log"] || "Không ghi"}
+        - Thói quen không lành mạnh: ${surveyData.habits || "Không ghi"}
+        - Tiền sử bệnh cá nhân: ${surveyData["health-issues"] || "Không có"}
+        - Tiền sử bệnh gia đình: ${surveyData["family-issues"] || "Không rõ"}
+        
+        **VI. Mức độ hài lòng & tinh thần**
+        - Thói quen tinh thần: ${surveyData["mental-habits"] || "Không rõ"}
+        - Mức độ hài lòng với sức khỏe: ${surveyData["health-satisfaction"] || "Không đánh giá"}
+        
+        Hãy đánh giá tình trạng sức khỏe hiện tại và đưa ra lời khuyên cá nhân hóa. Sử dụng markdown để trình bày rõ ràng: **bôi đậm**, *in nghiêng*, gạch đầu dòng nếu cần.
+        `;
+        
 
         // Hiển thị tin nhắn của người dùng
         addMessage("Tôi đã gửi khảo sát sức khỏe của mình.", "user");
