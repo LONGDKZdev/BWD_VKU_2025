@@ -128,4 +128,51 @@ video {
     transform: translateY(-50%) scale(1.05);
 }
 
+/* --- Responsive cho tablet --- */
+@media (max-width: 768px) {
+    .logo-text {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        text-align: center;
+    }
 
+    .logo-main {
+        flex-direction: column;
+        align-items: center;
+    }
+
+    .video-container {
+        padding: 10px;
+    }
+
+    .next-button {
+        font-size: 14px;
+        padding: 8px 12px;
+    }
+
+    #mainVideo {
+        width: 100%;
+        height: auto;
+    }
+}
+
+/* --- Responsive cho điện thoại nhỏ --- */
+@media (max-width: 480px) {
+    .logo-subtitle {
+        font-size: 12px;
+    }
+
+    .next-button {
+        font-size: 12px;
+        padding: 6px 10px;
+    }
+
+    .video-container {
+        padding: 5px;
+    }
+
+    #mainVideo {
+        border-radius: 8px;
+    }
+}

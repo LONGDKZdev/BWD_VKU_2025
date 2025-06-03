@@ -23,7 +23,7 @@
             </a>
         </div>
         <ul class="nav-links">
-            <li><a href="campaign.html" class="active">Chiến Dịch</a></li>
+            <li><a href="campaign.html">Chiến Dịch</a></li>
             <li><a href="explore.html">Khám phá</a></li>
             <li><a href="community.html">Cộng Đồng</a></li>
             <li><a href="ai-chat.html">Hỗ trợ</a></li>
@@ -52,6 +52,9 @@
                     <option value="nutrition">Dinh dưỡng</option>
                 </select>
             </div>
+            <button id="createCampaignBtn" class="create-campaign-btn">
+                <i class="fas fa-plus"></i> Tạo chiến dịch mới
+            </button>
         </div>
 
         <section class="featured-campaign">
@@ -158,27 +161,131 @@
             </div>
         </section>
 
-        <section class="campaign-achievements">
-            <h2>Thành tựu cộng đồng</h2>
-            <div class="achievement-stats">
-                <div class="stat-card">
-                    <i class="fas fa-running"></i>
-                    <h3>50,000+</h3>
-                    <p>Km đã chạy</p>
-                </div>
-                <div class="stat-card">
-                    <i class="fas fa-heart"></i>
-                    <h3>5,000+</h3>
-                    <p>Người tham gia</p>
-                </div>
-                <div class="stat-card">
-                    <i class="fas fa-hand-holding-heart"></i>
-                    <h3>50+</h3>
-                    <p>Chiến dịch thành công</p>
+
+        <div class="map-container">
+    <object data="src/styles/vn.svg" type="image/svg+xml" width="600"></object>
+</div>
+
+
+    </main>
+    <footer class="site-footer">
+        <div class="footer-content">
+            <div class="footer-section">
+                <h3>VỀ CHÚNG TÔI</h3>
+                <p>Web Sức Khỏe Việt Nam</p>
+                <p>"Khám phá và phát triển sức khỏe toàn diện"</p>
+                <p>https://VIETNAMSelfrise.com</p>
+                <div class="contact-info">
+                    <p><i class="fas fa-phone"></i> 0905 567 678</p>
+                    <p><i class="fas fa-envelope"></i> contact@VIETNAMSelfrise.com</p>
                 </div>
             </div>
-        </section>
-    </main>
+
+            <div class="footer-section">
+                <h3>KHÁM PHÁ</h3>
+                <ul>
+                    <li><a href="#">Dinh dưỡng lành mạnh</a></li>
+                    <li><a href="#">Tập luyện khoa học</a></li>
+                    <li><a href="#">Sức khỏe tinh thần</a></li>
+                    <li><a href="#">Lối sống tích cực</a></li>
+                    <li><a href="#">Tin tức sức khỏe</a></li>
+                    <li><a href="#">Cộng đồng</a></li>
+                </ul>
+            </div>
+
+            <div class="footer-section">
+                <h3>LIÊN KẾT</h3>
+                <ul>
+                    <li><a href="#">Tư vấn sức khỏe</a></li>
+                    <li><a href="#">Hướng dẫn tập luyện</a></li>
+                    <li><a href="#">Chế độ ăn uống</a></li>
+                    <li><a href="#">Yoga & Thiền</a></li>
+                    <li><a href="#">Sức khỏe gia đình</a></li>
+                </ul>
+            </div>
+
+            <div class="footer-section">
+                <h3>THEO DÕI</h3>
+                <ul>
+                    <li><a href="#">Blog</a></li>
+                    <li><a href="#">Khóa học online</a></li>
+                    <li><a href="#">Tài liệu</a></li>
+                    <li><a href="#">Bản đồ</a></li>
+                    <li><a href="#">Liên hệ</a></li>
+                </ul>
+            </div>
+        </div>
+
+        <div class="footer-bottom">
+            <div class="social-links">
+                <a href="#" class="social-link"><i class="fab fa-facebook"></i></a>
+                <a href="#" class="social-link"><i class="fab fa-twitter"></i></a>
+                <a href="#" class="social-link"><i class="fab fa-instagram"></i></a>
+                <a href="#" class="social-link"><i class="fab fa-youtube"></i></a>
+                <a href="#" class="social-link"><i class="fab fa-pinterest"></i></a>
+            </div>
+            <p class="copyright">© Viet Health Journey 2023 - 2024 Phát triển bởi <a href="#">Viet Health Journey</a></p>
+        </div>
+    </footer>
     <script src="src/js/campaign.js"></script>
 </body>
 </html>
+
+    <div id="createCampaignModal" class="modal">
+        <div class="modal-content">
+            <span class="close">&times;</span>
+            <h2>Tạo chiến dịch mới</h2>
+            <form id="campaignForm">
+                <div class="form-group">
+                    <label for="campaignTitle">Tên chiến dịch:</label>
+                    <input type="text" name="campaignTitle" id="campaignTitle" required placeholder="Nhập tên chiến dịch...">
+                </div>
+                <div class="form-group">
+                    <label for="campaignDescription">Mô tả:</label>
+                    <textarea name="campaignDescription" id="campaignDescription" required placeholder="Mô tả chi tiết về chiến dịch..."></textarea>
+                </div>
+                <div class="form-row">
+                    <div class="form-group">
+                        <label for="campaignCategory">Danh mục:</label>
+                        <select name="campaignCategory" id="campaignCategory" required>
+                            <option value="">Chọn danh mục</option>
+                            <option value="running">Chạy bộ</option>
+                            <option value="yoga">Yoga</option>
+                            <option value="fitness">Thể hình</option>
+                            <option value="nutrition">Dinh dưỡng</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label for="campaignStatus">Trạng thái:</label>
+                        <select name="campaignStatus" id="campaignStatus" required>
+                            <option value="active">Đang diễn ra</option>
+                            <option value="upcoming">Sắp diễn ra</option>
+                        </select>
+                    </div>
+                </div>
+                <div class="form-row">
+                    <div class="form-group">
+                        <label for="campaignStartDate">Ngày bắt đầu:</label>
+                        <input type="date" name="campaignStartDate" id="campaignStartDate" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="campaignEndDate">Ngày kết thúc:</label>
+                        <input type="date" name="campaignEndDate" id="campaignEndDate" required>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label for="campaignImage">Hình ảnh chiến dịch:</label>
+                    <div class="file-upload">
+                        <button type="button" class="upload-btn">
+                            <i class="fas fa-image"></i> Chọn ảnh
+                        </button>
+                        <input type="file" name="campaignImage" id="campaignImage" accept="image/*" required>
+                    </div>
+                    <div id="previewContainer">
+                        <img id="imagePreview" style="display: none;" alt="Preview">
+                    </div>
+                </div>
+                <button type="submit" class="submit-campaign-btn">Tạo chiến dịch</button>
+            </form>
+        </div>
+    </div>

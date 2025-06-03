@@ -62,6 +62,7 @@ document.addEventListener('DOMContentLoaded', function () {
             return data.candidates?.[0]?.content?.parts?.[0]?.text || "Xin lỗi, tôi chưa có câu trả lời phù hợp.";
         } catch (error) {
             console.error("Lỗi khi gọi Gemini API:", error);
+            showNotification("❌ Mô hình quá tải. Vui lòng thử lại sau.",error);
             return "Xin lỗi, có lỗi xảy ra khi kết nối đến AI.";
         }
     }
@@ -100,7 +101,7 @@ document.addEventListener('DOMContentLoaded', function () {
         for (const file of imageFiles) {
             const img = document.createElement('img');
             img.src = URL.createObjectURL(file);
-            img.style.maxWidth = '200px';
+            img.style.maxWidth = '100px';
             img.alt = file.name;
 
             const wrapper = document.createElement('div');
@@ -122,11 +123,11 @@ document.addEventListener('DOMContentLoaded', function () {
         //     });
         // }
 
-        if (documentFiles.length > 0) {
-            documentFiles.forEach(file => {
-                addMessage(`📎 Đã gửi tệp: ${file.name}`, "user");
-            });
-        }
+        // if (documentFiles.length > 0) {
+        //     documentFiles.forEach(file => {
+        //         addMessage(`📎 Đã gửi tệp: ${file.name}`, "user");
+        //     });
+        // }
 
         typingIndicator.style.display = 'block';
 

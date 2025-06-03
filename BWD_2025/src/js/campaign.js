@@ -64,24 +64,6 @@ document.addEventListener('DOMContentLoaded', function() {
     statusFilter.addEventListener('change', filterCampaigns);
     categoryFilter.addEventListener('change', filterCampaigns);
     
-    // Thêm CSS cho các thẻ giả
-    const style = document.createElement('style');
-    style.textContent = `
-        .campaign-placeholder {
-            width: 100%;
-            height: 0;
-            margin: 0;
-            padding: 0;
-            border: none;
-        }
-        
-        .campaign-grid {
-            display: grid;
-            grid-template-columns: repeat(3, 1fr);
-            gap: 20px;
-        }
-    `;
-    document.head.appendChild(style);
     
     // Xử lý nút tham gia chiến dịch
     const joinButtons = document.querySelectorAll('.join-campaign-btn');
@@ -187,3 +169,294 @@ function checkLoginStatus() {
     return localStorage.getItem('isLoggedIn') === 'true';
 }
 
+
+document.addEventListener('DOMContentLoaded', function() {
+    const modal = document.getElementById('createCampaignModal');
+    const btn = document.getElementById('createCampaignBtn');
+    const span = document.getElementsByClassName('close')[0];
+    const form = document.getElementById('campaignForm');
+    const campaignGrid = document.querySelector('.campaign-grid');
+
+    // Mảng lưu trữ các chiến dịch
+    let campaigns = [];
+
+    btn.onclick = function() {
+        modal.style.display = 'block';
+    }
+
+    span.onclick = function() {
+        modal.style.display = 'none';
+    }
+
+    window.onclick = function(event) {
+        if (event.target == modal) {
+            modal.style.display = 'none';
+        }
+    }
+
+    function createCampaignCard(campaign) {
+        const card = document.createElement('div');
+        card.className = 'campaign-card';
+        card.setAttribute('data-category', campaign.category);
+        card.setAttribute('data-creator', 'true');
+
+        // Tính toán thời gian
+        const today = new Date();
+        const startDate = new Date(campaign.startDate);
+        const endDate = new Date(campaign.endDate);
+        
+        let statusClass = '';
+        let statusText = '';
+        let timeText = '';
+        let cancelButton = '';
+
+        if (startDate > today) {
+            statusClass = 'upcoming';
+            statusText = 'Sắp diễn ra';
+            const daysUntilStart = Math.ceil((startDate - today) / (1000 * 60 * 60 * 24));
+            timeText = `Bắt đầu sau ${daysUntilStart} ngày`;
+        } else if (endDate > today) {
+            statusClass = 'active';
+            statusText = 'Đang diễn ra';
+            const daysRemaining = Math.ceil((endDate - today) / (1000 * 60 * 60 * 24));
+            timeText = `${daysRemaining} ngày còn lại`;
+        } else {
+            statusClass = 'completed';
+            statusText = 'Đã kết thúc';
+            timeText = 'Đã hoàn thành';
+        }
+
+        if (card.getAttribute('data-creator') === 'true') {
+            cancelButton = '<button class="cancel-campaign-btn">Hủy chiến dịch</button>';
+        }
+
+        card.innerHTML = `
+            <div class="campaign-image">
+                <img src="${campaign.imageUrl}" alt="${campaign.title}">
+                <div class="campaign-status ${statusClass}">${statusText}</div>
+                ${card.getAttribute('data-creator') ? '<div class="creator-badge">Chiến dịch của bạn</div>' : ''}
+            </div>
+            <div class="campaign-content">
+                <h3>${campaign.title}</h3>
+                <p>${campaign.description}</p>
+                <div class="campaign-stats">
+                    <span><i class="fas fa-users"></i> 0 người tham gia</span>
+                    <span><i class="fas fa-calendar"></i> ${timeText}</span>
+                </div>
+                ${cancelButton}
+            </div>
+        `;
+
+        if (card.getAttribute('data-creator') === 'true') {
+            const cancelBtn = card.querySelector('.cancel-campaign-btn');
+            cancelBtn.addEventListener('click', function() {
+                if (confirm('Bạn có chắc chắn muốn hủy chiến dịch này?')) {
+                    card.remove();
+                    const index = campaigns.findIndex(c => c.title === campaign.title);
+                    if (index > -1) {
+                        campaigns.splice(index, 1);
+                    }
+                }
+            });
+        }
+
+        return card;
+    }
+
+    // Xử lý xem trước ảnh
+    const imageInput = document.getElementById('campaignImage');
+    const imagePreview = document.getElementById('imagePreview');
+    const previewContainer = document.getElementById('previewContainer');
+
+    imageInput.addEventListener('change', function() {
+        const file = this.files[0];
+        if (file) {
+            const reader = new FileReader();
+            reader.onload = function(e) {
+                imagePreview.src = e.target.result;
+                previewContainer.style.display = 'block';
+                imagePreview.style.display = 'block';
+            }
+            reader.readAsDataURL(file);
+        } else {
+            previewContainer.style.display = 'none';
+            imagePreview.style.display = 'none';
+        }
+    });
+
+
+    form.onsubmit = function(e) {
+        e.preventDefault();
+        
+        // Lấy dữ liệu từ form
+        const formData = new FormData(form);
+        const campaign = {
+            title: formData.get('campaignTitle'),
+            description: formData.get('campaignDescription'),
+            category: formData.get('campaignCategory'),
+            startDate: formData.get('campaignStartDate'),
+            endDate: formData.get('campaignEndDate'),
+            imageUrl: URL.createObjectURL(formData.get('campaignImage'))
+        };
+
+        // Thêm chiến dịch vào mảng
+        campaigns.push(campaign);
+
+        // Tạo và thêm card mới vào grid
+        const card = createCampaignCard(campaign);
+        campaignGrid.insertBefore(card, campaignGrid.firstChild);
+
+        // Đóng modal và reset form
+        modal.style.display = 'none';
+        form.reset();
+    }
+});
+
+    // Đóng modal và reset form
+    modal.style.display = 'none';
+    form.reset();
+
+    // Xử lý xem trước ảnh
+    const imageInput = document.getElementById('campaignImage');
+    const imagePreview = document.getElementById('imagePreview');
+
+    imageInput.addEventListener('change', function() {
+        const file = this.files[0];
+        if (file) {
+            const reader = new FileReader();
+            reader.onload = function(e) {
+                imagePreview.src = e.target.result;
+                imagePreview.style.display = 'block';
+            }
+            reader.readAsDataURL(file);
+        } else {
+            imagePreview.style.display = 'none';
+        }
+    });
+
+    // Kiểm tra ngày kết thúc phải sau ngày bắt đầu
+    const startDate = document.getElementById('campaignStartDate');
+    const endDate = document.getElementById('campaignEndDate');
+
+    startDate.addEventListener('change', function() {
+        endDate.min = this.value;
+    });
+
+    endDate.addEventListener('change', function() {
+        if (this.value < startDate.value) {
+            alert('Ngày kết thúc phải sau ngày bắt đầu!');
+            this.value = '';
+        }
+    });
+
+// Xử lý hiển thị tên tỉnh trên bản đồ
+document.addEventListener('DOMContentLoaded', function() {
+    // [Các đoạn mã lọc chiến dịch, tham gia chiến dịch, tạo chiến dịch mới...]
+
+    // Xử lý bản đồ
+    const mapContainer = document.querySelector('.map-container');
+    const mapObject = mapContainer.querySelector('object');
+    const tooltip = document.createElement('div');
+    tooltip.className = 'map-tooltip';
+    mapContainer.appendChild(tooltip);
+
+    const provinceInfo = document.createElement('div');
+    provinceInfo.className = 'province-info';
+    provinceInfo.style.padding = '10px';
+    provinceInfo.style.border = '1px solid #ccc';
+    provinceInfo.style.marginTop = '10px';
+    provinceInfo.style.display = 'none';
+    mapContainer.appendChild(provinceInfo);
+
+    const provinceData = {
+        'Hà Nội': {
+            name: 'Hà Nội',
+            population: '8,053,663 (2023)',
+            area: '3,358.6 km²',
+            description: 'Thủ đô của Việt Nam, trung tâm chính trị và văn hóa.'
+        },
+        'Hồ Chí Minh': {
+            name: 'Hồ Chí Minh',
+            population: '9,320,866 (2023)',
+            area: '2,061 km²',
+            description: 'Thành phố lớn nhất, trung tâm kinh tế của Việt Nam.'
+        },
+        'Đà Nẵng': {
+            name: 'Đà Nẵng',
+            population: '1,141,000 (2023)',
+            area: '1,285 km²',
+            description: 'Thành phố biển nổi tiếng với du lịch và phát triển công nghệ.'
+        },
+        // Thêm dữ liệu cho các tỉnh khác nếu cần
+    };
+
+    mapObject.addEventListener('load', function() {
+        const svgDoc = mapObject.contentDocument;
+        if (!svgDoc) {
+            console.error('Không thể tải file SVG');
+            return;
+        }
+
+        const paths = svgDoc.querySelectorAll('path');
+        if (paths.length === 0) {
+            console.error('Không tìm thấy path trong SVG');
+            return;
+        }
+
+        paths.forEach(path => {
+            const provinceName = path.getAttribute('title') || path.getAttribute('id');
+            if (!provinceName) {
+                console.warn('Path không có thuộc tính title hoặc id:', path);
+                return;
+            }
+
+            path.style.fill = '#e0e0e0';
+            path.style.stroke = '#fff';
+            path.style.strokeWidth = '1';
+            path.style.cursor = 'pointer';
+            path.style.transition = 'fill 0.3s ease';
+
+            path.addEventListener('mouseenter', function() {
+                this.style.fill = '#4CAF50';
+                tooltip.textContent = provinceName;
+                tooltip.style.display = 'block';
+            });
+
+            path.addEventListener('mouseleave', function() {
+                if (!this.classList.contains('selected')) {
+                    this.style.fill = '#e0e0e0';
+                }
+                tooltip.style.display = 'none';
+            });
+
+            path.addEventListener('mousemove', function(e) {
+                const rect = mapObject.getBoundingClientRect();
+                const x = e.clientX - rect.left;
+                const y = e.clientY - rect.top;
+                tooltip.style.left = (x + 10) + 'px';
+                tooltip.style.top = (y + 10) + 'px';
+            });
+
+            path.addEventListener('click', function() {
+                const info = provinceData[provinceName] || {
+                    name: provinceName,
+                    population: 'Chưa có dữ liệu',
+                    area: 'Chưa có dữ liệu',
+                    description: 'Chưa có thông tin chi tiết.'
+                };
+
+                provinceInfo.innerHTML = `
+                    <h3>${info.name}</h3>
+                    <p><strong>Dân số:</strong> ${info.population}</p>
+                    <p><strong>Diện tích:</strong> ${info.area}</p>
+                    <p><strong>Mô tả:</strong> ${info.description}</p>
+                `;
+                provinceInfo.style.display = 'block';
+
+                paths.forEach(p => p.classList.remove('selected'));
+                this.classList.add('selected');
+                this.style.fill = '#2196F3';
+            });
+        });
+    });
+});
