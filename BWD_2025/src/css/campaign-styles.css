@@ -17,7 +17,9 @@
 }
 
 .campaign-header h1 {
-    font-size: 2.5rem;
+    font-size: 2rem;
+    font-family: 'Playwrite DK Loopet', cursive;
+    font-weight: 500;
     color: #1a472a;
     margin-bottom: 1rem;
 }
@@ -1282,6 +1284,10 @@ label {
 
 .map-container {
     position: relative;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-top: 20px;
     width: 100%;
     max-width: 800px;
     margin: 2rem auto;
@@ -1383,3 +1389,323 @@ label {
         padding: 10px;
     }
 }
+/* Vector Map Viet NamNam */
+
+.container_MapVietNam {
+    width: 98%;
+    height: 200px;
+    padding: 10px;
+    margin: 30px 20px;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+    background-color: #ecdfdf;
+}
+
+.campaign-overview {
+    display: flex;
+    gap: 2rem;
+    padding: 1rem;
+    background-color: #f7f7f0;
+    border-radius: 17px;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+    margin: 2rem 25px;
+    width: 100%;
+}
+
+.campaign-stats-container {
+    flex: 1;
+    max-width: 520px;
+    padding: 0.5rem;
+}
+
+
+.campaign-stats-container h2 {
+    font-family: 'Playwrite DK Loopet', cursive;
+    font-size: 2rem;
+    color: #1a472a;
+    margin-bottom: 2rem;
+    position: relative;
+    display: inline-block;
+}
+
+.campaign-stats-container h2::after {
+    content: '';
+    position: absolute;
+    bottom: -10px;
+    left: 0;
+    width: 60%;
+    height: 3px;
+    background: #4CAF50;
+    border-radius: 2px;
+}
+
+.stats-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 1rem;
+    /* height: 466px; */
+}
+.stats-grid-img {
+    margin-bottom: 15px;
+    display: block;
+    /* grid-template-columns: repeat(1, 1fr); */
+    /* gap: 2rem; */
+    /* height: 466px; */
+    padding: 15px 30px;
+    border: 1px solid;
+    border-radius: 16px 16px 16px 16px;
+}
+
+.stats-image-wrapper {
+    width: 100%;
+    max-width: 300px;
+    margin: 5px auto;
+    padding: 10px;
+    background: #dddcdc;
+    border-radius: 12px;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+  
+  .stats-image-wrapper img {
+    width: 100%;
+    height: auto;
+    aspect-ratio: 4/3;
+    object-fit: cover;
+    border-radius: 10px;
+  }
+
+.stats-grid-img img {
+    width: 100%;
+    max-width: 200px;
+    height: auto;
+    aspect-ratio: 4 / 3;
+    object-fit: cover;
+    border-radius: 10px;
+    display: block;
+    margin: 0 auto;
+}
+
+
+
+
+.stat-item {
+    background: linear-gradient(145deg, #ffffff, #f5f5f5);
+    padding: 1rem;
+    border-radius: 15px;
+    box-shadow: 5px 5px 15px rgba(0, 0, 0, 0.05),
+                -5px -5px 15px rgba(255, 255, 255, 0.8);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.stat-item:hover {
+    transform: translateY(-5px);
+    box-shadow: 8px 8px 20px rgba(0, 0, 0, 0.08),
+                -8px -8px 20px rgba(255, 255, 255, 0.9);
+}
+
+.stat-item h4 {
+    color: #666;
+    font-size: 16px;
+    font-weight: 500;
+    margin-bottom: 1px;
+    min-height: 40px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    line-height: 1.2;
+}
+
+.stat-number {
+    color: #1a472a;
+    font-size: 20px;
+    white-space: nowrap;
+    text-align: center;
+    margin: 10px;
+    line-height: 0;
+    font-family: 'Playwrite DK Loopet', cursive;
+}
+
+
+.stat-item:nth-child(1) .stat-number {
+    color: #2196F3;
+}
+
+.stat-item:nth-child(2) .stat-number {
+    color: #4CAF50;
+    text-align: left;
+}
+
+.stat-item:nth-child(3) .stat-number {
+    color: #FF9800;
+}
+
+.stat-item:nth-child(4) .stat-number {
+    color: #9C27B0;
+}
+
+.stat-item:nth-child(5) .stat-number {
+    color: #F44336;
+}
+.stat-item:nth-child(6) .stat-number {
+    color: #0f71f1;
+}
+
+@media (max-width: 768px) {
+    .campaign-stats-container {
+        padding: 1.5rem;
+    }
+
+    .campaign-stats-container h2 {
+        font-size: 15px;
+        margin-bottom: 1.5rem;
+    }
+
+    .stats-grid {
+        grid-template-columns: repeat(2, 1fr);
+        gap: 1.5rem;
+    }
+
+    .stat-item {
+        padding: 1.5rem;
+    }
+
+    .stat-number {
+        font-size: 1rem;
+    }
+}
+
+.vietnam-map-container {
+    flex-shrink: 0;
+    width: 400px;
+    height: 520px;
+    display: flex;
+    /* align-items: center; */
+    justify-content: center;
+    border-radius: 12px;
+    overflow: hidden;
+    background: white;
+}
+
+
+.vietnam-map {
+    max-width: 100%;
+    height: auto;
+    object-fit: contain;
+    justify-content: center;
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+    .campaign-overview {
+        flex-direction: column;
+    }
+
+    .stats-grid {
+        grid-template-columns: 1fr;
+    }
+}
+
+.province-image-container{
+    padding:10px;
+}
+
+@media (max-width: 992px) {
+    .campaign-overview {
+        flex-direction: column;
+        padding: 1rem;
+    }
+
+    .campaign-stats-container,
+    #map {
+        width: 100%;
+    }
+
+    .campaign-stats-container h2 {
+        font-size: 1.5rem;
+    }
+
+    .stats-grid {
+        grid-template-columns: repeat(2, 1fr);
+    }
+}
+
+@media (max-width: 768px) {
+    .stats-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .stat-item h4 {
+        font-size: 0.85rem;
+    }
+
+    .stat-item .stat-number {
+        font-size: 1.1rem;
+    }
+
+    #map {
+        min-height: 300px;
+    }
+}
+
+#map {
+    flex-shrink: 0;
+    width: 500px;
+  }
+
+
+  .campaign-wrapper {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 1rem;
+    /* background: #f9f9f9; */
+    border-radius: 16px;
+    /* box-shadow: 0 4px 16px rgba(0,0,0,0.05); */
+    width: 100%;
+  }
+  
+
+/* .sm-selected {
+    stroke: #ff0000 !important;
+    stroke-width: 3px !important;
+    filter: drop-shadow(0px 0px 5px rgba(255, 0, 0, 0.5));
+  } */
+
+  /* .province-image-container {
+    transition: opacity 0.4s ease-in-out;
+  } */
+/* Animation khi ảnh chuyển */
+.province-image-container {
+    transition: opacity 0.5s ease-in-out, transform 0.5s ease-in-out;
+    opacity: 1;
+  }
+  
+  .province-image-container.fade-out {
+    opacity: 0;
+    transform: scale(0.95);
+  }
+  
+  .province-image-container.fade-in {
+    opacity: 1;
+    transform: scale(1);
+  }
+  
+  /* Animation khi đổi tiêu đề */
+  .campaign-stats-container h2 {
+    transition: opacity 0.5s ease-in-out, transform 0.4s ease;
+  }
+  
+  .campaign-stats-container h2.fade-out {
+    opacity: 0;
+    transform: translateY(-10px);
+  }
+  
+  .campaign-stats-container h2.fade-in {
+    opacity: 1;
+    transform: translateY(0);
+  }
+  
+  /* Đã có animation cho stat-item: giữ lại */
+  

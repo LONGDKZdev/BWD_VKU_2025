@@ -9,6 +9,8 @@
     <link rel="stylesheet" href="src/css/campaign-styles.css">
     <link href="https://fonts.googleapis.com/css2?family=Playwrite+DK+Loopet&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+
 </head>
 <body>
     <nav class="navbar">
@@ -32,6 +34,7 @@
     </nav>
 
     <main class="campaign-container">
+        
         <div class="campaign-filters">
             <div class="search-box">
                 <input type="text" id="campaignSearch" placeholder="Tìm kiếm chiến dịch...">
@@ -160,14 +163,76 @@
                 </div>
             </div>
         </section>
+          </div>
 
-
-        <div class="map-container">
-    <object data="src/styles/vn.svg" type="image/svg+xml" width="600"></object>
-</div>
-
-
+          
     </main>
+    <div class="campaign-wrapper">
+        <div class="campaign-overview">
+            <div class="campaign-stats-container">
+                <h2>Tổng quan - Đà Nẵng</h2>
+
+                <!-- <div class="stats-image-wrapper">
+                    <img src="src/images/MapVietNam/hanoi.jpg" alt="Hà Nội">
+                  </div> -->
+                  
+                <div class="stats-image-wrapper">
+                    <img src="src/images/MapVietNam/golden-bridge.jpg" alt="Cầu Vàng - Đà Nẵng" class="province-image-container">
+                </div>
+                <div class="stats-grid">
+                    <div class="stat-item">
+                        <h4>Tổng số chiến dịch</h4>
+                        <p class="stat-number">15</p>
+                    </div>
+                    <div class="stat-item">
+                        <h4>Tổng số tiền tài trợ</h4>
+                        <p class="stat-number">270.000.000</p>
+                    </div>
+                    <div class="stat-item">
+                        <h4>Chiến dịch đang diễn ra</h4>
+                        <p class="stat-number">6</p>
+                    </div>
+                    <div class="stat-item">
+                        <h4>Chiến dịch sắp tới</h4>
+                        <p class="stat-number">5</p>
+                    </div>
+                    <div class="stat-item">
+                        <h4>Chiến dịch đã kết thúc</h4>
+                        <p class="stat-number">4</p>
+                    </div>
+                    <div class="stat-item">
+                        <h4>Số người đã tham gia</h4>
+                        <p class="stat-number">5.000</p>
+                    </div>
+                </div>
+            </div>
+            <div id="map" style="
+      /* width: 100px; */
+      
+      height: 520px;
+        margin-left: 0 !important;
+        margin-right: auto;
+        margin-top: 100px;
+        padding-top: 0px;
+        padding-right: 0px;
+        padding-left: 0px;
+        display: block;
+        /* width: 430px; */
+        border: 4px solid;
+        border-radius: 16px 16px 16px 16px;
+        background: url('src/images/MapVietNam/map-background.jpg') center center no-repeat;
+        background-size: cover;
+    "></div>
+    </div>
+    
+
+
+
+        
+        
+    </div>
+
+
     <footer class="site-footer">
         <div class="footer-content">
             <div class="footer-section">
@@ -228,6 +293,270 @@
         </div>
     </footer>
     <script src="src/js/campaign.js"></script>
+
+
+
+<script src="src/VietNam_Map/mapdata.js"></script>
+
+
+<script>
+    (function smartAutoFixViewBox() {
+      const desiredViewBox = "83 -6 500 500";
+      const defaultViewBox = "0 0 500 500";
+    
+      let lastSet = null;
+    
+      function fixViewBox() {
+        const svg = document.querySelector('#map_inner svg');
+        if (svg) {
+          const viewBox = svg.getAttribute('viewBox');
+          if (viewBox === defaultViewBox && viewBox !== lastSet) {
+            svg.setAttribute('viewBox', desiredViewBox);
+            lastSet = desiredViewBox;
+            console.log("🔄 ViewBox updated after interaction");
+          }
+        }
+      }
+    
+      // Kích hoạt fix mỗi frame cho mượt
+      function loopFix() {
+        fixViewBox();
+        requestAnimationFrame(loopFix);
+      }
+    
+      requestAnimationFrame(loopFix);
+    })();
+    </script>
+    
+    
+    
+
+<script>
+
+// Change overview data
+document.addEventListener('DOMContentLoaded', () => {
+  const provinceStats = {
+    "Hà Nội": {
+      totalCampaigns: 20,
+      totalMoney: 310000000,
+      active: 5,
+      upcoming: 7,
+      finished: 8,
+      participants: 15000,
+      image: "src/images/MapVietNam/hanoi.jpg"
+    },
+    "Thừa Thiên - Huế": {
+      totalCampaigns: 12,
+      totalMoney: 150000000,
+      active: 4,
+      upcoming: 3,
+      finished: 5,
+      participants: 4000,
+      image: "src/images/MapVietNam/hue.jpg"
+    },
+    "Đà Nẵng": {
+      totalCampaigns: 15,
+      totalMoney: 270000000,
+      active: 6,
+      upcoming: 5,
+      finished: 4,
+      participants: 5000,
+      image: "src/images/MapVietNam/golden-bridge.jpg"
+    },
+    "TP. Hồ Chí Minh": {
+      totalCampaigns: 30,
+      totalMoney: 550000000,
+      active: 12,
+      upcoming: 10,
+      finished: 8,
+      participants: 25000,
+      image: "src/images/MapVietNam/hochiminh.jpg"
+    }
+  };
+
+  const provinceNameMap = {
+    VNHN: 'Hà Nội',
+    VN26: 'Thừa Thiên - Huế',
+    VNDN: 'Đà Nẵng',
+    VNSG: 'TP. Hồ Chí Minh'
+  };
+
+  const interval = setInterval(() => {
+    const paths = document.querySelectorAll('path[class*="sm_state_"]');
+    if (paths.length > 0) {
+      clearInterval(interval);
+
+      paths.forEach(path => {
+        const fullClass = [...path.classList].find(cls => cls.startsWith('sm_state_'));
+        if (!fullClass) return;
+
+        const code = fullClass.replace('sm_state_', '');
+        const province = provinceNameMap[code];
+        if (!province) return;
+
+        path.style.cursor = 'pointer';
+
+        path.addEventListener('click', () => {
+          if (provinceStats[province]) {
+            updateOverview(province, provinceStats[province]);
+            
+          }
+        });
+      });
+    }
+  }, 300);
+  
+//Hàm 2
+function updateOverview(name, stats) {
+  const titleEl = document.querySelector(".campaign-stats-container h2");
+  if (titleEl) {
+    titleEl.classList.add("fade-out");
+    setTimeout(() => {
+      titleEl.textContent = `Tổng quan - ${name}`;
+      titleEl.classList.remove("fade-out");
+      titleEl.classList.add("fade-in");
+    }, 300);
+    setTimeout(() => titleEl.classList.remove("fade-in"), 800);
+  }
+
+  const imgEl = document.querySelector(".province-image-container");
+  if (imgEl && stats.image) {
+    imgEl.classList.add("fade-out");
+    setTimeout(() => {
+      imgEl.src = stats.image;
+      imgEl.alt = `Ảnh minh họa - ${name}`;
+      imgEl.classList.remove("fade-out");
+      imgEl.classList.add("fade-in");
+    }, 300);
+    setTimeout(() => imgEl.classList.remove("fade-in"), 800);
+  }
+
+  const statEls = document.querySelectorAll(".campaign-stats-container .stat-number");
+  const values = [
+    stats.totalCampaigns,
+    stats.totalMoney,
+    stats.active,
+    stats.upcoming,
+    stats.finished,
+    stats.participants
+  ];
+
+  statEls.forEach((el, i) => {
+    const parent = el.closest(".stat-item");
+    if (parent) {
+      parent.classList.remove("stat-animate");
+      void parent.offsetWidth;
+      parent.classList.add("stat-animate");
+    }
+    const old = parseInt(el.textContent.replace(/\D/g, "")) || 0;
+    const target = values[i];
+    animateCountUp(el, old, target, 1000 + i * 100);
+  });
+
+  updateMapMarker(name);
+}
+
+
+  function updateMapMarker(name) {
+    const svg = document.querySelector("#map_inner svg");
+    if (!svg) return;
+
+    const coords = {
+      "Hà Nội": { x: 340, y: 120 },
+    "Thừa Thiên - Huế": { x: 305, y: 220 },
+    "Đà Nẵng": { x: 310, y: 235 },
+    "TP. Hồ Chí Minh": { x: 300, y: 400 }
+    };
+
+    if (coords[name]) {
+      marker.setAttribute("x", coords[name].x);
+      marker.setAttribute("y", coords[name].y);
+    }
+  }
+});
+
+
+    (function removeSimpleMapsTrial() {
+      const observer = new MutationObserver(() => {
+        const trialLinks = document.querySelectorAll('a[href*="simplemaps.com"]');
+        trialLinks.forEach(link => {
+          if (link.textContent.includes("Trial")) {
+            const wrapper = link.closest("div");
+            if (wrapper) wrapper.remove();
+            else link.remove();
+          }
+        });
+      });
+    
+      observer.observe(document.body, {
+        childList: true,
+        subtree: true
+      });
+    })();
+</script>
+    
+<script src="src/VietNam_Map/countrymap.js"></script>
+<script>
+  function animateCountUp(element, start, end, duration = 1000) {
+    const range = end - start;
+    let startTime = null;
+  
+    function step(timestamp) {
+      if (!startTime) startTime = timestamp;
+      const progress = Math.min((timestamp - startTime) / duration, 1);
+      const current = Math.floor(start + progress * range);
+      element.textContent = current.toLocaleString("vi-VN");
+      if (progress < 1) requestAnimationFrame(step);
+    }
+  
+    requestAnimationFrame(step);
+  }
+  
+  function animateStatItem(el) {
+    el.classList.remove("stat-animate");
+    void el.offsetWidth; // Force reflow
+    el.classList.add("stat-animate");
+  }
+  
+
+  function updateMapMarker(name) {
+    const svg = document.querySelector("#map_inner svg");
+    if (!svg) return;
+  
+    const coords = {
+      "Hà Nội": { x: 340, y: 120 },
+      "Thừa Thiên - Huế": { x: 305, y: 220 },
+      "Đà Nẵng": { x: 310, y: 235 },
+      "TP. Hồ Chí Minh": { x: 300, y: 400 }
+    };
+
+  }
+  
+  document.addEventListener("DOMContentLoaded", function () {
+    const interval = setInterval(() => {
+      const svg = document.querySelector("#map_inner svg");
+      if (!svg) return;
+  
+      const provinces = svg.querySelectorAll("path, g");
+  
+      if (provinces.length > 0) {
+        clearInterval(interval);
+  
+        provinces.forEach((el) => {
+          const title = el.getAttribute("title") || el.getAttribute("name");
+          if (!title || !provinceStats[title]) return;
+  
+          el.style.cursor = "pointer";
+          el.addEventListener("click", () => {
+            updateOverview(title, provinceStats[title]);
+          });
+        });
+      }
+    }, 300);
+  });
+  </script>
+  
+
 </body>
 </html>
 
@@ -289,3 +618,4 @@
             </form>
         </div>
     </div>
+
