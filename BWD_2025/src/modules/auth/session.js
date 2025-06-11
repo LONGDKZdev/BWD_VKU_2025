@@ -9,6 +9,7 @@ import {
 } from "https://www.gstatic.com/firebasejs/11.6.0/firebase-auth.js";
 import { doc, updateDoc, serverTimestamp } from "https://www.gstatic.com/firebasejs/11.6.0/firebase-firestore.js";
 import { showToast } from "../../core/common.js";
+import { deleteDoc, doc } from "https://www.gstatic.com/firebasejs/11.6.0/firebase-firestore.js";
 
 // Thiết lập persistence cho session
 export async function setPersistenceType(rememberMe = true) {
@@ -142,4 +143,15 @@ function clearSessionData() {
 export function initSessionPersistence() {
     const rememberMe = localStorage.getItem("rememberMe") === "true";
     setPersistenceType(rememberMe);
+}
+
+
+// Gọi hàm này khi tài khoản bị xóa
+export async function deleteUserData(uid) {
+    try {
+        await deleteDoc(doc(db, "users", uid));
+        console.log("🗑️ Đã xoá dữ liệu Firestore của user:", uid);
+    } catch (error) {
+        console.error("❌ Lỗi khi xoá dữ liệu Firestore:", error);
+    }
 }

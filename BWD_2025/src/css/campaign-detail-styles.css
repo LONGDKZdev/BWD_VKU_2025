@@ -1,0 +1,1103 @@
+/* Xóa max-width và padding của container */
+.campaign-detail-container {
+    margin: 0;
+    padding: 0;
+    width: 100%;
+}
+
+/* Điều chỉnh campaign-hero */
+.campaign-hero {
+    text-align: center;
+    margin-bottom: 3rem;
+    position: relative;
+}
+
+/* Chỉnh sửa campaign-banner để full màn hình */
+.campaign-banner {
+    width: 100vw;
+    height: 500px;
+    overflow: hidden;
+    margin: 0;
+    border-radius: 0;
+    position: relative;
+}
+
+.campaign-banner img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.campaign-overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(to bottom, rgba(0,0,0,0.4) 0%, rgba(0,0,0,0.1) 100%);
+    color: white;
+    padding: 40px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    text-align: left;
+}
+
+.campaign-category {
+    font-size: 1.2rem;
+    margin-bottom: 1rem;
+    opacity: 0.9;
+}
+
+.campaign-overlay h1 {
+    font-size: 4rem;
+    margin-bottom: 1rem;
+    font-weight: bold;
+    text-shadow: 2px 2px 4px rgba(0,0,0,0.5);
+    font-family: 'Montserrat', Arial, sans-serif;
+
+}
+
+.campaign-overlay #campaign-subtitle {
+    font-size: 2rem;
+    max-width: 800px;
+    line-height: 1.4;
+    font-family: 'Courier Prime', monospace;
+    text-shadow: 1px 1px 3px rgba(0,0,0,0.5);
+}
+
+@media (max-width: 768px) {
+    .campaign-overlay {
+        padding: 20px;
+    }
+
+    .campaign-overlay h1 {
+        font-size: 3rem;
+    }
+
+    .campaign-overlay #campaign-subtitle {
+        font-size: 1.5rem;
+    }
+}
+
+/* Điều chỉnh phần nội dung bên dưới */
+.campaign-info {
+    max-width: 1400px;
+    margin: 2rem auto;
+    background: #fff;
+    border-radius: 15px;
+    padding: 3rem;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+}
+
+.info-section {
+    margin-bottom: 2rem;
+    padding-bottom: 2rem;
+    border-bottom: 1px solid #eee;
+}
+
+.info-section:last-child {
+    border-bottom: none;
+    margin-bottom: 0;
+    padding-bottom: 0;
+}
+
+.info-section h2 {
+    color: #1a472a;
+    font-size: 1.5rem;
+    margin-bottom: 1rem;
+    font-family: 'Playwrite DK Loopet', cursive;
+}
+
+.campaign-info-grid {
+    display: grid;
+    grid-template-columns: 250px 1fr 300px;
+    gap: 2rem;
+    margin-top: 2rem;
+}
+
+/* Cột trái */
+.info-left h2 {
+    color: #333;
+    font-size: 0.9rem;
+    margin-bottom: 0.5rem;
+    font-weight: bold;
+}
+
+.status-section, .date-section {
+    margin-bottom: 2rem;
+}
+
+.status-active {
+    display: inline-block;
+    padding: 0.5rem 1rem;
+    background: #4CAF50;
+    color: white;
+    border-radius: 20px;
+    font-size: 0.9rem;
+}
+
+.status-active-1 {
+    display: inline-block;
+    padding: 0.5rem 1rem;
+    background: #FFA726;
+    color: white;
+    border-radius: 20px;
+    font-size: 0.9rem;
+}
+
+.date, .location {
+    color: #4CAF50;
+    font-size: 1rem;
+    font-weight: 500;
+}
+
+/* Cột giữa */
+.info-center {
+    padding: 0 2rem;
+    border-left: 1px solid #eee;
+    border-right: 1px solid #eee;
+}
+
+.description-section p {
+    margin-bottom: 1.5rem;
+    line-height: 1.6;
+    color: #444;
+}
+
+/* Cột phải */
+.info-right {
+    text-align: center;
+}
+
+.register-section h2 {
+    color: #333;
+    font-size: 1rem;
+    margin-bottom: 1.5rem;
+    font-weight: bold;
+}
+
+.join-button {
+    padding: 10px 20px;
+    font-size: 16px;
+    border: none;
+    border-radius: 5px;
+    background-color: #4CAF50;
+    color: white;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    margin-bottom: 30px;
+}
+
+.join-button:hover {
+    background-color: #45a049;
+}
+
+.join-button.registered {
+    background-color: #888;
+    cursor: default;
+}
+
+.contact-info {
+    margin-top: 20px;
+}
+
+.contact-info a {
+    color: #4CAF50;
+    text-decoration: none;
+}
+
+.contact-info a:hover {
+    text-decoration: underline;
+}
+
+@media (max-width: 1024px) {
+    .campaign-info-grid {
+        grid-template-columns: 1fr;
+        gap: 3rem;
+    }
+
+    .info-center {
+        padding: 2rem 0;
+        border-left: none;
+        border-right: none;
+        border-top: 1px solid #eee;
+        border-bottom: 1px solid #eee;
+    }
+}
+
+@media (max-width: 768px) {
+    .campaign-banner {
+        height: 300px;
+    }
+
+    .campaign-hero h1 {
+        font-size: 2.5rem;
+    }
+
+    .campaign-hero p {
+        font-size: 1.2rem;
+    }
+
+    .campaign-info {
+        padding: 1.5rem;
+    }
+}
+.date-section {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    padding: 20px;
+    background-color: #f8f9fa;
+    border-radius: 8px;
+    margin: 20px 0;
+}
+
+.date-item {
+    border-left: 4px solid #4CAF50;
+    padding-left: 15px;
+}
+
+.date-item h2 {
+    color: #333;
+    font-size: 16px;
+    margin-bottom: 8px;
+}
+
+.date-item .date {
+    color: #4CAF50;
+    font-size: 18px;
+    font-weight: bold;
+}
+
+.info-center h2 {
+    text-align: left;
+    font-size: 24px;
+    color: #333;
+    margin-bottom: 20px;
+    padding-bottom: 10px;
+    border-bottom: 2px solid #4CAF50;
+    font-family: 'Playwrite DK Loopet', cursive;
+}
+
+/* Đường kẻ ngang */
+.section-divider {
+    width: 100%;
+    height: 1px;
+    background-color: #eee;
+    margin: 3rem 0;
+    border: none;
+}
+
+/* Phần thông tin thêm */
+.additional-info {
+    max-width: 1400px;
+    margin: 2rem auto;
+    padding: 3rem;
+    background: #fff;
+    border-radius: 15px;
+    position: relative;
+    overflow: hidden;
+}
+
+.additional-info::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 5px;
+}
+
+.additional-info h2 {
+    color: #1a472a;
+    font-size: 2rem;
+    margin-bottom: 2.5rem;
+    text-align: center;
+    font-family: 'Playwrite DK Loopet', cursive;
+    position: relative;
+    padding-bottom: 15px;
+}
+
+.additional-info h2::after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 80px;
+    height: 3px;
+    background-color: #4CAF50;
+}
+
+.info-content {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 2.5rem;
+}
+
+.info-item {
+    padding: 2rem;
+    background-color: #f9f9f9;
+    border-radius: 12px;
+    box-shadow: 0 3px 10px rgba(0,0,0,0.08);
+    transition: all 0.3s ease;
+    border-left: 4px solid #4CAF50;
+    position: relative;
+}
+
+.info-item:hover {
+    transform: translateY(-8px);
+    box-shadow: 0 8px 20px rgba(0,0,0,0.12);
+    background-color: #f5f9f5;
+}
+
+.info-item h3 {
+    color: #1a472a;
+    font-size: 1.3rem;
+    margin-bottom: 1.2rem;
+    font-weight: 600;
+    display: flex;
+    align-items: center;
+}
+
+.info-item h3::before {
+    font-family: 'Font Awesome 5 Free';
+    margin-right: 10px;
+    font-weight: 900;
+    color: #4CAF50;
+    font-size: 1.1rem;
+}
+
+.info-item:nth-child(1) h3::before {
+    content: '\f3c5'; /* Biểu tượng địa điểm */
+}
+
+.info-item:nth-child(2) h3::before {
+    content: '\f500'; /* Biểu tượng người */
+}
+
+.info-item:nth-child(3) h3::before {
+    content: '\f5a2'; /* Biểu tượng hình thức */
+}
+
+.info-item:nth-child(4) h3::before {
+    content: '\f091'; /* Biểu tượng giải thưởng */
+}
+
+.info-item p {
+    color: #555;
+    line-height: 1.7;
+    font-size: 1.05rem;
+    position: relative;
+    padding-left: 5px;
+}
+
+@media (max-width: 768px) {
+    .additional-info {
+        padding: 2rem;
+    }
+    
+    .info-content {
+        grid-template-columns: 1fr;
+    }
+}
+.event-schedule {
+    padding: 3rem 0;
+    clear: both;
+}
+
+.additional-info h2,
+.event-schedule h2 {
+    margin-top: 1rem;
+    margin-bottom: 2rem;
+    position: relative;
+    clear: both;
+}
+
+.program-details {
+    margin-top: 2rem;
+}
+
+.section-container {
+    margin: 3rem 0;
+    position: relative;
+    padding-top: 2rem;
+    border-top: 1px solid #e0e0e0;
+}
+
+.section-container:first-child {
+    border-top: none;
+    margin-top: 0;
+    padding-top: 0;
+}
+
+.section-header {
+    margin-bottom: 2rem;
+    padding-top: 50;
+}
+
+.section-header h2 {
+    font-size: 1.8rem;
+    color: #333;
+    margin: 0;
+    padding: 0;
+}
+
+.program-details,
+.schedule-details {
+    padding: 0 1rem;
+    margin-top: 1.5rem;
+}
+
+.program-details h3,
+.schedule-details h3 {
+    color: #333;
+    margin-bottom: 1rem;
+    font-size: 1.2rem;
+}
+
+.program-details ul {
+    list-style-type: none;
+    padding-left: 1.5rem;
+}
+
+.program-details ul li {
+    margin-bottom: 0.8rem;
+    position: relative;
+}
+
+.program-details ul li:before {
+    content: "•";
+    color: #4CAF50;
+    font-weight: bold;
+    position: absolute;
+    left: -1.5rem;
+}
+
+.event-item {
+    margin-bottom: 1.5rem;
+    padding: 1rem;
+    background: #f9f9f9;
+    border-radius: 8px;
+}
+
+.event-item h3 {
+    color: #2196F3;
+    margin-bottom: 0.5rem;
+}
+
+.event-item p {
+    color: #666;
+    line-height: 1.5;
+}
+
+/* Phần CSS cho liên hệ và tổ chức thực hiện */
+.contact-section {
+    padding: 3rem;
+}
+
+.contact-container {
+    display: flex;
+    gap: 2rem;
+}
+
+.contact-column {
+    flex: 1;
+}
+
+.contact-column h2 {
+    color: #1a472a;
+    font-size: 1.5rem;
+    text-align: left;
+    margin-bottom: 0.5rem;
+}
+
+.contact-line {
+    height: 3px;
+    width: 60px;
+    background-color: #4CAF50;
+    margin-bottom: 1.5rem;
+}
+
+.contact-person {
+    margin-bottom: 1.5rem;
+}
+
+.contact-person h3 {
+    color: #333;
+    font-size: 1.1rem;
+    margin-bottom: 0.3rem;
+    font-weight: 600;
+}
+
+.contact-person p {
+    color: #4CAF50;
+    font-size: 0.95rem;
+    display: flex;
+    align-items: center;
+}
+
+.contact-person p i {
+    margin-right: 8px;
+    color: #4CAF50;
+}
+
+@media (max-width: 768px) {
+    .contact-container {
+        flex-direction: column;
+    }
+}
+.date-section {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    padding: 20px;
+    background-color: #f8f9fa;
+    border-radius: 8px;
+    margin: 20px 0;
+}
+
+.date-item {
+    border-left: 4px solid #4CAF50;
+    padding-left: 15px;
+}
+
+.date-item h2 {
+    color: #333;
+    font-size: 16px;
+    margin-bottom: 8px;
+}
+
+.date-item .date {
+    color: #4CAF50;
+    font-size: 18px;
+    font-weight: bold;
+}
+
+.info-center h2 {
+    text-align: left;
+    font-size: 24px;
+    color: #333;
+    margin-bottom: 20px;
+    padding-bottom: 10px;
+    border-bottom: 2px solid #4CAF50;
+}
+
+/* Đường kẻ ngang */
+.section-divider {
+    width: 100%;
+    height: 1px;
+    background-color: #eee;
+    margin: 3rem 0;
+    border: none;
+}
+
+/* Phần thông tin thêm */
+.additional-info {
+    max-width: 1400px;
+    margin: 2rem auto;
+    padding: 3rem;
+    background: #fff;
+    border-radius: 15px;
+    /* box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1); */
+    position: relative;
+    overflow: hidden;
+}
+
+.additional-info::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 5px;
+}
+
+.additional-info h2 {
+    color: #1a472a;
+    font-size: 2rem;
+    margin-bottom: 2.5rem;
+    text-align: center;
+    font-family: 'Playwrite DK Loopet', cursive;
+    position: relative;
+    padding-bottom: 15px;
+}
+
+.additional-info h2::after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 80px;
+    height: 3px;
+    background-color: #4CAF50;
+}
+
+.info-content {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 2.5rem;
+}
+
+.info-item {
+    padding: 2rem;
+    background-color: #f9f9f9;
+    border-radius: 12px;
+    box-shadow: 0 3px 10px rgba(0,0,0,0.08);
+    transition: all 0.3s ease;
+    border-left: 4px solid #4CAF50;
+    position: relative;
+}
+
+.info-item:hover {
+    transform: translateY(-8px);
+    box-shadow: 0 8px 20px rgba(0,0,0,0.12);
+    background-color: #f5f9f5;
+}
+
+.info-item h3 {
+    color: #1a472a;
+    font-size: 1.3rem;
+    margin-bottom: 1.2rem;
+    font-weight: 600;
+    display: flex;
+    align-items: center;
+}
+
+.info-item h3::before {
+    font-family: 'Font Awesome 5 Free';
+    margin-right: 10px;
+    font-weight: 900;
+    color: #4CAF50;
+    font-size: 1.1rem;
+}
+
+.info-item:nth-child(1) h3::before {
+    content: '\f3c5'; /* Biểu tượng địa điểm */
+}
+
+.info-item:nth-child(2) h3::before {
+    content: '\f500'; /* Biểu tượng người */
+}
+
+.info-item:nth-child(3) h3::before {
+    content: '\f5a2'; /* Biểu tượng hình thức */
+}
+
+.info-item:nth-child(4) h3::before {
+    content: '\f091'; /* Biểu tượng giải thưởng */
+}
+
+.info-item p {
+    color: #555;
+    line-height: 1.7;
+    font-size: 1.05rem;
+    position: relative;
+    padding-left: 5px;
+}
+
+@media (max-width: 768px) {
+    .additional-info {
+        padding: 2rem;
+    }
+    
+    .info-content {
+        grid-template-columns: 1fr;
+    }
+}
+.event-schedule {
+    padding: 3rem 0;
+    clear: both;
+}
+
+.additional-info h2,
+.event-schedule h2 {
+    margin-top: 1rem;
+    margin-bottom: 2rem;
+    position: relative;
+    clear: both;
+}
+
+.program-details {
+    margin-top: 2rem;
+}
+
+.section-container {
+    margin: 3rem 0;
+    position: relative;
+    padding-top: 2rem;
+    border-top: 1px solid #e0e0e0;
+}
+
+.section-container:first-child {
+    border-top: none;
+    margin-top: 0;
+    padding-top: 0;
+}
+
+.section-header {
+    margin-bottom: 2rem;
+    padding-top: 50;
+}
+
+.section-header h2 {
+    font-size: 1.8rem;
+    color: #333;
+    margin: 0;
+    padding: 0;
+}
+
+.program-details,
+.schedule-details {
+    padding: 0 1rem;
+    margin-top: 1.5rem;
+}
+
+.program-details h3,
+.schedule-details h3 {
+    color: #333;
+    margin-bottom: 1rem;
+    font-size: 1.2rem;
+}
+
+.program-details ul {
+    list-style-type: none;
+    padding-left: 1.5rem;
+}
+
+.program-details ul li {
+    margin-bottom: 0.8rem;
+    position: relative;
+}
+
+.program-details ul li:before {
+    content: "•";
+    color: #4CAF50;
+    font-weight: bold;
+    position: absolute;
+    left: -1.5rem;
+}
+
+.event-item {
+    margin-bottom: 1.5rem;
+    padding: 1rem;
+    background: #f9f9f9;
+    border-radius: 8px;
+}
+
+.event-item h3 {
+    color: #2196F3;
+    margin-bottom: 0.5rem;
+}
+
+.event-item p {
+    color: #666;
+    line-height: 1.5;
+}
+
+/* Phần CSS cho kế hoạch chiến dịch */
+.campaign-plan-section {
+    padding: 3rem;
+    background: linear-gradient(to bottom, #ffffff, #f5f9f5);
+    position: relative;
+    overflow: hidden;
+}
+
+.campaign-plan-section h2 {
+    color: #1a472a;
+    font-size: 2rem;
+    margin-bottom: 2.5rem;
+    text-align: center;
+    font-family: 'Playwrite DK Loopet', cursive;
+    position: relative;
+    padding-bottom: 15px;
+}
+
+.campaign-plan-section h2::after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 80px;
+    height: 3px;
+    background-color: #4CAF50;
+}
+
+.campaign-timeline {
+    position: relative;
+    max-width: 1200px;
+    margin: 3rem auto;
+    padding: 0 20px;
+}
+
+
+.timeline-item {
+    position: relative;
+    margin-bottom: 4rem;
+    display: flex;
+    opacity: 0.9;
+    transition: all 0.3s ease;
+}
+
+.timeline-item:hover {
+    opacity: 1;
+    transform: translateY(-5px);
+}
+
+.timeline-item:last-child {
+    margin-bottom: 0;
+}
+
+.timeline-date {
+    min-width: 120px;
+    text-align: center;
+    background: linear-gradient(135deg, #1a472a, #4CAF50);
+    color: white;
+    border-radius: 12px;
+    padding: 15px 10px;
+    position: relative;
+    z-index: 1;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+    transition: transform 0.3s ease;
+}
+
+.timeline-item:hover .timeline-date {
+    transform: scale(1.05);
+    box-shadow: 0 8px 20px rgba(0,0,0,0.25);
+}
+
+.date-number {
+    font-size: 2.2rem;
+    font-weight: bold;
+    line-height: 1;
+    text-shadow: 1px 1px 3px rgba(0,0,0,0.3);
+}
+
+.date-month {
+    font-size: 1.3rem;
+    opacity: 0.9;
+    margin-top: 5px;
+}
+
+.timeline-content {
+    margin-left: 2.5rem;
+    background-color: white;
+    border-radius: 12px;
+    padding: 2rem;
+    box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+    flex: 1;
+    position: relative;
+    border-left: 5px solid #4CAF50;
+    transition: all 0.3s ease;
+}
+
+.timeline-item:hover .timeline-content {
+    box-shadow: 0 8px 25px rgba(0,0,0,0.15);
+    background-color: #f9fff9;
+}
+
+.timeline-content::before {
+    content: '';
+    position: absolute;
+    width: 24px;
+    height: 24px;
+    background: linear-gradient(135deg, #4CAF50, #1a472a);
+    border-radius: 50%;
+    top: 50%;
+    left: -37px;
+    margin-top: -12px;
+    box-shadow: 0 0 0 5px rgba(76, 175, 80, 0.3), 0 0 10px rgba(0,0,0,0.2);
+    z-index: 1;
+    transition: all 0.3s ease;
+}
+
+.timeline-item:hover .timeline-content::before {
+    transform: scale(1.2);
+    box-shadow: 0 0 0 8px rgba(76, 175, 80, 0.2), 0 0 15px rgba(0,0,0,0.3);
+}
+
+.timeline-content h3 {
+    color: #1a472a;
+    font-size: 1.5rem;
+    margin-bottom: 1rem;
+    font-weight: 600;
+    display: flex;
+    align-items: center;
+}
+
+.timeline-content h3::before {
+    font-family: 'Font Awesome 5 Free';
+    margin-right: 12px;
+    font-weight: 900;
+    color: #4CAF50;
+    font-size: 1.2rem;
+}
+
+.timeline-item:nth-child(1) .timeline-content h3::before {
+    content: '\f024'; /* Biểu tượng cờ */
+}
+
+.timeline-item:nth-child(2) .timeline-content h3::before {
+    content: '\f51c'; /* Biểu tượng hội thảo */
+}
+
+.timeline-item:nth-child(3) .timeline-content h3::before {
+    content: '\f091'; /* Biểu tượng thử thách */
+}
+
+.timeline-item:nth-child(4) .timeline-content h3::before {
+    content: '\f0c0'; /* Biểu tượng sự kiện nhóm */
+}
+
+.timeline-item:nth-child(5) .timeline-content h3::before {
+    content: '\f091'; /* Biểu tượng giải thưởng */
+}
+
+.timeline-content p {
+    color: #555;
+    line-height: 1.7;
+    margin-bottom: 0;
+    font-size: 1.05rem;
+}
+
+@media (max-width: 768px) {
+    .campaign-timeline::before {
+        left: 30px;
+    }
+    
+    .timeline-item {
+        flex-direction: column;
+    }
+    
+    .timeline-date {
+        width: 90px;
+        min-width: auto;
+        margin-bottom: 1.5rem;
+        margin-left: 50px;
+    }
+    
+    .timeline-content {
+        margin-left: 50px;
+    }
+    
+    .timeline-content::before {
+        left: -27px;
+    }
+}/* Cải thiện phần đăng ký - phiên bản nhẹ nhàng hơn */
+.register-section {
+    background: linear-gradient(to bottom, #f9fff9, #ffffff);
+    padding: 1.8rem;
+    border-radius: 12px;
+    box-shadow: 0 3px 10px rgba(0, 0, 0, 0.05);
+    position: relative;
+    overflow: hidden;
+    border: 1px solid rgba(76, 175, 80, 0.1);
+}
+
+.register-section::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 3px;
+    background: linear-gradient(to right, #4CAF50, #8bc34a);
+    opacity: 0.7;
+}
+
+.register-section h2 {
+    color: #2e7d32;
+    font-size: 1.4rem;
+    margin-bottom: 1.2rem;
+    font-weight: 600;
+    font-style: 50;
+    text-align: center;
+    font-family: 'Playwrite DK Loopet', cursive;
+}
+
+.participants-count {
+    text-align: center;
+    margin-bottom: 18px;
+    font-size: 1rem;
+    color: #555;
+    background-color: rgba(76, 175, 80, 0.05);
+    padding: 8px 15px;
+    border-radius: 20px;
+    display: inline-block;
+}
+
+.participants-count span {
+    font-weight: 600;
+    color: #4CAF50;
+    font-size: 1.2rem;
+}
+
+.join-button {
+    padding: 10px 22px;
+    font-size: 0.95rem;
+    font-weight: 500;
+    border: none;
+    border-radius: 25px;
+    background-color: #4CAF50;
+    color: white;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    margin: 8px auto 20px;
+    display: block;
+    box-shadow: 0 2px 6px rgba(76, 175, 80, 0.2);
+    min-width: 180px;
+}
+
+.join-button:hover {
+    background-color: #45a049;
+    transform: translateY(-2px);
+    box-shadow: 0 3px 8px rgba(76, 175, 80, 0.3);
+}
+
+.join-button:active {
+    transform: translateY(0);
+    box-shadow: 0 1px 4px rgba(76, 175, 80, 0.2);
+}
+
+.join-button.registered {
+    background-color: #9e9e9e;
+    cursor: default;
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+}
+
+.contact-info {
+    margin-top: 15px;
+    font-size: 0.9rem;
+    color: #777;
+    position: relative;
+    padding-top: 10px;
+}
+
+.contact-info::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 20px;
+    height: 1px;
+    background-color: #eee;
+}
+
+.contact-info a {
+    color: #4CAF50;
+    text-decoration: none;
+    font-weight: 400;
+    transition: all 0.2s ease;
+}
+
+.contact-info a:hover {
+    color: #2e7d32;
+}

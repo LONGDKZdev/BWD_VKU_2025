@@ -151,3 +151,23 @@ export async function createUser(uid, data) {
     });
 }
 
+export async function createEmptyUserProfile(user, provider = "email") {
+    await setDoc(doc(db, "users", user.uid), {
+        name: user.displayName || "",
+        email: user.email,
+        avatar: user.photoURL || "",
+        phone: "",
+        birthdate: "",
+        gender: "",
+        createdAt: serverTimestamp(),
+        points: 0,
+        streak: 0,
+        postCount: 0,
+        followers: 0,
+        category: "",
+        achievements: [],
+        provider: provider
+    });
+}
+
+
