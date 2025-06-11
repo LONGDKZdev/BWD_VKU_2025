@@ -12,9 +12,11 @@
     <link href="https://fonts.googleapis.com/css2?family=Montserrat&display=swap" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css2?family=Playwrite+DK+Loopet&display=swap" rel="stylesheet">
     <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+      <!-- AOS CSS -->
+<link href="https://cdn.jsdelivr.net/npm/aos@2.3.4/dist/aos.css" rel="stylesheet">
 </head>
 <body>
-    <nav class="navbar">
+    <nav class="navbar" >
         <div class="logo">
             <a href="index.html" class="logo-text">
                 <div class="logo-main">
@@ -30,7 +32,7 @@
     <main>
         <section class="hero">
             <div class="hero-content">
-                <div class="hero-text">
+                <div class="hero-text"  data-aos="fade-right" data-aos-duration="1000">
                     <h1 class="main-title">VIET<span class="highlight">NAM</span></h1>
                     <h1 class="main-title">Self+<span class="highlight">Rise</span></h1>
                     <p class="subtitle">Cùng nhau phát triển – từ học tập đến lối sống lành mạnh.</p>
@@ -42,4 +44,29 @@
         </section>
     </main>
 </body>
+<!-- AOS JS -->
+<script src="https://cdn.jsdelivr.net/npm/aos@2.3.4/dist/aos.js"></script>
+<script>
+  AOS.init();
+</script>
+<script>
+    document.addEventListener('DOMContentLoaded', function () {
+      const joinButton = document.querySelector('.join-button');
+      const heroContent = document.querySelector('.hero-content');
+  
+      joinButton.addEventListener('click', function (e) {
+        e.preventDefault(); // Ngăn chuyển trang ngay
+  
+        // Thêm class để kích hoạt hiệu ứng
+        heroContent.classList.add('exit');
+  
+        // Đợi hiệu ứng xong (600ms), rồi chuyển trang
+        setTimeout(function () {
+          window.location.href = joinButton.getAttribute('href');
+        }, 600);
+      });
+    });
+  </script>
+  
+  
 </html>

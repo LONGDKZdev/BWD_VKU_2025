@@ -1062,7 +1062,17 @@ body {
 .slider-nav i {
     font-size: 18px;
 }
+/* Đọc Thêm */
+.news-card .read-more {
+    opacity: 0;
+    transform: translateY(20px);
+    transition: all 0.3s ease;
+}
 
+.news-card:hover .read-more {
+    opacity: 1;
+    transform: translateY(0);
+}
 /* ========== Mission Section ========== */
 .mission-section {
     padding: 80px 0;

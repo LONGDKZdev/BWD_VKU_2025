@@ -603,9 +603,10 @@ document.addEventListener('DOMContentLoaded', function() {
     // Rest of your initialization code...
 });// Add these functions to your existing JavaScript file
 
-// Voice recording functionality
+// Voice recording functionality/
+//hàm 1
 function setupVoiceRecording() {
-    const voiceBtn = document.getElementById('voice-btn');
+const voiceBtn = document.getElementById('voice-btn');
     const voicePanel = document.querySelector('.voice-recording-panel');
     const closePanel = document.querySelector('.close-recording-panel');
     const recordBtn = document.getElementById('record-btn');
@@ -613,102 +614,148 @@ function setupVoiceRecording() {
     const sendBtn = document.querySelector('.send-recording');
     const timerDisplay = document.querySelector('.recording-timer');
     const audioWaves = document.querySelector('.audio-waves');
-    
+    const waves = document.querySelectorAll('.wave');
+
     let mediaRecorder;
+    let audioContext;
+    let analyser;
+    let audioSource;
     let audioChunks = [];
     let recordingTimer;
     let recordingDuration = 0;
     let audioBlob;
-    
-    // Open voice recording panel
+    let visualizationInterval;
+
     voiceBtn.addEventListener('click', function() {
         voicePanel.style.display = 'block';
+        void voicePanel.offsetWidth;
+        voicePanel.style.opacity = '1';
         resetRecording();
     });
-    
-    // Close voice recording panel
-    closePanel.addEventListener('click', function() {
-        voicePanel.style.display = 'none';
+
+    function closeVoicePanel() {
+        voicePanel.style.opacity = '0';
+        setTimeout(() => {
+            voicePanel.style.display = 'none';
+        }, 300);
         stopRecording();
-    });
-    
-    // Cancel recording
-    cancelBtn.addEventListener('click', function() {
-        voicePanel.style.display = 'none';
-        stopRecording();
-    });
-    
-    // Record button click
-    recordBtn.addEventListener('click', function() {
+    }
+
+    closePanel.addEventListener('click', closeVoicePanel);
+    cancelBtn.addEventListener('click', closeVoicePanel);
+
+    recordBtn.addEventListener('click', async function() {
         if (recordBtn.classList.contains('recording')) {
-            // Stop recording
-            stopRecording();
+            await stopRecording();
             recordBtn.innerHTML = '<i class="fas fa-redo"></i>';
             recordBtn.classList.remove('recording');
             recordBtn.classList.add('paused');
             sendBtn.disabled = false;
+            audioWaves.classList.remove('recording');
+            clearInterval(visualizationInterval);
+            document.querySelector('.recording-visualization').style.backgroundColor = 'rgba(255, 152, 0, 0.05)';
         } else if (recordBtn.classList.contains('paused')) {
-            // Restart recording
             resetRecording();
         } else {
-            // Start recording
             startRecording();
         }
     });
-    
-    // Send recording
+
     sendBtn.addEventListener('click', function() {
-        if (audioBlob) {
-            sendAudioMessage(audioBlob);
-            voicePanel.style.display = 'none';
+        if (!audioBlob || !(audioBlob instanceof Blob) || audioBlob.size === 0) {
+            alert('Không thể gửi: Bản ghi âm không hợp lệ. Vui lòng thử lại.');
+            sendBtn.innerHTML = '<i class="fas fa-paper-plane"></i>';
             resetRecording();
+            return;
+        }
+        sendBtn.innerHTML = '<i class="fas fa-spinner fa-spin"></i>';
+        try {
+            sendAudioMessage(audioBlob);
+            closeVoicePanel();
+            resetRecording();
+            sendBtn.innerHTML = '<i class="fas fa-paper-plane"></i>';
+        } catch (error) {
+            console.error('Error sending audio message:', error);
+            alert('Lỗi khi gửi tin nhắn ghi âm. Vui lòng thử lại.');
+            sendBtn.innerHTML = '<i class="fas fa-paper-plane"></i>';
         }
     });
-    
-    // Start recording
+
     function startRecording() {
         navigator.mediaDevices.getUserMedia({ audio: true })
             .then(stream => {
-                mediaRecorder = new MediaRecorder(stream);
+                // Khởi tạo AudioContext để phân tích âm thanh
+                audioContext = new (window.AudioContext || window.webkitAudioContext)();
+                analyser = audioContext.createAnalyser();
+                audioSource = audioContext.createMediaStreamSource(stream);
+                audioSource.connect(analyser);
+                analyser.fftSize = 256; // Kích thước FFT để phân tích tần số
+                const bufferLength = analyser.frequencyBinCount;
+                const dataArray = new Uint8Array(bufferLength);
+
+                const mimeType = MediaRecorder.isTypeSupported('audio/webm') ? 'audio/webm' :
+                                MediaRecorder.isTypeSupported('audio/ogg') ? 'audio/ogg' : 'audio/mp3';
+                mediaRecorder = new MediaRecorder(stream, { mimeType });
                 audioChunks = [];
-                
+
                 mediaRecorder.addEventListener('dataavailable', event => {
                     audioChunks.push(event.data);
                 });
-                
+
                 mediaRecorder.addEventListener('stop', () => {
                     const audioTracks = stream.getAudioTracks();
                     audioTracks.forEach(track => track.stop());
-                    
-                    audioBlob = new Blob(audioChunks, { type: 'audio/webm' });
+                    audioBlob = new Blob(audioChunks, { type: mimeType });
+                    // Ngắt kết nối AudioContext khi dừng
+                    audioSource.disconnect();
+                    analyser.disconnect();
                 });
-                
-                // Start recording
+
                 mediaRecorder.start();
                 recordBtn.classList.add('recording');
                 audioWaves.classList.add('recording');
-                
-                // Start timer
+                document.querySelector('.recording-visualization').style.backgroundColor = 'rgba(76, 175, 80, 0.05)';
+
+                // Cập nhật sóng âm theo thời gian thực
+                visualizationInterval = setInterval(() => {
+                    if (!recordBtn.classList.contains('recording')) return;
+                    analyser.getByteFrequencyData(dataArray);
+                    const average = dataArray.reduce((sum, value) => sum + value, 0) / bufferLength;
+                    const amplitude = Math.min(average / 255 * 50, 50); // Chuyển đổi thành độ cao tối đa 50px
+                    waves.forEach(wave => {
+                        wave.style.height = `${amplitude}px`;
+                    });
+                }, 100);
+
                 recordingDuration = 0;
                 updateTimer();
                 recordingTimer = setInterval(updateTimer, 1000);
+                timerDisplay.classList.add('recording-active');
             })
             .catch(error => {
                 console.error('Error accessing microphone:', error);
                 alert('Không thể truy cập microphone. Vui lòng kiểm tra quyền truy cập.');
+                recordBtn.classList.add('error');
+                setTimeout(() => {
+                    recordBtn.classList.remove('error');
+                }, 1000);
             });
     }
-    
-    // Stop recording
+
     function stopRecording() {
         if (mediaRecorder && mediaRecorder.state !== 'inactive') {
-            mediaRecorder.stop();
-            audioWaves.classList.remove('recording');
-            clearInterval(recordingTimer);
+            return new Promise(resolve => {
+                mediaRecorder.addEventListener('stop', () => {
+                    resolve();
+                }, { once: true });
+                mediaRecorder.stop();
+                audioWaves.classList.remove('recording');
+                clearInterval(recordingTimer);
+            });
         }
+        return Promise.resolve();
     }
-    
-    // Reset recording
+
     function resetRecording() {
         stopRecording();
         audioChunks = [];
@@ -716,15 +763,25 @@ function setupVoiceRecording() {
         recordingDuration = 0;
         updateTimer();
         recordBtn.innerHTML = '<i class="fas fa-microphone"></i>';
-        recordBtn.classList.remove('recording', 'paused');
+        recordBtn.classList.remove('recording', 'paused', 'error');
         sendBtn.disabled = true;
+        audioWaves.classList.remove('recording');
+        clearInterval(visualizationInterval);
+        waves.forEach(wave => {
+            wave.style.height = '5px';
+        });
+        document.querySelector('.recording-visualization').style.backgroundColor = 'rgba(76, 175, 80, 0.05)';
     }
-    
-    // Update timer display
+
     function updateTimer() {
         const minutes = Math.floor(recordingDuration / 60).toString().padStart(2, '0');
         const seconds = (recordingDuration % 60).toString().padStart(2, '0');
         timerDisplay.textContent = `${minutes}:${seconds}`;
+        if (recordBtn.classList.contains('recording')) {
+            timerDisplay.classList.toggle('pulse');
+        } else {
+            timerDisplay.classList.remove('pulse');
+        }
         recordingDuration++;
     }
     
@@ -874,219 +931,7 @@ document.addEventListener('DOMContentLoaded', function() {
     
     // Rest of your initialization code...
 });// Enhance the voice recording functionality
-function setupVoiceRecording() {
-    const voiceBtn = document.getElementById('voice-btn');
-    const voicePanel = document.querySelector('.voice-recording-panel');
-    const closePanel = document.querySelector('.close-recording-panel');
-    const recordBtn = document.getElementById('record-btn');
-    const cancelBtn = document.querySelector('.cancel-recording');
-    const sendBtn = document.querySelector('.send-recording');
-    const timerDisplay = document.querySelector('.recording-timer');
-    const audioWaves = document.querySelector('.audio-waves');
-    const waves = document.querySelectorAll('.wave');
-    
-    let mediaRecorder;
-    let audioChunks = [];
-    let recordingTimer;
-    let recordingDuration = 0;
-    let audioBlob;
-    let visualizationInterval;
-    
-    // Open voice recording panel with animation
-    voiceBtn.addEventListener('click', function() {
-        voicePanel.style.display = 'block';
-        // Force reflow to enable animation
-        void voicePanel.offsetWidth;
-        voicePanel.style.opacity = '1';
-        resetRecording();
-    });
-    
-    // Close voice recording panel with animation
-    function closeVoicePanel() {
-        voicePanel.style.opacity = '0';
-        setTimeout(() => {
-            voicePanel.style.display = 'none';
-        }, 300);
-        stopRecording();
-    }
-    
-    closePanel.addEventListener('click', closeVoicePanel);
-    cancelBtn.addEventListener('click', closeVoicePanel);
-    
-    // Record button click with enhanced visual feedback
-    recordBtn.addEventListener('click', function() {
-        if (recordBtn.classList.contains('recording')) {
-            // Stop recording
-            stopRecording();
-            recordBtn.innerHTML = '<i class="fas fa-redo"></i>';
-            recordBtn.classList.remove('recording');
-            recordBtn.classList.add('paused');
-            sendBtn.disabled = false;
-            
-            // Stop wave animation but keep last state
-            audioWaves.classList.remove('recording');
-            clearInterval(visualizationInterval);
-            
-            // Add a subtle background to indicate recording is paused
-            document.querySelector('.recording-visualization').style.backgroundColor = 'rgba(255, 152, 0, 0.05)';
-            
-        } else if (recordBtn.classList.contains('paused')) {
-            // Restart recording
-            resetRecording();
-        } else {
-            // Start recording
-            startRecording();
-        }
-    });
-    
-    // Send recording with animation
-    sendBtn.addEventListener('click', function() {
-        if (audioBlob) {
-            sendBtn.innerHTML = '<i class="fas fa-spinner fa-spin"></i>';
-            setTimeout(() => {
-                sendAudioMessage(audioBlob);
-                closeVoicePanel();
-                resetRecording();
-            }, 500);
-        }
-    });
-    
-    // Start recording with enhanced visualization
-    function startRecording() {
-        navigator.mediaDevices.getUserMedia({ audio: true })
-            .then(stream => {
-                mediaRecorder = new MediaRecorder(stream);
-                audioChunks = [];
-                
-                mediaRecorder.addEventListener('dataavailable', event => {
-                    audioChunks.push(event.data);
-                });
-                
-                mediaRecorder.addEventListener('stop', () => {
-                    const audioTracks = stream.getAudioTracks();
-                    audioTracks.forEach(track => track.stop());
-                    
-                    audioBlob = new Blob(audioChunks, { type: 'audio/webm' });
-                });
-                
-                // Start recording
-                mediaRecorder.start();
-                recordBtn.classList.add('recording');
-                audioWaves.classList.add('recording');
-                
-                // Reset visualization background
-                document.querySelector('.recording-visualization').style.backgroundColor = 'rgba(76, 175, 80, 0.05)';
-                
-                // Add random wave heights for more realistic visualization
-                visualizationInterval = setInterval(() => {
-                    if (!recordBtn.classList.contains('recording')) return;
-                    
-                    waves.forEach(wave => {
-                        if (!audioWaves.classList.contains('recording')) {
-                            const randomHeight = Math.floor(Math.random() * 45) + 5;
-                            wave.style.height = `${randomHeight}px`;
-                        }
-                    });
-                }, 100);
-                
-                // Start timer with pulsing effect
-                recordingDuration = 0;
-                updateTimer();
-                recordingTimer = setInterval(updateTimer, 1000);
-                
-                // Add recording indicator
-                timerDisplay.classList.add('recording-active');
-            })
-            .catch(error => {
-                console.error('Error accessing microphone:', error);
-                alert('Không thể truy cập microphone. Vui lòng kiểm tra quyền truy cập.');
-                
-                // Visual feedback for error
-                recordBtn.classList.add('error');
-                setTimeout(() => {
-                    recordBtn.classList.remove('error');
-                }, 1000);
-            });
-    }
-    
-    // Stop recording with visual feedback
-    function stopRecording() {
-        if (mediaRecorder && mediaRecorder.state !== 'inactive') {
-            mediaRecorder.stop();
-            clearInterval(recordingTimer);
-            timerDisplay.classList.remove('recording-active');
-        }
-    }
-    
-    // Reset recording state with visual feedback
-    function resetRecording() {
-        stopRecording();
-        audioChunks = [];
-        audioBlob = null;
-        recordingDuration = 0;
-        updateTimer();
-        recordBtn.innerHTML = '<i class="fas fa-microphone"></i>';
-        recordBtn.classList.remove('recording', 'paused', 'error');
-        sendBtn.disabled = true;
-        audioWaves.classList.remove('recording');
-        clearInterval(visualizationInterval);
-        
-        // Reset waves to initial state
-        waves.forEach(wave => {
-            wave.style.height = '5px';
-        });
-        
-        // Reset visualization background
-        document.querySelector('.recording-visualization').style.backgroundColor = 'rgba(76, 175, 80, 0.05)';
-    }
-    
-    // Update timer display with visual effects
-    function updateTimer() {
-        const minutes = Math.floor(recordingDuration / 60).toString().padStart(2, '0');
-        const seconds = (recordingDuration % 60).toString().padStart(2, '0');
-        timerDisplay.textContent = `${minutes}:${seconds}`;
-        
-        // Add pulsing effect to timer when recording
-        if (recordBtn.classList.contains('recording')) {
-            timerDisplay.classList.toggle('pulse');
-        } else {
-            timerDisplay.classList.remove('pulse');
-        }
-        
-        recordingDuration++;
-    }
-    
-    // Rest of the function remains the same...
-}
 
-// Add this CSS to your stylesheet
-const style = document.createElement('style');
-style.textContent = `
-    .recording-active {
-        animation: timer-pulse 1s infinite alternate;
-    }
-    
-    @keyframes timer-pulse {
-        0% { opacity: 1; }
-        100% { opacity: 0.7; }
-    }
-    
-    .btn-record.error {
-        background-color: #d32f2f;
-        animation: shake 0.5s ease-in-out;
-    }
-    
-    @keyframes shake {
-        0%, 100% { transform: translateX(0); }
-        20%, 60% { transform: translateX(-5px); }
-        40%, 80% { transform: translateX(5px); }
-    }
-    
-    .voice-recording-panel {
-        opacity: 0;
-        transition: opacity 0.3s ease;
-    }
-`;
 // Add group search functionality
 function setupGroupSearch() {
     const searchInput = document.querySelector('.search-box input');
