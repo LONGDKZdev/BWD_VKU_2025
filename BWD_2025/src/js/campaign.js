@@ -48,7 +48,7 @@ const provinceStats = {
         }
     }
 };
-function updateOverview(name, data) {
+function updateOverview(name, data){
     document.querySelector('.overview-title').innerText = data.title;
     document.querySelector('.province-image').src = data.image;
 
@@ -66,11 +66,9 @@ function updateOverview(name, data) {
 
 
 
+document.addEventListener('DOMContentLoaded', function(){
 
-
-document.addEventListener('DOMContentLoaded', function () {
-
-    function updateOverview(provinceName, data) {
+    function updateOverview(provinceName, data){
         document.querySelector('.overview-title').innerText = data.title;
         document.querySelector('.province-image').src = data.image;
 
@@ -183,16 +181,11 @@ async function joinCampaign(campaignTitle) {
 }
 
 
-
-function showModal(message, type) {
-    // Xóa hàm showModal cũ vì không cần thiết nữa
-}
-
 // Thêm event listener cho tất cả các nút tham gia/đăng ký
-document.addEventListener('DOMContentLoaded', function () {
+document.addEventListener('DOMContentLoaded', function() {
     const campaignButtons = document.querySelectorAll('.join-campaign-btn');
     campaignButtons.forEach(button => {
-        button.addEventListener('click', async function (e) {
+        button.addEventListener('click', async function(e) {
             e.preventDefault();
             const campaignCard = button.closest('.campaign-card');
             const campaignTitle = campaignCard.querySelector('h3').textContent;
@@ -202,14 +195,14 @@ document.addEventListener('DOMContentLoaded', function () {
                 button.disabled = true;
                 button.classList.add('loading');
                 await joinCampaign(campaignTitle);
-
+                
                 // Cập nhật text nút
                 if (isUpcoming) {
                     button.textContent = 'Đã đăng ký';
                 } else {
                     button.textContent = 'Đã tham gia';
                 }
-
+                
                 // Thêm class để đổi style
                 button.classList.remove('loading');
                 button.classList.add('joined');
@@ -221,7 +214,7 @@ document.addEventListener('DOMContentLoaded', function () {
                 button.classList.remove('loading');
                 button.classList.add('error');
                 button.textContent = 'Thử lại';
-
+                
                 setTimeout(() => {
                     button.classList.remove('error');
                     button.textContent = isUpcoming ? 'Đăng ký trước' : 'Tham gia ngay';
@@ -230,6 +223,14 @@ document.addEventListener('DOMContentLoaded', function () {
         });
     });
 });
+
+
+
+function checkLoginStatus() {
+    // Giả lập kiểm tra đăng nhập
+    return localStorage.getItem('isLoggedIn') === 'true';
+}
+
 
 function updateCampaignStats(campaignCard) {
     const statsElement = campaignCard.querySelector('.campaign-stats span:first-child');

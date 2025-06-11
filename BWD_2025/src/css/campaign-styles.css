@@ -643,6 +643,301 @@ label {
 .copyright {
     color: rgba(255, 255, 255, 0.7);
     font-size: 0.9rem;
+}/* ==============================
+   Bố cục chung
+============================== */
+.campaign-container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 2rem;
+    position: relative;
+}
+
+/* ==============================
+   Tiêu đề chiến dịch
+============================== */
+.campaign-header {
+    text-align: center;
+    margin-bottom: 3rem;
+    
+}
+
+.campaign-header h1 {
+    font-size: 2.5rem;
+    color: #1a472a;
+    margin-bottom: 1rem;
+    font-weight: 500;
+    font-family: 'Playwrite DK Loopet', cursive;
+}
+
+.campaign-header p {
+    color: #666;
+    font-size: 1.1rem;
+}
+
+/* ==============================
+   Lưới chiến dịch
+============================== */
+.campaign-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr); /* Mặc định 3 cột trên 1 hàng */
+    gap: 2rem;
+    margin-bottom: 4rem;
+}
+
+/* ==============================
+   Thẻ chiến dịch
+============================== */
+.campaign-image {
+    position: relative;
+    height: 200px;
+    overflow: hidden;
+    border-radius: 10px;
+}
+
+.campaign-image img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: all 0.3s ease;
+}
+
+.campaign-image::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0);
+    transition: all 0.3s ease;
+    z-index: 1;
+}
+
+.campaign-image:hover::before {
+    background: rgba(0, 0, 0, 0.5);
+}
+
+.campaign-image:hover img {
+    transform: scale(1.1);
+}
+
+.details-btn {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    padding: 0.8rem 1.5rem;
+    background: #4CAF50;
+    color: white;
+    border: none;
+    border-radius: 25px;
+    cursor: pointer;
+    opacity: 0;
+    z-index: 2;
+    transition: all 0.3s ease;
+}
+
+.campaign-image:hover .details-btn {
+    opacity: 1;
+}
+
+.details-btn:hover {
+    background: #45a049;
+    transform: translate(-50%, -50%) scale(1.1);
+}
+
+.campaign-status {
+    position: absolute;
+    top: 1rem;
+    right: 1rem;
+    padding: 0.5rem 1rem;
+    border-radius: 20px;
+    font-size: 0.9rem;
+    font-weight: 500;
+}
+
+.campaign-status.active {
+    background: #4CAF50;
+    color: white;
+}
+
+.campaign-status.upcoming {
+    background: #FFA726;
+    color: white;
+}
+
+.campaign-content {
+    padding: 1.5rem;
+    flex-grow: 1;
+    display: flex;
+    flex-direction: column;
+}
+
+.campaign-content h3 {
+    font-size: 1.3rem;
+    color: #1a472a;
+    margin-bottom: 0.5rem;
+}
+
+.campaign-content p {
+    color: #666;
+    margin-bottom: 1rem;
+}
+
+.campaign-stats {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 1rem;
+    font-size: 0.9rem;
+    color: #666;
+}
+
+.campaign-stats span {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+}
+/* ==============================
+   Chân trang
+============================== */
+.site-footer {
+    background: #1a472a;
+    color: #fff;
+    padding: 60px 0 30px;
+    position: relative;
+}
+
+.footer-content {
+    max-width: 1200px;
+    margin: 0 auto;
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 40px;
+    padding: 0 20px;
+    font-family: 'Montserrat', sans-serif;
+}
+
+.footer-section h3 {
+    color: #4CAF50;
+    font-size: 1.2rem;
+    font-family: 'Playwrite DK Loopet', cursive;
+    margin-bottom: 20px;
+    position: relative;
+    padding-bottom: 10px;
+}
+
+.footer-section h3::after {
+    content: '';
+    position: absolute;
+    left: 0;
+    bottom: 0;
+    width: 50px;
+    height: 2px;
+    background: #4CAF50;
+}
+
+.footer-section p {
+    margin-bottom: 10px;
+    color: #e0e0e0;
+    line-height: 1.6;
+}
+
+.footer-section ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+.footer-section ul li {
+    margin-bottom: 12px;
+}
+
+.footer-section ul li a {
+    color: #e0e0e0;
+    text-decoration: none;
+    transition: all 0.3s ease;
+    display: flex;
+    align-items: center;
+}
+
+.footer-section ul li a:hover {
+    color: #4CAF50;
+    padding-left: 20px;
+}
+
+.footer-section ul li a::before {
+    content: '→';
+    position: absolute;
+    left: -20px;
+    opacity: 0;
+    transition: all 0.3s ease;
+}
+
+.footer-section ul li a:hover::before {
+    opacity: 1;
+}
+
+.contact-info {
+    margin-top: 20px;
+}
+
+.contact-info p {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.contact-info i {
+    font-size: 1.1rem;
+}
+
+.social-links {
+    display: flex;
+    gap: 15px;
+    margin-top: 20px;
+}
+
+.social-links a {
+    color: #fff;
+    background: rgba(255, 255, 255, 0.1);
+    width: 36px;
+    height: 36px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: all 0.3s ease;
+}
+
+.social-links a:hover {
+    color: #4CAF50;
+    transform: translateY(-3px);
+}
+
+.footer-bottom {
+    max-width: 1200px;
+    margin: 40px auto 0;
+    padding: 20px;
+    border-top: 1px solid rgba(255, 255, 255, 0.1);
+    text-align: center;
+}
+
+.social-link {
+    color: #fff;
+    font-size: 1.5rem;
+    margin: 0 10px;
+    transition: all 0.3s ease;
+}
+
+.social-link:hover {
+    color: #4CAF50;
+    transform: translateY(-5px);
+}
+
+.copyright {
+    color: rgba(255, 255, 255, 0.7);
+    font-size: 0.9rem;
 }
 
 .copyright a {
@@ -672,6 +967,396 @@ label {
         transform: rotate(360deg);
     }
 }
+/* Phân chia chiến dịch theo trạng thái */
+.campaign-section {
+    margin-bottom: 3rem;
+}
+
+.campaign-section-title {
+    color: #1a472a;
+    font-size: 1.5rem;
+    margin-bottom: 1.5rem;
+    padding-bottom: 0.5rem;
+    border-bottom: 2px solid #4CAF50;
+    display: inline-block;
+}
+
+.campaign-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 1.5rem;
+}
+
+.campaign-card {
+    background: #fff;
+    border-radius: 10px;
+    overflow: hidden;
+    box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+    position: relative;
+}
+
+.campaign-card .campaign-code {
+    position: absolute;
+    top: 1rem;
+    left: 1rem;
+    background: rgba(0,0,0,0.7);
+    color: white;
+    padding: 0.3rem 0.8rem;
+    border-radius: 5px;
+    font-size: 0.9rem;
+}
+
+.campaign-card .location-tag {
+    position: absolute;
+    top: 1rem;
+    right: 1rem;
+    background: #4CAF50;
+    color: white;
+    padding: 0.3rem 0.8rem;
+    border-radius: 5px;
+    font-size: 0.9rem;
+}
+
+.campaign-image {
+    position: relative;
+    height: 200px;
+}
+
+.campaign-image img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.campaign-content {
+    padding: 1.5rem;
+}
+
+.campaign-title {
+    font-size: 1.2rem;
+    color: #1a472a;
+    margin-bottom: 0.8rem;
+    font-weight: 500;
+}
+
+.campaign-description {
+    color: #666;
+    font-size: 0.9rem;
+    margin-bottom: 1rem;
+    line-height: 1.5;
+}
+
+.campaign-status {
+    position: absolute;
+    top: 1rem;
+    right: 1rem;
+    padding: 0.5rem 1rem;
+    border-radius: 20px;
+    font-size: 0.9rem;
+    font-weight: 500;
+}
+
+.campaign-status.active {
+    background: #4CAF50;
+    color: white;
+}
+
+.campaign-status.upcoming {
+    background: #FFA726;
+    color: white;
+}
+
+.campaign-content {
+    padding: 1.5rem;
+    flex-grow: 1;
+    display: flex;
+    flex-direction: column;
+}
+
+.campaign-content h3 {
+    font-size: 1.3rem;
+    color: #1a472a;
+    margin-bottom: 0.5rem;
+}
+
+.campaign-content p {
+    color: #666;
+    margin-bottom: 1rem;
+}
+
+.campaign-stats {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 1rem;
+    font-size: 0.9rem;
+    color: #666;
+}
+
+.campaign-stats span {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+}
+/* ==============================
+   Chân trang
+============================== */
+.site-footer {
+    background: #1a472a;
+    color: #fff;
+    padding: 60px 0 30px;
+    position: relative;
+}
+
+.footer-content {
+    max-width: 1200px;
+    margin: 0 auto;
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 40px;
+    padding: 0 20px;
+    font-family: 'Montserrat', sans-serif;
+}
+
+.footer-section h3 {
+    color: #4CAF50;
+    font-size: 1.2rem;
+    font-family: 'Playwrite DK Loopet', cursive;
+    margin-bottom: 20px;
+    position: relative;
+    padding-bottom: 10px;
+}
+
+.footer-section h3::after {
+    content: '';
+    position: absolute;
+    left: 0;
+    bottom: 0;
+    width: 50px;
+    height: 2px;
+    background: #4CAF50;
+}
+
+.footer-section p {
+    margin-bottom: 10px;
+    color: #e0e0e0;
+    line-height: 1.6;
+}
+
+.footer-section ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+.footer-section ul li {
+    margin-bottom: 12px;
+}
+
+.footer-section ul li a {
+    color: #e0e0e0;
+    text-decoration: none;
+    transition: all 0.3s ease;
+    display: flex;
+    align-items: center;
+}
+
+.footer-section ul li a:hover {
+    color: #4CAF50;
+    padding-left: 20px;
+}
+
+.footer-section ul li a::before {
+    content: '→';
+    position: absolute;
+    left: -20px;
+    opacity: 0;
+    transition: all 0.3s ease;
+}
+
+.footer-section ul li a:hover::before {
+    opacity: 1;
+}
+
+.contact-info {
+    margin-top: 20px;
+}
+
+.contact-info p {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.contact-info i {
+    font-size: 1.1rem;
+}
+
+.social-links {
+    display: flex;
+    gap: 15px;
+    margin-top: 20px;
+}
+
+.social-links a {
+    color: #fff;
+    background: rgba(255, 255, 255, 0.1);
+    width: 36px;
+    height: 36px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: all 0.3s ease;
+}
+
+.social-links a:hover {
+    color: #4CAF50;
+    transform: translateY(-3px);
+}
+
+.footer-bottom {
+    max-width: 1200px;
+    margin: 40px auto 0;
+    padding: 20px;
+    border-top: 1px solid rgba(255, 255, 255, 0.1);
+    text-align: center;
+}
+
+.social-link {
+    color: #fff;
+    font-size: 1.5rem;
+    margin: 0 10px;
+    transition: all 0.3s ease;
+}
+
+.social-link:hover {
+    color: #4CAF50;
+    transform: translateY(-5px);
+}
+
+.copyright {
+    color: rgba(255, 255, 255, 0.7);
+    font-size: 0.9rem;
+}
+
+.copyright a {
+    color: #4CAF50;
+    text-decoration: none;
+}
+
+/* ==============================
+   Hiệu ứng tải
+============================== */
+.loading-spinner {
+    display: none;
+    width: 40px;
+    height: 40px;
+    margin: 20px auto;
+    border: 4px solid #f3f3f3;
+    border-top: 4px solid #4CAF50;
+    border-radius: 50%;
+    animation: spin 1s linear infinite;
+}
+
+@keyframes spin {
+    0% {
+        transform: rotate(0deg);
+    }
+    100% {
+        transform: rotate(360deg);
+    }
+}
+/* Phân chia chiến dịch theo trạng thái */
+.campaign-section {
+    margin-bottom: 4rem;
+}
+
+.campaign-section-title {
+    font-size: 1.8rem;
+    color: #1a472a;
+    margin-bottom: 2rem;
+    text-align: center;
+    font-family: 'Playwrite DK Loopet', cursive;
+}
+
+/* Grid riêng cho từng phần */
+.campaign-grid-active,
+.campaign-grid-upcoming {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 2rem;
+    margin-bottom: 2rem;
+}
+
+/* Hiệu ứng khác nhau cho từng loại */
+.campaign-card[data-status="active"] .campaign-image::before {
+    border: 3px solid #4CAF50;
+}
+
+.campaign-card[data-status="upcoming"] .campaign-image::before {
+    border: 3px solid #FFA726;
+}
+
+
+
+.copyright a {
+    color: #4CAF50;
+    text-decoration: none;
+}
+
+/* ==============================
+   Hiệu ứng tải
+============================== */
+.loading-spinner {
+    display: none;
+    width: 40px;
+    height: 40px;
+    margin: 20px auto;
+    border: 4px solid #f3f3f3;
+    border-top: 4px solid #4CAF50;
+    border-radius: 50%;
+    animation: spin 1s linear infinite;
+}
+
+@keyframes spin {
+    0% {
+        transform: rotate(0deg);
+    }
+    100% {
+        transform: rotate(360deg);
+    }
+}
+/* Phân chia chiến dịch theo trạng thái */
+.campaign-section {
+    margin-bottom: 4rem;
+}
+
+.campaign-section-title {
+    font-size: 1.8rem;
+    color: #1a472a;
+    margin-bottom: 2rem;
+    text-align: center;
+    font-family: 'Playwrite DK Loopet', cursive;
+}
+
+/* Grid riêng cho từng phần */
+.campaign-grid-active,
+.campaign-grid-upcoming {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 2rem;
+    margin-bottom: 2rem;
+}
+
+/* Hiệu ứng khác nhau cho từng loại */
+.campaign-card[data-status="active"] .campaign-image::before {
+    border: 3px solid #4CAF50;
+}
+
+.campaign-card[data-status="upcoming"] .campaign-image::before {
+    border: 3px solid #FFA726;
+}
+
 
 /* ==============================
    Thiết kế đáp ứng - Màn hình lớn (>1200px)

@@ -83,7 +83,7 @@ var simplemaps_countrymap_mapdata={
   },
   state_specific: {
     VN01: {
-      name: "Lai Chau",
+      name: "Lai Châu",
       description: " "
     },
     VN02: {
@@ -99,7 +99,7 @@ var simplemaps_countrymap_mapdata={
       description: " "
     },
     VN05: {
-      name: "Son La",
+      name: "Sơn La",
       description: " "
     },
     VN06: {
@@ -156,7 +156,7 @@ var simplemaps_countrymap_mapdata={
   	color: "#800080"    
   },
     VN27: {
-      name: "Quàng Nam",
+      name: "Quảng Nam",
       description: " "
     },
     VN28: {
@@ -220,7 +220,7 @@ var simplemaps_countrymap_mapdata={
       description: " "
     },
     VN45: {
-      name: "Ðong Tháp",
+      name: "Đồng Tháp",
       description: " "
     },
     VN46: {
@@ -312,11 +312,11 @@ var simplemaps_countrymap_mapdata={
       description: " "
     },
     VN73: {
-      name: "Hau Giang",
+      name: "Hậu Giang",
       description: " "
     },
     VNCT: {
-      name: "Can Tho",
+      name: "Cần Thơ",
       description: " "
     },
     VNDN: {
@@ -382,7 +382,7 @@ locations: {
 
   labels: {
     VN01: {
-      name: "Lai Chau",
+      name: "Lai Châu",
       parent_id: "VN01"
     },
     VN02: {
@@ -398,7 +398,7 @@ locations: {
       parent_id: "VN04"
     },
     VN05: {
-      name: "Son La",
+      name: "Sơn La",
       parent_id: "VN05"
     },
     VN06: {
@@ -454,7 +454,7 @@ locations: {
       parent_id: "VN26"
     },
     VN27: {
-      name: "Quàng Nam",
+      name: "Quảng Nam",
       parent_id: "VN27"
     },
     VN28: {
@@ -518,7 +518,7 @@ locations: {
       parent_id: "VN44"
     },
     VN45: {
-      name: "Ðong Tháp",
+      name: "Đồng Tháp",
       parent_id: "VN45"
     },
     VN46: {
