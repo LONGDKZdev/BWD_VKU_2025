@@ -7,7 +7,91 @@
     padding: 2rem;
     position: relative; /* Hỗ trợ vị trí cho create-campaign-btn */
 }
-
+.support-section {
+    padding: 60px 20px;
+    width: 100vw; /* Chiều rộng toàn màn hình */
+    margin-left: calc(-50vw + 50%); /* Căn lại chính giữa */
+    background-color: #e8fff0;
+    text-align: center;
+  }
+  
+  .section-title {
+    font-size: 2rem;
+    font-family: 'Montserrat', sans-serif;
+    margin-bottom: 30px;
+    color: #1a472a;
+  }
+  
+  .partners {
+    display: flex;
+    justify-content: center;
+    gap: 40px;
+    flex-wrap: nowrap;
+    margin-bottom: 60px;
+    
+  }
+  
+  .partner {
+    width: 263px;   
+  }
+  
+  .partner img {
+    width: 100px;
+    height: auto;
+    margin-bottom: 10px;
+  }
+  
+  .partner p {
+    font-weight: bold;
+    color: #1a1a1a;
+    font-family: 'Montserrat', sans-serif;
+  }
+  
+  .contacts {
+    display: flex;
+    justify-content: center;
+    gap: 30px;
+    flex-wrap: wrap;
+  }
+  
+  .contact-card {
+    background: white;
+    border-radius: 10px;
+    padding: 20px;
+    margin: 20px;
+    width: 270px;
+    box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+    transition: transform 0.3s;
+  }
+  
+  .contact-card:hover {
+    transform: translateY(-5px);
+  }
+  
+  .contact-card img {
+    width: 100%;
+    height: 190px;
+    object-fit: cover;
+    border-radius: 8px;
+  }
+  
+  .contact-card h3 {
+    margin: 15px 0 10px;
+    font-size: 1.2rem;
+    color: #1a472a;
+  }
+  
+  .contact-card p {
+    font-size: 0.95rem;
+    color: #333;
+  }
+  
+  .contact-card .email {
+    margin-top: 10px;
+    color: #4CAF50;
+    font-weight: bold;
+  }
+  
 /* ==============================
    Tiêu đề chiến dịch
 ============================== */
@@ -1650,6 +1734,16 @@ label {
         margin-top: 1rem;
     }
 
+    .nav-links a {
+        color: white;
+        font-family: 'Montserrat', sans-serif;
+        text-decoration: none;
+        font-weight: bold;
+        padding: 0.5rem 1rem;
+        border-radius: 4px;
+        transition: background-color 0.3s;
+    }
+
     .nav-links li {
         margin: 0.5rem 0;
     }
@@ -2089,7 +2183,7 @@ label {
 .campaign-overview {
     display: flex;
     gap: 2rem;
-    padding: 1rem;
+    padding: 0rem 1rem 0rem 1rem ;
     background-color: #f7f7f0;
     border-radius: 17px;
     box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
@@ -2143,8 +2237,8 @@ label {
 
 .stats-image-wrapper {
     width: 100%;
-    max-width: 300px;
-    margin: 5px auto;
+    max-width: 450px;
+    margin: 0px auto 2px auto;
     padding: 10px;
     background: #dddcdc;
     border-radius: 12px;
@@ -2156,7 +2250,7 @@ label {
   
   .stats-image-wrapper img {
     width: 100%;
-    height: auto;
+    height: 300px;
     aspect-ratio: 4/3;
     object-fit: cover;
     border-radius: 10px;
@@ -2394,4 +2488,9 @@ label {
   }
   
   /* Đã có animation cho stat-item: giữ lại */
-  
+  @media (max-width: 768px) {
+    .partners {
+      flex-direction: column;
+      align-items: center;
+    }
+  }

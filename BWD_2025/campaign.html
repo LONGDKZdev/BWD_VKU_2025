@@ -7,14 +7,17 @@
     <link rel="icon" type="image" href="src/images/LogoSelfRise.png">
     <link rel="stylesheet" href="src/css/styles.css">
     <link rel="stylesheet" href="src/css/campaign-styles.css">
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat&display=swap" rel="stylesheet">
+
     <link href="https://fonts.googleapis.com/css2?family=Playwrite+DK+Loopet&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <link href="https://fonts.googleapis.com/css2?family=Playwrite+DK+Loopet&display=swap" rel="stylesheet">
+    
      <!-- AOS CSS -->
 <link href="https://cdn.jsdelivr.net/npm/aos@2.3.4/dist/aos.css" rel="stylesheet">
 </head>
 <body>
-    <nav class="navbar">
+    <nav class="navbar" style="padding: 1,5rem 0rem 1,5rem 0rem">
         <div class="logo">
             <a href="index.html" class="logo-text">
                 <div class="logo-main">
@@ -33,6 +36,64 @@
             <li><a href="account.html">Tài Khoản</a></li>
         </ul>
     </nav>
+    
+    <div class="campaign-wrapper"  data-aos="fade-right" data-aos-duration="1000">
+      <div class="campaign-overview">
+          <div class="campaign-stats-container">
+              <h2>Tổng quan - Đà Nẵng</h2>
+
+              <!-- <div class="stats-image-wrapper">
+                  <img src="src/images/MapVietNam/hanoi.jpg" alt="Hà Nội">
+                </div> -->
+              <div class="stats-image-wrapper">
+                  <img src="src/images/MapVietNam/golden-bridge.jpg" alt="Cầu Vàng - Đà Nẵng" class="province-image-container">
+              </div>
+              <div class="stats-grid">
+                  <div class="stat-item">
+                      <h4>Tổng số chiến dịch</h4>
+                      <p class="stat-number">15</p>
+                  </div>
+                  <div class="stat-item">
+                      <h4>Tổng số tiền tài trợ</h4>
+                      <p class="stat-number">270.000.000</p>
+                  </div>
+                  <div class="stat-item">
+                      <h4>Chiến dịch đang diễn ra</h4>
+                      <p class="stat-number">6</p>
+                  </div>
+                  <div class="stat-item">
+                      <h4>Chiến dịch sắp tới</h4>
+                      <p class="stat-number">5</p>
+                  </div>
+                  <div class="stat-item">
+                      <h4>Chiến dịch đã kết thúc</h4>
+                      <p class="stat-number">4</p>
+                  </div>
+                  <div class="stat-item">
+                      <h4>Số người đã tham gia</h4>
+                      <p class="stat-number">5.000</p>
+                  </div>
+              </div>
+          </div>
+          <div id="map" style="
+    /* width: 100px; */
+    height: 520px;
+      margin-left: 0 !important;
+      margin-right: auto;
+      margin-top: 100px;
+      padding-top: 0px;
+      padding-right: 0px;
+      padding-left: 0px;
+      display: block;
+      /* width: 430px; */
+      border: 4px solid;
+      border-radius: 16px 16px 16px 16px;
+      background: url('src/images/MapVietNam/map-background.jpg') center center no-repeat;
+      background-size: cover;
+  "></div>
+  </div>
+
+  </div>
 
     <main class="campaign-container">
         <section class="featured-campaign">
@@ -71,7 +132,7 @@
                 </div>
             </section>
         
-        <section class="campaign-section" >
+        <section class="campaign-section" data-aos="fade-right" data-aos-duration="1000">
             <h2 class="campaign-section-title">Chiến dịch sắp diễn ra</h2>
             <div class="campaign-grid">
                 <div class="campaign-card" data-category="running">
@@ -82,7 +143,6 @@
                         <button class="details-btn" onclick="window.location.href='campaign-detail-3.html?id=your_campaign_id'">Chi tiết</button>
                     </div>
                 </div>
-           
 
             <div class="campaign-card" data-category="nutrition">
                     <div class="campaign-image">
@@ -103,74 +163,48 @@
                </div>
         </section>
 </section>
-
-
   </main>
-
-    <div class="campaign-wrapper"  data-aos="fade-right" data-aos-duration="1000">
-        <div class="campaign-overview">
-            <div class="campaign-stats-container">
-                <h2>Tổng quan - Đà Nẵng</h2>
-
-                <!-- <div class="stats-image-wrapper">
-                    <img src="src/images/MapVietNam/hanoi.jpg" alt="Hà Nội">
-                  </div> -->
-                  
-                <div class="stats-image-wrapper">
-                    <img src="src/images/MapVietNam/golden-bridge.jpg" alt="Cầu Vàng - Đà Nẵng" class="province-image-container">
-                </div>
-                <div class="stats-grid">
-                    <div class="stat-item">
-                        <h4>Tổng số chiến dịch</h4>
-                        <p class="stat-number">15</p>
-                    </div>
-                    <div class="stat-item">
-                        <h4>Tổng số tiền tài trợ</h4>
-                        <p class="stat-number">270.000.000</p>
-                    </div>
-                    <div class="stat-item">
-                        <h4>Chiến dịch đang diễn ra</h4>
-                        <p class="stat-number">6</p>
-                    </div>
-                    <div class="stat-item">
-                        <h4>Chiến dịch sắp tới</h4>
-                        <p class="stat-number">5</p>
-                    </div>
-                    <div class="stat-item">
-                        <h4>Chiến dịch đã kết thúc</h4>
-                        <p class="stat-number">4</p>
-                    </div>
-                    <div class="stat-item">
-                        <h4>Số người đã tham gia</h4>
-                        <p class="stat-number">5.000</p>
-                    </div>
-                </div>
-            </div>
-            <div id="map" style="
-      /* width: 100px; */
-      
-      height: 520px;
-        margin-left: 0 !important;
-        margin-right: auto;
-        margin-top: 100px;
-        padding-top: 0px;
-        padding-right: 0px;
-        padding-left: 0px;
-        display: block;
-        /* width: 430px; */
-        border: 4px solid;
-        border-radius: 16px 16px 16px 16px;
-        background: url('src/images/MapVietNam/map-background.jpg') center center no-repeat;
-        background-size: cover;
-    "></div>
+  <section class="support-section" id="support">
+    <div class="container">
+      <h2 class="section-title" data-aos="fade-down">Cơ quan phối hợp hỗ trợ</h2>
+      <div class="partners" data-aos="fade-up">
+        <div class="partner">
+          <img src="src/images/soyte_.png" alt="Sở Y tế Đà Nẵng">
+          <p>Sở Y tế Đà Nẵng</p>
+        </div>
+        <div class="partner">
+          <img src="src/images/viendinhduong.png" alt="Viện Dinh Dưỡng Quốc Gia">
+          <p>Viện Dinh Dưỡng Quốc Gia</p>
+        </div>
+        <div class="partner">
+          <img src="src/images/trungtamthethao.png" alt="Trung tâm Thể thao TP. Đà Nẵng">
+          <p>Trung tâm Thể thao TP. Đà Nẵng</p>
+        </div>
+      </div>
+  
+      <h2 class="section-title" data-aos="fade-down">Liên hệ với chúng tôi</h2>
+      <div class="contacts" data-aos="fade-up">
+        <div class="contact-card">
+          <img src="src/images/ThanhHai.jpg" alt="Chị Đỗ Anh Thư">
+          <h3>Anh Võ Thanh Hải</h3>
+          <p>Đại diện dự án VIETNAM Self+Rise tại tỉnh Thừa Thiên Huế</p>
+          <p class="email">haivt.24itb@vku.udn.vn</p>
+        </div>
+        <div class="contact-card">
+          <img src="src/images/QuocAnh.jpg" alt="Mrs. Amal">
+          <h3>Anh Lê Văn Quốc Anh</h3>
+          <p>Chuyên gia dự án VIETNAM Self+Rise tại tỉnh Đà Nẵng</p>
+          <p class="email">anhlvq.24itb@vku.udn.vn</p>
+        </div>
+        <div class="contact-card">
+          <img src="src/images/HuyLong.jpg" alt="Anh Tùng">
+          <h3>Anh Võ Huy Long</h3>
+          <p>Chuyên gia bản địa cho VIETNAM Self+Rise tại khu vực</p>
+          <p class="email">longvh.24itb@vku.udn.vn</p>
+        </div>
+      </div>
     </div>
-    
-
-
-
-        
-        
-    </div>
+  </section>
 
 
     <footer class="site-footer">

@@ -64,6 +64,37 @@ const users = [
     thienDinh: 40
   }
   },
+
+  {
+    uid: "NQ72dDBOHtOGLcEPbMJuxQZbUm52",
+    name: "Ngọc Huyền",
+    email: "huyendttn.24itb@vku.udn.vn",
+    avatar: "src/images/Ngochuyen.jpg",
+    phone: "0941736020",
+    birthdate: "2006-11-03",
+    gender: "female",
+    createdAt: new Date().toISOString(),
+    points: 400,
+    streak: 8,
+    followers: 180,
+    postCount: 9,
+    category: "fitness",
+    achievements: [
+      "Tham gia chiến dịch Đà Nẵng chạy bộ 2024",
+      "Hoàn thành 30km tháng 5",
+      "Tham gia chiến dịch chạy bộ tháng cộng đồng 2025",
+    ],
+    activity: {
+      name: "Chạy bộ tháng 8",
+      status: "Đã hoàn thành 20/30 ngày",
+      progress: 50,
+  progressBars: {
+    chuoiNgay: 80,
+    vanDong: 90,
+    thienDinh: 90
+  }
+  }
+},
   {
     uid: "VVa0MD7reBXzAlD82CqgQsqzZYz1", // ✅ UID thật
     name: "longDKZ",

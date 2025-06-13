@@ -205,7 +205,9 @@ body {
     align-items: center;
     transition: color var(--transition-speed);
 }
-
+.nav-link a{
+    font-family: 'Montserrat', sans-serif;
+}
 .nav-link:hover {
     color: var(--primary-color);
 }

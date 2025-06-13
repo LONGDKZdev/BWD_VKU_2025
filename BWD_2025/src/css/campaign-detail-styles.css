@@ -131,6 +131,10 @@
     margin-bottom: 0.5rem;
     font-weight: bold;
 }
+.status-section  h2{
+    font-family: 'Playwrite DK Loopet', cursive;
+    font-size: 1.2rem;
+}
 
 .status-section, .date-section {
     margin-bottom: 2rem;
@@ -138,20 +142,20 @@
 
 .status-active {
     display: inline-block;
-    padding: 0.5rem 1rem;
+    padding: 0.6rem 1.2rem;
     background: #4CAF50;
     color: white;
-    border-radius: 20px;
-    font-size: 0.9rem;
+    border-radius: 25px;
+    font-size: 1rem;
 }
 
 .status-active-1 {
     display: inline-block;
-    padding: 0.5rem 1rem;
+    padding: 0.6rem 1.2rem;
     background: #FFA726;
     color: white;
-    border-radius: 20px;
-    font-size: 0.9rem;
+    border-radius: 25px;
+    font-size: 1rem;
 }
 
 .date, .location {
@@ -396,7 +400,7 @@
 .info-item p {
     color: #555;
     line-height: 1.7;
-    font-size: 1.05rem;
+    font-size: 1.3rem;
     position: relative;
     padding-left: 5px;
 }
@@ -972,7 +976,7 @@
     color: #555;
     line-height: 1.7;
     margin-bottom: 0;
-    font-size: 1.05rem;
+    font-size: 1.2rem;
 }
 
 @media (max-width: 768px) {

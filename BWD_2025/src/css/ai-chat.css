@@ -719,6 +719,10 @@ input[type=range] {
     font-family: Arial, sans-serif; 
     height: 10px; 
 }
+.nav-link a {
+    font-family: 'Montserrat', sans-serif;
+  }
+  
 
 .navbar {
     background-color: #1a472a;
@@ -732,6 +736,7 @@ input[type=range] {
     left: 0;
     right: 0;
     z-index: 1000;
+        font-family: 'Montserrat', sans-serif !important;
 }
 
 
