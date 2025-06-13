@@ -44,12 +44,12 @@
             <aside class="sidebar">
                 <div class="user-profile">
                     <div class="avatar">
-                        <img src="src/images/QuocAnh.jpg" alt="User">
+                        <img src="src/images/default-avatar.jpg" alt="User">
                         <span class="status-dot online"></span>
                     </div>
                     <div class="user-info">
                         <div class="user-details">
-                            <h3 id="display-name">Quốc Anh</h3>
+                            <h3 id="display-name"></h3>
                             <span class="status-text">Online</span>
                         </div>
                     </div>
@@ -393,12 +393,12 @@
 
     <!-- Core Scripts -->
     <script type="module" src="src/core/firebase.js"></script>
-    <script type="module" src="src/core/common.js"></script>
+    <!-- <script type="module" src="src/core/common.js"></script> -->
 
     <!-- Module Scripts -->
-    <script type="module" src="src/modules/user/user.js"></script>
+    <!-- <script type="module" src="src/modules/user/user.js"></script>
     <script type="module" src="src/modules/chat/chat.js"></script>
-    <script type="module" src="src/modules/chat/groups.js"></script>
+    <script type="module" src="src/modules/chat/groups.js"></script> -->
 
     <!-- UI Script -->
     <script src="src/js/community.js"></script>
@@ -406,5 +406,17 @@
         <span class="close-viewer">&times;</span>
         <img id="expandedImg" class="viewer-content">
     </div>
+
+
+    <script type="module">
+        import { loadUserInfo } from "./src/js/user-info.js";
+        
+        loadUserInfo(user => {
+            document.querySelector(".user-profile .avatar img").src = user.avatar || "src/images/default-avatar.jpg";
+            document.querySelector("#display-name").textContent = user.name || "Không rõ";
+        });
+        </script>
+        
 </body>
+
 </html>

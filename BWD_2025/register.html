@@ -155,8 +155,37 @@
                     await setDoc(userRef, {
                         name: user.displayName,
                         email: user.email,
-                        avatar: user.photoURL || "",
-                        createdAt: new Date().toISOString()
+                        avatar: user.photoURL || "src/images/default-avatar.jpg",
+                        createdAt: new Date().toISOString(),
+                        points: 0,
+    streak: 0,
+    followers: 0,
+    postCount: 0,
+    category: "fitness", // hoặc "unknown"
+
+    activity: {
+        name: "",
+        status: "",
+        progress: 0
+    },
+
+    achievements: [
+        {
+            icon: "fas fa-fire",
+            title: "Chuỗi ngày liên tiếp",
+            progress: 0
+        },
+        {
+            icon: "fas fa-dumbbell",
+            title: "Vận động viên",
+            progress: 0
+        },
+        {
+            icon: "fas fa-brain",
+            title: "Thiền định",
+            progress: 0
+        }
+    ]
                     });
                     showNotification("✅ Đăng ký thành công!", 'success', 2000);
                 }
@@ -206,10 +235,39 @@
                     await updateProfile(user, { displayName: name });
 
                     await setDoc(doc(db, "users", user.uid), {
-                        name,
-                        email,
-                        avatar: "",
-                        createdAt: new Date().toISOString()
+                        name: user.displayName,
+                        email: user.email,
+                        avatar: user.photoURL || "src/images/default-avatar.jpg",
+                        createdAt: new Date().toISOString(),
+                        points: 0,
+    streak: 0,
+    followers: 0,
+    postCount: 0,
+    category: "fitness", // hoặc "unknown"
+
+    activity: {
+        name: "",
+        status: "",
+        progress: 0
+    },
+
+    achievements: [
+        {
+            icon: "fas fa-fire",
+            title: "Chuỗi ngày liên tiếp",
+            progress: 0
+        },
+        {
+            icon: "fas fa-dumbbell",
+            title: "Vận động viên",
+            progress: 0
+        },
+        {
+            icon: "fas fa-brain",
+            title: "Thiền định",
+            progress: 0
+        }
+    ]
                     });
 
                     showNotification("✅ Đăng ký thành công!", 'success', 2000);

@@ -21,11 +21,12 @@
     font-family: 'Playwrite DK Loopet', cursive;
     font-weight: 500;
     color: #1a472a;
-    margin-bottom: 1rem;
+    margin-bottom: 0.5rem;
 }
 
 .campaign-header p {
     color: #666;
+    margin-bottom: 0.5rem;
     font-size: 1.1rem;
 }
 

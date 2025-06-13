@@ -38,7 +38,7 @@
     <main class="account-container">
         <div class="account-header">
             <div class="profile-image">
-                <img src="src/images/QuocAnh.jpg" alt="Ảnh đại diện" id="profileImage">
+                <img src="src/images/default-avatar.jpg" alt="Ảnh đại diện" id="profileImage">
                 <div class="image-upload">
                     <label for="uploadImage">
                         <i class="fas fa-camera"></i>
@@ -47,8 +47,8 @@
                 </div>
             </div>
             <div class="profile-info">
-                <h1 id="userName">Quốc Anh</h1>
-                <p class="member-since">Thành viên từ: <span id="memberSince">01/01/2024</span></p>
+                <h1 id="userName"></h1>
+                <p class="member-since">Thành viên từ: <span id="memberSince"></span></p>
             </div>
         </div>
 
@@ -77,19 +77,19 @@
                     <form id="profileForm">
                         <div class="form-group">
                             <label>Họ và tên</label>
-                            <input type="text" id="fullName" value="Quốc Anh">
+                            <input type="text" id="fullName">
                         </div>
                         <div class="form-group">
                             <label>Email</label>
-                            <input type="email" id="email" value="anhlvq.24itb@vku.udn.vn">
+                            <input type="email" id="email">
                         </div>
                         <div class="form-group">
                             <label>Số điện thoại</label>
-                            <input type="tel" id="phone" value="0123456789">
+                            <input type="tel" id="phone"">
                         </div>
                         <div class="form-group">
                             <label>Ngày sinh</label>
-                            <input type="date" id="birthdate" value="1990-01-01">
+                            <input type="date" id="birthdate">
                         </div>
                         <div class="form-group">
                             <label>Giới tính</label>
@@ -108,8 +108,11 @@
                         <div class="activity-card">
                             <div class="activity-icon"><i class="fas fa-running"></i></div>
                             <div class="activity-info">
-                                <h3>Chạy bộ vì sức khỏe cộng đồng</h3>
-                                <p>Đã hoàn thành 15/30 ngày</p>
+                                <!-- <h3>Chạy bộ vì sức khỏe cộng đồng</h3>
+                                <p>Đã hoàn thành 15/30 ngày</p> -->
+                                <h3 id="activityTitle"></h3>
+                                <p id="activityStatus"></p>
+                                
                                 <div class="progress-bar">
                                     <div class="progress" style="width: 50%"></div>
                                 </div>
@@ -125,8 +128,10 @@
                             <div class="achievement-icon">
                                 <i class="fas fa-medal"></i>
                             </div>
-                            <h3>Người chạy bộ tích cực</h3>
-                            <p>Hoàn thành 100km chạy bộ</p>
+                            <!-- <h3>Người chạy bộ tích cực</h3>
+                            <p>Hoàn thành 100km chạy bộ</p> -->
+                            <h3></h3>
+                            <p></p>
                         </div>
                         <!-- Thêm các thành tích khác -->
                     </div>
@@ -166,7 +171,7 @@
             </div>
         </div>
     </main>
-    <script src="src/js/account.js"></script>
+    <script type="module" src="src/js/account.js"></script>
     <div id="notification" class="notification"></div>
 </body>
 

@@ -130,6 +130,9 @@
 
                 try {
                     const result = await signInWithEmailAndPassword(auth, email, password);
+                    const user = result.user;
+                    localStorage.setItem("userId", user.uid);
+                    
                     showNotification("✅ Đăng nhập thành công!", 'success', 2000);
                     setTimeout(() => {
                         showNotification("👍 Đang điều hướng, chờ giây lát...", 'info', 2500);

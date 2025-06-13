@@ -1,5 +1,5 @@
 // user.js
-import { db, auth } from "../core/firebase-config.js";
+import { db, auth } from "../core/firebase.js";
 import {
     doc,
     getDoc,

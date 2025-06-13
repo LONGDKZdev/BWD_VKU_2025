@@ -1,4 +1,94 @@
+import { auth, db } from "../core/firebase.js";
+import { onAuthStateChanged } from "https://www.gstatic.com/firebasejs/11.6.0/firebase-auth.js";
+import { doc, getDoc, updateDoc } from "https://www.gstatic.com/firebasejs/11.6.0/firebase-firestore.js";
+import { showNotification } from "../js/notification.js";
+
+
+
+async function loadUserProfile(uid) {
+    try {
+        const storedUser = JSON.parse(localStorage.getItem("user"));
+        const fallbackUid = storedUser?.uid || null;
+
+        const userRef = doc(db, "users", uid);
+        const userSnap = await getDoc(userRef);
+        if (!userSnap.exists()) {
+            showNotification("❌ Không tìm thấy hồ sơ người dùng!", "error");
+            return;
+        }
+
+        const data = userSnap.data();
+
+        document.getElementById("profileImage").src = data.avatar || "src/images/default-avatar.jpg";
+        document.getElementById("userName").textContent = data.name || "(Chưa có tên)";
+        document.getElementById("fullName").value = data.name || "";
+        document.getElementById("email").value = data.email || "";
+        document.getElementById("phone").value = data.phone || "";
+        document.getElementById("birthdate").value = data.birthdate || "";
+        document.getElementById("gender").value = data.gender || "other";
+
+// === Hiển thị hoạt động ===
+const activityTitle = document.getElementById("activityTitle");
+const activityStatus = document.getElementById("activityStatus");
+const progressBar = document.querySelector("#activities .progress");
+
+if (data.activity && data.activity.name) {
+    activityTitle.textContent = data.activity.name || "Không có tên hoạt động";
+    activityStatus.textContent = data.activity.status || "";
+    if (data.activity.progress !== undefined) {
+        progressBar.style.width = `${data.activity.progress}%`;
+    } else {
+        progressBar.style.width = "0%";
+    }
+} else {
+    activityTitle.textContent = "Chưa có hoạt động nào";
+    activityStatus.textContent = "";
+    progressBar.style.width = "0%";
+}
+
+// === Hiển thị thành tích ===
+if (Array.isArray(data.achievements)) {
+    const achievementGrid = document.querySelector('.achievements-grid');
+    achievementGrid.innerHTML = ""; // Xoá placeholder cũ nếu có
+
+    data.achievements.forEach((title, index) => {
+        const card = document.createElement("div");
+        card.className = "achievement-card";
+        card.innerHTML = `
+            <div class="achievement-icon"><i class="fas fa-medal"></i></div>
+            <h3>🏅 ${title}</h3>
+            <p>Được ghi nhận bởi hệ thống</p>
+        `;
+        achievementGrid.appendChild(card);
+    });
+}
+
+
+        const createdAt = data.createdAt;
+        if (createdAt) {
+            const date = new Date(createdAt);
+            document.getElementById("memberSince").textContent = date.toLocaleDateString("vi-VN");
+        } else {
+            document.getElementById("memberSince").textContent = "Không xác định";
+        }
+    } catch (error) {
+        showNotification("❌ Lỗi khi tải hồ sơ: " + error.message, "error");
+    }
+}
+
+
 document.addEventListener('DOMContentLoaded', function () {
+onAuthStateChanged(auth, (user) => {
+    if (user && user.uid) {
+        loadUserProfile(user.uid); 
+    } else if (fallbackUid) {
+        showNotification("⚠️ Không lấy được từ auth, dùng localStorage.", warning);
+        loadUserProfile(fallbackUid); 
+    } else {
+        window.location.href = "login.html";
+    }
+});
+
     // Xử lý chuyển tab
     const navButtons = document.querySelectorAll('.nav-btn');
     const tabPanes = document.querySelectorAll('.tab-pane');
@@ -38,19 +128,28 @@ document.addEventListener('DOMContentLoaded', function () {
 
     // Xử lý form thông tin cá nhân
     const profileForm = document.getElementById('profileForm');
-    profileForm.addEventListener('submit', function (e) {
-        e.preventDefault();
-        const formData = {
-            fullName: document.getElementById('fullName').value,
-            email: document.getElementById('email').value,
-            phone: document.getElementById('phone').value,
-            birthdate: document.getElementById('birthdate').value,
-            gender: document.getElementById('gender').value
-        };
+    profileForm.addEventListener('submit', async function (e) {
+    e.preventDefault();
 
-        // Hiển thị thông báo thành công
-        showNotification('Đã lưu thông tin thành công!');
-        // Ở đây bạn có thể thêm code để gửi dữ liệu lên server
+    const formData = {
+        name: document.getElementById('fullName').value,
+        email: document.getElementById('email').value,
+        phone: document.getElementById('phone').value,
+        birthdate: document.getElementById('birthdate').value,
+        gender: document.getElementById('gender').value
+    };
+
+    try {
+        const user = auth.currentUser;
+        if (!user) throw new Error("Không xác định người dùng");
+
+        const userRef = doc(db, "users", user.uid);
+        await updateDoc(userRef, formData);
+
+        showNotification("✅ Đã lưu thông tin thành công!");
+    } catch (err) {
+        showNotification("❌ Lỗi khi lưu thông tin: " + err.message, "error");
+    }
     });
 
     // Xử lý form cài đặt

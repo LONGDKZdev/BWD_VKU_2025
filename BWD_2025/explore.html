@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="vi">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -11,11 +12,12 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <link rel="icon" type="image" href="src/images/LogoSelfRise.png">
 </head>
+
 <body>
     <nav class="navbar">
         <div class="logo">
             <a href="index.html" class="logo-text">
-                <div class="logo-main" style = "margin-left: 20px;">
+                <div class="logo-main" style="margin-left: 20px;">
                     <span class="logo-viet">VIET</span>
                     <span class="logo-nam">NAM</span>
                     <span class="logo-SelfRise">Self+Rise</span>
@@ -25,7 +27,7 @@
         </div>
         <ul class="nav-links">
             <!-- đổi tên chiến dịch sang trang chủ -->
-            <li><a href="campaign.html">Trang chủ</a></li> 
+            <li><a href="campaign.html">Trang chủ</a></li>
             <li><a href="explore.html">Khám phá</a></li>
             <li><a href="community.html">Cộng Đồng</a></li>
             <li><a href="ai-chat.html">Hỗ trợ</a></li>
@@ -39,27 +41,28 @@
             <div class="left-sidebar">
                 <div class="profile-card">
                     <div class="avatar">
-                        <img src="src/images/QuocAnh.jpg" alt="Avatar của bạn">
+                        <img class="current-user-avatar" src="" alt="Avatar của bạn">
                     </div>
-                    <h3>Quốc Anh</h3>
-                    <p class="rank-position">Hạng #10</p>
+                    <!-- tên người dùng  -->
+                    <h3></h3>
+                    <p class="rank-position">Hạng #</p>
                     <div class="progress-container">
                         <div class="progress-bar">
                             <div class="progress" style="width: 65%"></div>
                         </div>
-                        <p class="progress-text">650 điểm</p>
+                        <p class="progress-text">m</p>
                     </div>
                     <div class="profile-stats">
                         <div class="stat">
-                            <span class="stat-value">15</span>
+                            <span class="stat-value"></span>
                             <span class="stat-label">Ngày liên tiếp</span>
                         </div>
                         <div class="stat">
-                            <span class="stat-value">24</span>
+                            <span class="stat-value"></span>
                             <span class="stat-label">Bài đăng</span>
                         </div>
                         <div class="stat">
-                            <span class="stat-value">156</span>
+                            <span class="stat-value"></span>
                             <span class="stat-label">Người theo dõi</span>
                         </div>
                     </div>
@@ -118,7 +121,8 @@
                     <div class="post-form">
                         <div class="form-header">
                             <div class="user-avatar">
-                                <img src="src/images/QuocAnh.jpg" alt="Avatar của bạn">
+                                <!-- src/images/QuocAnh.jpg -->
+                                <img class="current-user-avatar" src="" alt="Avatar của bạn">
                             </div>
                             <input type="text" id="post-text" placeholder="Chia sẻ thành tựu hoặc kinh nghiệm của bạn..." onclick="openPostModal()">
                         </div>
@@ -132,9 +136,10 @@
                         <div class="post-form-full">
                             <div class="form-header">
                                 <div class="user-avatar">
-                                    <img src="src/images/QuocAnh.jpg" alt="Avatar của bạn">
+                                    <img class="current-user-avatar" src="" alt="Avatar của bạn">
                                 </div>
-                                <textarea id="post-text-modal" placeholder="Chia sẻ thành tựu hoặc kinh nghiệm của bạn..."></textarea>
+                                <textarea id="post-text-modal"
+                                    placeholder="Chia sẻ thành tựu hoặc kinh nghiệm của bạn..."></textarea>
                             </div>
                             <div class="preview-container" id="preview-container">
                                 <!-- Preview content sẽ được thêm vào đây bằng JavaScript -->
@@ -173,15 +178,15 @@
                     </div>
                 </div>
                 <!-- Modal cho comments -->
-<div id="comments-modal" class="modal">
-    <div class="modal-content">
-        <span class="close">&times;</span>
-        <h3 class="modal-title"></h3>
-        <div class="modal-content-inner">
-            <!-- Nội dung comments sẽ được thêm vào đây bằng JavaScript -->
-        </div>
-    </div>
-</div>
+                <div id="comments-modal" class="modal">
+                    <div class="modal-content">
+                        <span class="close">&times;</span>
+                        <h3 class="modal-title"></h3>
+                        <div class="modal-content-inner">
+                            <!-- Nội dung comments sẽ được thêm vào đây bằng JavaScript -->
+                        </div>
+                    </div>
+                </div>
                 <div class="feed-filter">
                     <button class="filter-btn active" data-filter="trending">Xu hướng</button>
                     <button class="filter-btn" data-filter="latest">Mới nhất</button>
@@ -207,7 +212,7 @@
                 </div>
 
                 <div class="achievements-card">
-                    <h3>Thành tích của bạn</h3>
+                    <h3>Thành tích</h3>
                     <div class="achievement-list">
                         <div class="achievement-item">
                             <div class="achievement-icon">
@@ -216,7 +221,7 @@
                             <div class="achievement-info">
                                 <h4>15 ngày liên tiếp</h4>
                                 <div class="progress-bar">
-                                    <div class="progress" style="width: 75%"></div>
+                                    <div class="progress" style="width: 100%"></div>
                                 </div>
                             </div>
                         </div>
@@ -227,7 +232,7 @@
                             <div class="achievement-info">
                                 <h4>Vận động viên</h4>
                                 <div class="progress-bar">
-                                    <div class="progress" style="width: 60%"></div>
+                                    <div class="progress" style="width: 100%"></div>
                                 </div>
                             </div>
                         </div>
@@ -238,7 +243,7 @@
                             <div class="achievement-info">
                                 <h4>Thiền định</h4>
                                 <div class="progress-bar">
-                                    <div class="progress" style="width: 40%"></div>
+                                    <div class="progress" style="width: 100%"></div>
                                 </div>
                             </div>
                         </div>
@@ -280,22 +285,24 @@
                     </div>
                 </div>
 
-               <div class="trending-topics">
-    <h3>Chủ đề nổi bật</h3>
-    <div class="topic-list">
-        <a href="#" class="topic-tag">#ChayBoMoiNgay</a>
-        <a href="#" class="topic-tag">#AnSachSongKhoe</a>
-        <a href="#" class="topic-tag">#ThienBuoiSang</a>
-        <a href="#" class="topic-tag">#HocTapHieuQua</a>
-        <a href="#" class="topic-tag">#PodcastSelfRise</a>
-    </div>
-</div>
+                <div class="trending-topics">
+                    <h3>Chủ đề nổi bật</h3>
+                    <div class="topic-list">
+                        <a href="#" class="topic-tag">#ChayBoMoiNgay</a>
+                        <a href="#" class="topic-tag">#AnSachSongKhoe</a>
+                        <a href="#" class="topic-tag">#ThienBuoiSang</a>
+                        <a href="#" class="topic-tag">#HocTapHieuQua</a>
+                        <a href="#" class="topic-tag">#PodcastSelfRise</a>
+                    </div>
+                </div>
             </div>
         </div>
     </div>
 
     <section id="leaderboard" class="leaderboard-section">
-        <div class="close-leaderboard" style="position: absolute; top: 20px; right: 30px; cursor: pointer; font-size: 2rem; z-index: 10;">&times;</div>
+        <div class="close-leaderboard"
+            style="position: absolute; top: 20px; right: 30px; cursor: pointer; font-size: 2rem; z-index: 10;">&times;
+        </div>
         <div class="container">
             <h2>Bảng xếp hạng chi tiết</h2>
             <div class="leaderboard-filters">
@@ -365,8 +372,60 @@
             </div>
         </div>
     </section>
-    <script src="src/js/rank.js"></script>
-    <script src="src/js/search.js"></script>
-    <script src="src/js/follow-button.js"></script>
+    <script type="module" src="src/js/rank.js"></script>
+    <script type="module" src="src/js/search.js"></script>
+    <script type="module" src="src/js/follow-button.js"></script>
+
+    <script type="module">
+        import { loadUserInfo } from "./src/js/user-info.js";
+
+        loadUserInfo(user => {
+    const avatarElements = document.querySelectorAll(".current-user-avatar");
+    avatarElements.forEach(img => {
+        img.src = user.avatar || "src/images/default-avatar.jpg";
+    });
+
+    document.querySelector(".profile-card h3").textContent = user.name || "(Không có tên)";
+    document.querySelector(".progress").style.width = (user.points || 0) / 10 + "%";
+    document.querySelector(".progress-text").textContent = `${user.points || 0} điểm`;
+    
+    const stats = document.querySelectorAll(".profile-stats .stat .stat-value");
+    if (stats.length >= 3) {
+        stats[0].textContent = user.streak || 0;       // Ngày liên tiếp
+        stats[1].textContent = user.postCount || 0;    // Bài đăng
+        stats[2].textContent = user.followers || 0;    // Người theo dõi
+    }
+
+    // Hạng
+    document.querySelector(".rank-position").textContent =
+    user.rank ? `Hạng #${user.rank}` : "Chưa có hạng";
+
+    const achievementContainer = document.getElementById('achievement-list');
+achievementContainer.innerHTML = "";
+
+(user.achievements || []).forEach(item => {
+  const block = document.createElement('div');
+  block.className = "achievement-item";
+  block.innerHTML = `
+    <div class="achievement-icon">
+      <i class="fas ${item.icon}"></i>
+    </div>
+    <div class="achievement-info">
+      <h4>${item.title}</h4>
+      <div class="progress-bar">
+        <div class="progress" style="width: ${item.progress || 0}%"></div>
+      </div>
+    </div>
+  `;
+  achievementContainer.appendChild(block);
+});
+
+
+});
+
+    </script>
+
+
 </body>
+
 </html>
