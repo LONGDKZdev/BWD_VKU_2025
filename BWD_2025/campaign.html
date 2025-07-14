@@ -40,7 +40,7 @@
     <div class="campaign-wrapper"  data-aos="fade-right" data-aos-duration="1000">
       <div class="campaign-overview">
           <div class="campaign-stats-container">
-              <h2>Tổng quan - Đà Nẵng</h2>
+              <h2  class="overview-title">Tổng quan - Đà Nẵng</h2>
 
               <!-- <div class="stats-image-wrapper">
                   <img src="src/images/MapVietNam/hanoi.jpg" alt="Hà Nội">
@@ -51,27 +51,20 @@
               <div class="stats-grid">
                   <div class="stat-item">
                       <h4>Tổng số chiến dịch</h4>
-                      <p class="stat-number">15</p>
+                      <p class="stat-number">13</p>
                   </div>
-                  <div class="stat-item">
-                      <h4>Tổng số tiền tài trợ</h4>
-                      <p class="stat-number">270.000.000</p>
-                  </div>
-                  <div class="stat-item">
-                      <h4>Chiến dịch đang diễn ra</h4>
-                      <p class="stat-number">6</p>
-                  </div>
+
                   <div class="stat-item">
                       <h4>Chiến dịch sắp tới</h4>
-                      <p class="stat-number">5</p>
+                      <p class="stat-number">3</p>
                   </div>
                   <div class="stat-item">
                       <h4>Chiến dịch đã kết thúc</h4>
-                      <p class="stat-number">4</p>
+                      <p class="stat-number">3</p>
                   </div>
                   <div class="stat-item">
                       <h4>Số người đã tham gia</h4>
-                      <p class="stat-number">5.000</p>
+                      <p class="stat-number">100</p>
                   </div>
               </div>
           </div>
@@ -185,19 +178,20 @@
       <h2 class="section-title" data-aos="fade-down">Liên hệ với chúng tôi</h2>
       <div class="contacts" data-aos="fade-up">
         <div class="contact-card">
-          <img src="src/images/ThanhHai.jpg" alt="Chị Đỗ Anh Thư">
+          <img src="src/images/ThanhHai.jpg" alt="Hải">
           <h3>Anh Võ Thanh Hải</h3>
-          <p>Đại diện dự án VIETNAM Self+Rise tại tỉnh Thừa Thiên Huế</p>
+          <p>Chuyên gia dự án VIETNAM Self+Rise tại tỉnh Thừa Thiên Huế</p>
           <p class="email">haivt.24itb@vku.udn.vn</p>
         </div>
         <div class="contact-card">
-          <img src="src/images/QuocAnh.jpg" alt="Mrs. Amal">
+          <img src="src/images/QuocAnh.jpg" alt="Quốc Anh">
           <h3>Anh Lê Văn Quốc Anh</h3>
           <p>Chuyên gia dự án VIETNAM Self+Rise tại tỉnh Đà Nẵng</p>
           <p class="email">anhlvq.24itb@vku.udn.vn</p>
         </div>
+
         <div class="contact-card">
-          <img src="src/images/HuyLong.jpg" alt="Anh Tùng">
+          <img src="src/images/HuyLong.jpg" alt="Long">
           <h3>Anh Võ Huy Long</h3>
           <p>Chuyên gia bản địa cho VIETNAM Self+Rise tại khu vực</p>
           <p class="email">longvh.24itb@vku.udn.vn</p>
@@ -263,7 +257,7 @@
                 <a href="#" class="social-link"><i class="fab fa-youtube"></i></a>
                 <a href="#" class="social-link"><i class="fab fa-pinterest"></i></a>
             </div>
-            <p class="copyright">© Viet Health Journey 2023 - 2024 Phát triển bởi <a href="#">Viet Health Journey</a></p>
+            <p class="copyright">© Viet Self Rise 2024 - 2025 Phát triển bởi <a href="#">Viet Self Rise</a></p>
         </div>
     </footer>
     <script src="src/js/campaign.js"></script>
@@ -315,40 +309,32 @@ AOS.init();
 document.addEventListener('DOMContentLoaded', () => {
   const provinceStats = {
     "Hà Nội": {
-      totalCampaigns: 20,
-      totalMoney: 310000000,
-      active: 5,
-      upcoming: 7,
-      finished: 8,
-      participants: 15000,
-      image: "src/images/MapVietNam/hanoi.jpg"
+      totalCampaigns: 11,
+      upcoming: 1,
+      finished: 1,
+      participants: 100,
+      image: "src/images/MapVietNam/hanoi.jpg?v=2"
     },
     "Thừa Thiên - Huế": {
       totalCampaigns: 12,
-      totalMoney: 150000000,
-      active: 4,
-      upcoming: 3,
-      finished: 5,
-      participants: 4000,
-      image: "src/images/MapVietNam/hue.jpg"
+      upcoming: 2,
+      finished: 2,
+      participants: 200,
+      image: "src/images/MapVietNam/hue.jpg?v=2"
     },
     "Đà Nẵng": {
-      totalCampaigns: 15,
-      totalMoney: 270000000,
-      active: 6,
-      upcoming: 5,
-      finished: 4,
-      participants: 5000,
-      image: "src/images/MapVietNam/golden-bridge.jpg"
+      totalCampaigns: 13,
+      upcoming: 3,
+      finished: 3,
+      participants: 400,
+      image: "src/images/MapVietNam/golden-bridge.jpg?v=2"
     },
     "TP. Hồ Chí Minh": {
-      totalCampaigns: 30,
-      totalMoney: 550000000,
-      active: 12,
-      upcoming: 10,
-      finished: 8,
-      participants: 25000,
-      image: "src/images/MapVietNam/hochiminh.jpg"
+      totalCampaigns: 20,
+      upcoming: 4,
+      finished: 4,
+      participants: 1000,
+      image: "src/images/MapVietNam/hochiminh.jpg?v=2"
     }
   };
 
@@ -412,8 +398,6 @@ function updateOverview(name, stats) {
   const statEls = document.querySelectorAll(".campaign-stats-container .stat-number");
   const values = [
     stats.totalCampaigns,
-    stats.totalMoney,
-    stats.active,
     stats.upcoming,
     stats.finished,
     stats.participants
