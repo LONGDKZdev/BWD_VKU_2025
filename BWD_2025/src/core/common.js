@@ -66,29 +66,37 @@ export async function showAlert(message, type = "info") {
     });
 }
 
+// 🧠 Load bài viết từ PHP API
+async function loadPosts() {
+    try {
+        showLoading("Đang tải dữ liệu...");
 
+        const res = await fetch("/src/core/get-posts.php");
+        const result = await res.json();
+        hideLoading();
 
-export function showLoading(message = "Đang xử lý...", timeout = 10000) {
-    Swal.fire({
-        title: message,
-        allowOutsideClick: false,
-        didOpen: () => {
-            Swal.showLoading();
-            setTimeout(() => Swal.close(), timeout);
+        if (!result.documents) {
+            showAlert("Không tìm thấy dữ liệu nào!", "warning");
+            return;
         }
-    });
+
+        const html = result.documents.map(doc => {
+            const data = doc.fields;
+            return `
+                <div class="post">
+                    <h3>${data.title?.stringValue || 'Không tiêu đề'}</h3>
+                    <p>${data.content?.stringValue || 'Không nội dung'}</p>
+                </div>
+            `;
+        }).join('');
+
+        document.getElementById('post-list').innerHTML = html;
+    } catch (err) {
+        hideLoading();
+        console.error("Lỗi tải dữ liệu:", err);
+        showToast("Lỗi khi tải dữ liệu", "error");
+    }
 }
 
-export async function showConfirm(message = "Bạn chắc chắn chưa?") {
-    const result = await Swal.fire({
-        title: message,
-        icon: 'question'
-    });
-    return result.isConfirmed;
-}
-
-
-
-
-
-
+// Gọi hàm khi trang tải xong
+window.addEventListener("DOMContentLoaded", loadPosts);

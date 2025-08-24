@@ -19,3 +19,8 @@ yarn-debug.log*
 
 # Dotenv
 .env
+
+#file php
+src/core/config.php
+#keyAPI
+src/core/firebase.js
